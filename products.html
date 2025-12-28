@@ -1,1 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | FAMM ATL Company Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D Product Viewer -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <style>
+        /* Enhanced CSS for products page */
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #ffffff;
+            --bg-light-secondary: #f9f9f9;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Holographic 3D Viewer */
+        .holographic-viewer {
+            height: 500px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .hologram-container {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .hologram {
+            width: 100%;
+            height: 100%;
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid rgba(76, 175, 80, 0.5);
+            border-radius: 50%;
+            position: absolute;
+            animation: hologramFloat 6s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        .hologram:nth-child(2) {
+            transform: rotateY(45deg);
+            animation-delay: -2s;
+        }
+
+        .hologram:nth-child(3) {
+            transform: rotateY(90deg);
+            animation-delay: -4s;
+        }
+
+        .hologram:nth-child(4) {
+            transform: rotateY(135deg);
+            animation-delay: -1s;
+        }
+
+        @keyframes hologramFloat {
+            0%, 100% { transform: rotateY(0deg) translateY(0); opacity: 0.8; }
+            50% { transform: rotateY(180deg) translateY(-20px); opacity: 1; }
+        }
+
+        .product-info-display {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        /* Gyroscope Controls */
+        .gyro-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            padding: 15px 30px;
+            border-radius: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .gyro-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gyro-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff9800;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .product-selector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-width: 150px;
+        }
+
+        .product-selector:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Smart Product Recommender */
+        .ai-recommender {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .recommender-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .recommender-input select, .recommender-input button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .recommender-input select {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .recommender-input select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+
+        .recommender-input button {
+            background: white;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .recommender-input button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .ai-suggestion {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .recommendation-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .recommendation-item:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateX(5px);
+        }
+
+        /* Real-time Inventory Heat Map */
+        .inventory-heatmap {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .heatmap-cell {
+            height: 100px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .heatmap-low { 
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+        }
+        .heatmap-medium { 
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+        }
+        .heatmap-high { 
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .heatmap-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        /* Bulk Order Simulator */
+        .bulk-simulator {
+            background: linear-gradient(135deg, #1a472a, #2e7d32);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .simulator-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .control-group {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .simulator-slider {
+            width: 100%;
+            margin: 15px 0;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            outline: none;
+        }
+
+        .simulator-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            cursor: pointer;
+        }
+
+        .slider-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .simulator-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .result-box {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Product Comparison Matrix */
+        .comparison-matrix {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            overflow-x: auto;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .matrix-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .matrix-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .matrix-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .matrix-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Seasonal Availability Calendar */
+        .seasonal-calendar {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .calendar-month {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .calendar-month:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .calendar-month.active {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .seasonal-info {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .seasonal-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .seasonal-product-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--primary-light);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .holographic-viewer {
+                height: 400px;
+            }
+            
+            .hologram-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .recommender-input {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .simulator-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .simulator-results {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .heatmap-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .product-selector {
+                min-width: 120px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .holographic-viewer {
+                height: 300px;
+            }
+            
+            .hologram-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .gyro-controls {
+                flex-direction: column;
+                width: 90%;
+                text-align: center;
+            }
+            
+            .simulator-results {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .comparison-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="changeLanguage('sw')">SW</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-seedling"></i>
+                <div class="logo-text">FAMM<span>ATL</span></div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home">Home</a></li>
+                    <li><a href="about.html" data-lang="about">About Us</a></li>
+                    <li><a href="products.html" class="active" data-lang="products">Products</a></li>
+                    <li><a href="services.html" data-lang="services">Export Services</a></li>
+                    <li><a href="certifications.html" data-lang="certifications">Certifications</a></li>
+                    <li><a href="contact.html" data-lang="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 data-lang="products_title">Our Premium Agricultural Products</h1>
+            <div class="breadcrumb">
+                <a href="index.html" data-lang="home">Home</a>
+                <span>/</span>
+                <span data-lang="products">Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Holographic 3D Viewer -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="hologram_title">Holographic 3D Product Explorer</h2>
+                <p data-lang="hologram_desc">Use your device's gyroscope to explore products in 360° 3D</p>
+            </div>
+            
+            <div class="holographic-viewer">
+                <div class="hologram-container" id="hologramContainer">
+                    <div class="hologram"></div>
+                    <div class="hologram"></div>
+                    <div class="hologram"></div>
+                    <div class="hologram"></div>
+                </div>
+                
+                <div class="product-info-display" id="productInfoDisplay">
+                    <h3 id="currentProductName">Select a Product</h3>
+                    <p id="currentProductDesc">Click on a product below to view in 3D</p>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.9rem;" data-lang="product_type">Product Type:</div>
+                        <div style="font-weight: bold;" id="productTypeDisplay">-</div>
+                    </div>
+                </div>
+                
+                <div class="gyro-controls">
+                    <div class="gyro-status">
+                        <div class="gyro-dot" id="gyroDot"></div>
+                        <span id="gyroStatus" data-lang="gyro_ready">Gyroscope Ready</span>
+                    </div>
+                    <button class="ar-btn" onclick="startARView()" style="background: var(--secondary); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <span data-lang="view_ar">View in AR</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 30px;">
+                <button class="product-selector" onclick="select3DProduct('coffee')" style="background: linear-gradient(135deg, #8B4513, #654321);">
+                    <i class="fas fa-mug-hot"></i>
+                    <span data-lang="coffee">Premium Coffee</span>
+                </button>
+                <button class="product-selector" onclick="select3DProduct('grains')" style="background: linear-gradient(135deg, #FFD700, #FFC107);">
+                    <i class="fas fa-wheat-awn"></i>
+                    <span data-lang="grains">Organic Grains</span>
+                </button>
+                <button class="product-selector" onclick="select3DProduct('spices')" style="background: linear-gradient(135deg, #8B0000, #B22222);">
+                    <i class="fas fa-mortar-pestle"></i>
+                    <span data-lang="spices">Exotic Spices</span>
+                </button>
+                <button class="product-selector" onclick="select3DProduct('legumes')" style="background: linear-gradient(135deg, #228B22, #32CD32);">
+                    <i class="fas fa-seedling"></i>
+                    <span data-lang="legumes">Quality Legumes</span>
+                </button>
+                <button class="product-selector" onclick="select3DProduct('nuts')" style="background: linear-gradient(135deg, #8B7355, #A0522D);">
+                    <i class="fas fa-acorn"></i>
+                    <span data-lang="nuts">Premium Nuts</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Product Recommender AI -->
+    <section class="section">
+        <div class="container">
+            <div class="ai-recommender">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="ai_recommender_title">AI Product Recommender</h2>
+                    <p data-lang="ai_recommender_desc">Tell us your needs, and our AI will suggest the perfect products</p>
+                </div>
+                
+                <div class="recommender-input">
+                    <select id="marketSelect">
+                        <option value="" data-lang="select_market">Select Target Market</option>
+                        <option value="europe">Europe</option>
+                        <option value="north_america">North America</option>
+                        <option value="asia">Asia</option>
+                        <option value="middle_east">Middle East</option>
+                        <option value="africa">Africa</option>
+                    </select>
+                    
+                    <select id="productCategory">
+                        <option value="" data-lang="select_product">Select Product Category</option>
+                        <option value="organic">Organic Products</option>
+                        <option value="premium">Premium Grade</option>
+                        <option value="bulk">Bulk Commodity</option>
+                        <option value="specialty">Specialty Products</option>
+                        <option value="all">All Products</option>
+                    </select>
+                    
+                    <button onclick="getAIRecommendation()">
+                        <i class="fas fa-robot"></i>
+                        <span data-lang="get_recommendation">Get AI Recommendation</span>
+                    </button>
+                </div>
+                
+                <div class="ai-suggestion" id="aiSuggestion">
+                    <!-- AI suggestions appear here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Inventory Heat Map -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="inventory_title">Real-time Inventory Heat Map</h2>
+                <p data-lang="inventory_desc">Monitor product availability across our warehouses</p>
+            </div>
+            
+            <div class="inventory-heatmap">
+                <div class="heatmap-grid" id="heatmapGrid">
+                    <!-- Heatmap cells generated by JavaScript -->
+                </div>
+                
+                <div class="heatmap-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #4caf50, #2e7d32);"></div>
+                        <span data-lang="high_stock">High Stock (>70%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #ff9800, #f57c00);"></div>
+                        <span data-lang="medium_stock">Medium Stock (30-70%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #f44336, #d32f2f);"></div>
+                        <span data-lang="low_stock">Low Stock (<30%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bulk Order Simulator -->
+    <section class="section">
+        <div class="container">
+            <div class="bulk-simulator">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="bulk_simulator_title">Bulk Order Simulator</h2>
+                    <p data-lang="bulk_simulator_desc">Adjust sliders to simulate your order and see real-time pricing</p>
+                </div>
+                
+                <div class="simulator-controls">
+                    <div class="control-group">
+                        <label data-lang="quantity">Quantity (Metric Tons)</label>
+                        <input type="range" class="simulator-slider" id="quantitySlider" min="1" max="1000" value="100">
+                        <div class="slider-value" id="quantityValue">100 MT</div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label data-lang="quality">Quality Grade</label>
+                        <input type="range" class="simulator-slider" id="qualitySlider" min="1" max="3" value="2" step="1">
+                        <div class="slider-value" id="qualityValue">Grade A - Premium</div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label data-lang="product">Product Type</label>
+                        <select id="simulatorProduct" style="width: 100%; padding: 12px; border-radius: 5px; margin-top: 10px; background: rgba(255,255,255,0.9); border: none;">
+                            <option value="coffee" data-lang="coffee">Coffee</option>
+                            <option value="grains" data-lang="grains">Grains</option>
+                            <option value="spices" data-lang="spices">Spices</option>
+                            <option value="legumes" data-lang="legumes">Legumes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <button onclick="calculateBulkOrder()" style="background: var(--secondary); color: white; border: none; padding: 15px 40px; border-radius: 30px; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-calculator"></i>
+                        <span data-lang="calculate_order">Calculate Order</span>
+                    </button>
+                </div>
+                
+                <div class="simulator-results" id="bulkResults">
+                    <div class="result-box">
+                        <div class="result-label" data-lang="total_cost">Total Cost</div>
+                        <div class="result-value" id="totalCost">$0</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label" data-lang="unit_price">Unit Price</div>
+                        <div class="result-value" id="unitPrice">$0/MT</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label" data-lang="shipping_cost">Shipping Cost</div>
+                        <div class="result-value" id="shippingCost">$0</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label" data-lang="delivery_time">Delivery Time</div>
+                        <div class="result-value" id="deliveryTime">0 days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Comparison Matrix -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="comparison_title">Product Comparison Matrix</h2>
+                <p data-lang="comparison_desc">Compare all our products side by side</p>
+            </div>
+            
+            <div class="comparison-matrix">
+                <table class="matrix-table" id="comparisonTable">
+                    <!-- Table generated by JavaScript -->
+                </table>
+                
+                <div class="comparison-buttons">
+                    <button onclick="addToComparison()" style="background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-plus"></i>
+                        <span data-lang="add_product">Add Product to Compare</span>
+                    </button>
+                    <button onclick="clearComparison()" style="background: #f44336; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-trash"></i>
+                        <span data-lang="clear_all">Clear All</span>
+                    </button>
+                    <button onclick="exportComparison()" style="background: #2196f3; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-download"></i>
+                        <span data-lang="export_comparison">Export Comparison</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal Availability Calendar -->
+    <section class="section">
+        <div class="container">
+            <div class="seasonal-calendar">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="calendar_title">Seasonal Availability Calendar</h2>
+                    <p data-lang="calendar_desc">Check when each product is at its peak season</p>
+                </div>
+                
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar months generated by JavaScript -->
+                </div>
+                
+                <div class="seasonal-info">
+                    <h3 id="selectedMonth" data-lang="select_month">Select a month above</h3>
+                    <p id="seasonalDescription" data-lang="select_month_prompt">Click on a month to see available products during that season</p>
+                    <div class="seasonal-products" id="seasonalProducts">
+                        <!-- Product tags will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <div class="logo-text">FAMM<span>ATL</span></div>
+                    </div>
+                    <p data-lang="footer_desc">Leading exporters of premium agricultural products from Tanzania, committed to quality and sustainability.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="quick_links">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-lang="home">Home</a></li>
+                        <li><a href="about.html" data-lang="about">About Us</a></li>
+                        <li><a href="products.html" data-lang="products">Products</a></li>
+                        <li><a href="certifications.html" data-lang="certifications">Certifications</a></li>
+                        <li><a href="contact.html" data-lang="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="products">Products</h3>
+                    <ul>
+                        <li><a href="#coffee" data-lang="coffee">Coffee</a></li>
+                        <li><a href="#grains" data-lang="grains">Grains</a></li>
+                        <li><a href="#spices" data-lang="spices">Spices</a></li>
+                        <li><a href="#legumes" data-lang="legumes">Legumes</a></li>
+                        <li><a href="#nuts" data-lang="nuts">Nuts</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="contact_us">Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</li>
+                        <li><i class="fas fa-phone"></i> +255 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fammatl.co.tz</li>
+                        <li><i class="fas fa-globe"></i> www.fammatl.co.tz</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FAMM ATL Company Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Language data
+        const languageData = {
+            en: {
+                // Header
+                home: "Home",
+                about: "About Us",
+                products: "Products",
+                services: "Export Services",
+                certifications: "Certifications",
+                contact: "Contact",
+                products_title: "Our Premium Agricultural Products",
+                
+                // Holographic Viewer
+                hologram_title: "Holographic 3D Product Explorer",
+                hologram_desc: "Use your device's gyroscope to explore products in 360° 3D",
+                gyro_ready: "Gyroscope Ready",
+                gyro_active: "Gyroscope Active",
+                gyro_not_supported: "Gyroscope Not Supported",
+                view_ar: "View in AR",
+                coffee: "Premium Coffee",
+                grains: "Organic Grains",
+                spices: "Exotic Spices",
+                legumes: "Quality Legumes",
+                nuts: "Premium Nuts",
+                product_type: "Product Type:",
+                
+                // AI Recommender
+                ai_recommender_title: "AI Product Recommender",
+                ai_recommender_desc: "Tell us your needs, and our AI will suggest the perfect products",
+                select_market: "Select Target Market",
+                select_product: "Select Product Category",
+                get_recommendation: "Get AI Recommendation",
+                ai_analyzing: "AI Analyzing Your Request...",
+                top_recommendations: "Top Recommendations for Your Market:",
+                
+                // Inventory Heat Map
+                inventory_title: "Real-time Inventory Heat Map",
+                inventory_desc: "Monitor product availability across our warehouses",
+                high_stock: "High Stock (>70%)",
+                medium_stock: "Medium Stock (30-70%)",
+                low_stock: "Low Stock (<30%)",
+                
+                // Bulk Order Simulator
+                bulk_simulator_title: "Bulk Order Simulator",
+                bulk_simulator_desc: "Adjust sliders to simulate your order and see real-time pricing",
+                quantity: "Quantity (Metric Tons)",
+                quality: "Quality Grade",
+                product: "Product Type",
+                calculate_order: "Calculate Order",
+                total_cost: "Total Cost",
+                unit_price: "Unit Price",
+                shipping_cost: "Shipping Cost",
+                delivery_time: "Delivery Time",
+                
+                // Comparison Matrix
+                comparison_title: "Product Comparison Matrix",
+                comparison_desc: "Compare all our products side by side",
+                add_product: "Add Product to Compare",
+                clear_all: "Clear All",
+                export_comparison: "Export Comparison",
+                
+                // Seasonal Calendar
+                calendar_title: "Seasonal Availability Calendar",
+                calendar_desc: "Check when each product is at its peak season",
+                select_month: "Select a month above",
+                select_month_prompt: "Click on a month to see available products during that season",
+                peak_season: "Peak Season",
+                good_availability: "Good Availability",
+                limited_availability: "Limited Availability",
+                
+                // Footer
+                footer_desc: "Leading exporters of premium agricultural products from Tanzania, committed to quality and sustainability.",
+                quick_links: "Quick Links",
+                contact_us: "Contact Us"
+            },
+            sw: {
+                // Header
+                home: "Nyumbani",
+                about: "Kuhusu Sisi",
+                products: "Bidhaa",
+                services: "Huduma za Usafirishaji",
+                certifications: "Vyeti",
+                contact: "Wasiliana",
+                products_title: "Bidhaa Zetu Bora za Kilimo",
+                
+                // Holographic Viewer
+                hologram_title: "Kichunguzi cha Bidhaa cha 3D cha Holografiki",
+                hologram_desc: "Tumia gyroscope ya kifaa chako kuchunguza bidhaa katika 360° 3D",
+                gyro_ready: "Gyroscope Tayari",
+                gyro_active: "Gyroscope Inatumika",
+                gyro_not_supported: "Gyroscope Haijaungwa Mkono",
+                view_ar: "Angalia katika AR",
+                coffee: "Kahawa Bora",
+                grains: "Nafaka Asilia",
+                spices: "Viungo Vya Kigeni",
+                legumes: "Legumes Bora",
+                nuts: "Njugu Bora",
+                product_type: "Aina ya Bidhaa:",
+                
+                // AI Recommender
+                ai_recommender_title: "Kipendekezi cha Bidhaa cha AI",
+                ai_recommender_desc: "Tuambie mahitaji yako, na AI yetu itapendekeza bidhaa kamili",
+                select_market: "Chagua Soko Lengwa",
+                select_product: "Chagua Kitengo cha Bidhaa",
+                get_recommendation: "Pata Pendekezo la AI",
+                ai_analyzing: "AI Inachanganua Ombi Lako...",
+                top_recommendations: "Mapendekezo Bora Kwa Sok Lako:",
+                
+                // Inventory Heat Map
+                inventory_title: "Ramani ya Joto ya Hesabu ya Wakati Halisi",
+                inventory_desc: "Fuatilia upatikanaji wa bidhaa kwenye maghala yetu",
+                high_stock: "Hesabu Kubwa (>70%)",
+                medium_stock: "Hesabu ya Kati (30-70%)",
+                low_stock: "Hesabu Ndogo (<30%)",
+                
+                // Bulk Order Simulator
+                bulk_simulator_title: "Simulator ya Agizo la Wingi",
+                bulk_simulator_desc: "Rekebisha viwekaji slides ili kuiga agizo lako na uone bei ya wakati halisi",
+                quantity: "Kiasi (Tani za Kipimo)",
+                quality: "Kiwango cha Ubora",
+                product: "Aina ya Bidhaa",
+                calculate_order: "Kokotoa Agizo",
+                total_cost: "Gharama ya Jumla",
+                unit_price: "Bei ya Kitengo",
+                shipping_cost: "Gharama ya Usafirishaji",
+                delivery_time: "Muda wa Kufikisha",
+                
+                // Comparison Matrix
+                comparison_title: "Matrix ya Kulinganisha Bidhaa",
+                comparison_desc: "Linganisha bidhaa zetu zote kwa upande",
+                add_product: "Ongeza Bidhaa kwa Kulinganisha",
+                clear_all: "Futa Zote",
+                export_comparison: "Hamisha Ulinganisho",
+                
+                // Seasonal Calendar
+                calendar_title: "Kalenda ya Upatikanaji wa Msimu",
+                calendar_desc: "Angalia wakati kila bidhaa iko katika msimu wake wa kilele",
+                select_month: "Chagua mwezi hapo juu",
+                select_month_prompt: "Bonyeza mwezi kuona bidhaa zinazopatikana wakati wa msimu huo",
+                peak_season: "Msimu wa Kilele",
+                good_availability: "Upatikanaji Mzuri",
+                limited_availability: "Upatikanaji Mdogo",
+                
+                // Footer
+                footer_desc: "Wasanifu wakuu wa bidhaa za kilimo bora kutoka Tanzania, wakijitolea kwa ubora na uendelevu.",
+                quick_links: "Viungo vya Haraka",
+                contact_us: "Wasiliana Nasi"
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'en';
+
+        // Change language function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    element.textContent = languageData[lang][key];
+                }
+            });
+            
+            // Update select options
+            updateSelectOptions();
+            
+            // Update dynamic content
+            updateDynamicContent();
+        }
+
+        function updateSelectOptions() {
+            document.querySelectorAll('select option[data-lang]').forEach(option => {
+                const key = option.getAttribute('data-lang');
+                if (languageData[currentLanguage][key]) {
+                    option.textContent = languageData[currentLanguage][key];
+                }
+            });
+        }
+
+        // Holographic 3D Viewer
+        let currentProduct = 'coffee';
+        let gyroEnabled = false;
+        
+        const productData = {
+            coffee: {
+                name: "Premium Arabica Coffee",
+                desc: "Single-origin Arabica beans, shade-grown, hand-picked",
+                color: "139, 69, 19",
+                grade: "AA Grade",
+                origin: "Kilimanjaro Region",
+                moisture: "10-12%"
+            },
+            grains: {
+                name: "Organic Maize",
+                desc: "Non-GMO, chemical-free, sun-dried",
+                color: "255, 215, 0",
+                grade: "Grade A",
+                origin: "Southern Highlands",
+                moisture: "13-14%"
+            },
+            spices: {
+                name: "Zanzibar Cloves",
+                desc: "Premium quality, sun-dried, rich aroma",
+                color: "139, 0, 0",
+                grade: "Special Grade",
+                origin: "Zanzibar",
+                moisture: "8-10%"
+            },
+            legumes: {
+                name: "Kidney Beans",
+                desc: "High protein, uniform size, cleaned",
+                color: "34, 139, 34",
+                grade: "Grade A",
+                origin: "Lake Zone",
+                moisture: "12-14%"
+            },
+            nuts: {
+                name: "Cashew Nuts",
+                desc: "Whole kernels, premium grade, naturally processed",
+                color: "139, 115, 85",
+                grade: "W320",
+                origin: "Coastal Region",
+                moisture: "5-7%"
+            }
+        };
+
+        function initHolographicViewer() {
+            // Initialize gyroscope
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', handleDeviceOrientation);
+                gyroEnabled = true;
+                document.getElementById('gyroStatus').textContent = 
+                    languageData[currentLanguage].gyro_ready;
+                document.getElementById('gyroDot').style.background = '#4caf50';
+            } else {
+                document.getElementById('gyroStatus').textContent = 
+                    languageData[currentLanguage].gyro_not_supported;
+                document.getElementById('gyroDot').style.background = '#f44336';
+            }
+            
+            // Initialize with coffee product
+            select3DProduct('coffee');
+        }
+
+        function handleDeviceOrientation(event) {
+            if (!gyroEnabled) return;
+            
+            const container = document.getElementById('hologramContainer');
+            const beta = event.beta || 0;
+            const gamma = event.gamma || 0;
+            
+            // Smooth rotation
+            const rotateX = beta * 0.3;
+            const rotateY = gamma * 0.3;
+            
+            container.style.transform = `translate(-50%, -50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        function select3DProduct(product) {
+            currentProduct = product;
+            const data = productData[product];
+            const container = document.getElementById('hologramContainer');
+            const holograms = container.querySelectorAll('.hologram');
+            
+            // Update hologram colors
+            holograms.forEach(hologram => {
+                hologram.style.background = `rgba(${data.color}, 0.15)`;
+                hologram.style.borderColor = `rgba(${data.color}, 0.4)`;
+            });
+            
+            // Update product info
+            document.getElementById('currentProductName').textContent = data.name;
+            document.getElementById('currentProductDesc').textContent = data.desc;
+            document.getElementById('productTypeDisplay').textContent = 
+                currentLanguage === 'en' ? 
+                `${data.grade} | ${data.origin}` :
+                `${data.grade} | ${data.origin}`;
+            
+            // Visual feedback for selected button
+            document.querySelectorAll('.product-selector').forEach(btn => {
+                btn.style.transform = 'scale(1)';
+                btn.style.boxShadow = 'none';
+            });
+            event.target.style.transform = 'scale(1.05)';
+            event.target.style.boxShadow = '0 15px 30px rgba(0,0,0,0.3)';
+        }
+
+        function startARView() {
+            alert(currentLanguage === 'en' 
+                ? "AR mode activated! In a real implementation, this would open your camera for augmented reality viewing."
+                : "Hali ya AR imewashwa! Katika utekelezaji halisi, hii ingefungua kamera yako kwa kuangalia hali ya kuongezwa.");
+        }
+
+        // AI Product Recommender
+        function getAIRecommendation() {
+            const market = document.getElementById('marketSelect').value;
+            const category = document.getElementById('productCategory').value;
+            const suggestion = document.getElementById('aiSuggestion');
+            
+            if (!market || !category) {
+                alert(currentLanguage === 'en' 
+                    ? "Please select both market and product category"
+                    : "Tafadhali chagua soko na kitengo cha bidhaa");
+                return;
+            }
+            
+            // Show loading state
+            suggestion.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                    <p>${languageData[currentLanguage].ai_analyzing}</p>
+                </div>
+            `;
+            suggestion.style.display = 'block';
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                const recommendations = generateRecommendations(market, category);
+                suggestion.innerHTML = `
+                    <h3 style="margin-bottom: 20px;">${languageData[currentLanguage].top_recommendations}</h3>
+                    <div style="display: grid; gap: 15px;">
+                        ${recommendations.map(rec => `
+                            <div class="recommendation-item">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="margin: 0;">${rec.name}</h4>
+                                    <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 15px; font-size: 0.9rem;">
+                                        ${rec.grade}
+                                    </span>
+                                </div>
+                                <p style="margin-bottom: 10px; opacity: 0.9;">${rec.description}</p>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                    <span><i class="fas fa-dollar-sign"></i> ${rec.priceRange}</span>
+                                    <span><i class="fas fa-box"></i> ${rec.availability}</span>
+                                    <span><i class="fas fa-shipping-fast"></i> ${rec.shippingTime}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }, 1500);
+        }
+
+        function generateRecommendations(market, category) {
+            const recommendations = {
+                europe: {
+                    organic: [
+                        {
+                            name: "Organic Arabica Coffee",
+                            description: "Shade-grown, Fair Trade certified, perfect for European organic markets",
+                            grade: "AA Grade",
+                            priceRange: "$5.50 - $7.20/kg",
+                            availability: "250 MT in stock",
+                            shippingTime: "25-30 days"
+                        },
+                        {
+                            name: "Organic Sesame Seeds",
+                            description: "EU organic certified, hulled, premium quality for bakery industry",
+                            grade: "Grade A",
+                            priceRange: "$3.80 - $5.20/kg",
+                            availability: "180 MT in stock",
+                            shippingTime: "20-25 days"
+                        }
+                    ],
+                    premium: [
+                        {
+                            name: "Specialty Grade Coffee",
+                            description: "Cupping score 85+, single origin, perfect for specialty coffee shops",
+                            grade: "Specialty",
+                            priceRange: "$8.50 - $12.00/kg",
+                            availability: "120 MT in stock",
+                            shippingTime: "25-30 days"
+                        }
+                    ]
+                },
+                asia: {
+                    bulk: [
+                        {
+                            name: "Food Grade Maize",
+                            description: "Non-GMO, suitable for animal feed and food processing",
+                            grade: "Food Grade",
+                            priceRange: "$380 - $520/MT",
+                            availability: "5,000 MT in stock",
+                            shippingTime: "35-40 days"
+                        }
+                    ]
+                },
+                middle_east: {
+                    all: [
+                        {
+                            name: "Premium Dates",
+                            description: "Medjool variety, premium quality for Middle Eastern markets",
+                            grade: "Grade A",
+                            priceRange: "$4.50 - $6.80/kg",
+                            availability: "300 MT in stock",
+                            shippingTime: "15-20 days"
+                        }
+                    ]
+                }
+            };
+            
+            return recommendations[market]?.[category] || [
+                {
+                    name: "Premium Arabica Coffee",
+                    description: "Our best-selling product suitable for all markets",
+                    grade: "AA Grade",
+                    priceRange: "$4.50 - $6.50/kg",
+                    availability: "500 MT in stock",
+                    shippingTime: "25-30 days"
+                }
+            ];
+        }
+
+        // Real-time Inventory Heat Map
+        function loadInventoryHeatMap() {
+            const grid = document.getElementById('heatmapGrid');
+            const products = [
+                { name: "Coffee", stock: 85, location: "Warehouse A" },
+                { name: "Maize", stock: 45, location: "Warehouse B" },
+                { name: "Beans", stock: 92, location: "Warehouse C" },
+                { name: "Spices", stock: 28, location: "Warehouse A" },
+                { name: "Rice", stock: 75, location: "Warehouse B" },
+                { name: "Cashews", stock: 60, location: "Warehouse C" },
+                { name: "Sesame", stock: 35, location: "Warehouse A" },
+                { name: "Tea", stock: 88, location: "Warehouse B" }
+            ];
+            
+            grid.innerHTML = '';
+            
+            products.forEach(product => {
+                const cell = document.createElement('div');
+                let heatClass = 'heatmap-medium';
+                if (product.stock > 70) heatClass = 'heatmap-low';
+                if (product.stock < 30) heatClass = 'heatmap-high';
+                
+                cell.className = `heatmap-cell ${heatClass}`;
+                cell.innerHTML = `
+                    <div style="font-size: 1.2rem; margin-bottom: 5px;">${product.name}</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${product.stock}%</div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; opacity: 0.9;">${product.location}</div>
+                `;
+                
+                cell.addEventListener('click', () => {
+                    alert(currentLanguage === 'en'
+                        ? `${product.name}: ${product.stock}% available at ${product.location}`
+                        : `${product.name}: ${product.stock}% inapatikana kwenye ${product.location}`);
+                });
+                
+                grid.appendChild(cell);
+            });
+        }
+
+        // Bulk Order Simulator
+        function initBulkSimulator() {
+            const quantitySlider = document.getElementById('quantitySlider');
+            const qualitySlider = document.getElementById('qualitySlider');
+            
+            quantitySlider.addEventListener('input', () => {
+                document.getElementById('quantityValue').textContent = `${quantitySlider.value} MT`;
+            });
+            
+            qualitySlider.addEventListener('input', () => {
+                const grades = currentLanguage === 'en' 
+                    ? ["Grade C - Standard", "Grade B - Good", "Grade A - Premium"]
+                    : ["Daraja C - Kawaida", "Daraja B - Nzuri", "Daraja A - Bora"];
+                document.getElementById('qualityValue').textContent = grades[qualitySlider.value - 1];
+            });
+            
+            // Initial calculation
+            calculateBulkOrder();
+        }
+
+        function calculateBulkOrder() {
+            const quantity = parseInt(document.getElementById('quantitySlider').value);
+            const quality = parseInt(document.getElementById('qualitySlider').value);
+            const product = document.getElementById('simulatorProduct').value;
+            
+            // Base prices per MT
+            const basePrices = {
+                coffee: { min: 4200, max: 6500 },
+                grains: { min: 380, max: 520 },
+                spices: { min: 4800, max: 7200 },
+                legumes: { min: 850, max: 1250 }
+            };
+            
+            const productData = basePrices[product] || basePrices.coffee;
+            
+            // Calculate price based on quality
+            const qualityMultiplier = [0.8, 1.0, 1.3][quality - 1];
+            const unitPrice = (productData.min + (productData.max - productData.min) * Math.random()) * qualityMultiplier;
+            
+            // Calculate totals
+            const totalCost = unitPrice * quantity;
+            const shippingCost = totalCost * 0.15; // 15% shipping
+            const deliveryTime = product === 'coffee' || product === 'spices' ? 
+                Math.floor(Math.random() * 10) + 25 : 
+                Math.floor(Math.random() * 15) + 30;
+            
+            // Update display
+            document.getElementById('totalCost').textContent = `$${totalCost.toLocaleString()}`;
+            document.getElementById('unitPrice').textContent = `$${unitPrice.toFixed(2)}/MT`;
+            document.getElementById('shippingCost').textContent = `$${shippingCost.toLocaleString()}`;
+            document.getElementById('deliveryTime').textContent = `${deliveryTime} ${currentLanguage === 'en' ? 'days' : 'siku'}`;
+        }
+
+        // Product Comparison Matrix
+        function loadComparisonMatrix() {
+            const table = document.getElementById('comparisonTable');
+            const products = [
+                {
+                    name: "Arabica Coffee",
+                    grade: "AA",
+                    moisture: "10-12%",
+                    origin: "Kilimanjaro",
+                    price: "$5.50/kg",
+                    packaging: "60kg bags",
+                    minimum: "10 MT"
+                },
+                {
+                    name: "Maize",
+                    grade: "Grade A",
+                    moisture: "13-14%",
+                    origin: "Southern Highlands",
+                    price: "$450/MT",
+                    packaging: "50kg bags",
+                    minimum: "20 MT"
+                },
+                {
+                    name: "Kidney Beans",
+                    grade: "Grade A",
+                    moisture: "12-14%",
+                    origin: "Lake Zone",
+                    price: "$950/MT",
+                    packaging: "25kg bags",
+                    minimum: "15 MT"
+                },
+                {
+                    name: "Cloves",
+                    grade: "Special",
+                    moisture: "8-10%",
+                    origin: "Zanzibar",
+                    price: "$6.20/kg",
+                    packaging: "30kg bags",
+                    minimum: "5 MT"
+                }
+            ];
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>${currentLanguage === 'en' ? 'Product' : 'Bidhaa'}</th>
+                        <th>${currentLanguage === 'en' ? 'Grade' : 'Daraja'}</th>
+                        <th>${currentLanguage === 'en' ? 'Moisture' : 'Unyamavu'}</th>
+                        <th>${currentLanguage === 'en' ? 'Origin' : 'Asili'}</th>
+                        <th>${currentLanguage === 'en' ? 'Price' : 'Bei'}</th>
+                        <th>${currentLanguage === 'en' ? 'Packaging' : 'Ufungashaji'}</th>
+                        <th>${currentLanguage === 'en' ? 'Minimum Order' : 'Agizo la Chini'}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${products.map(product => `
+                        <tr>
+                            <td><strong>${product.name}</strong></td>
+                            <td>${product.grade}</td>
+                            <td>${product.moisture}</td>
+                            <td>${product.origin}</td>
+                            <td style="color: var(--primary); font-weight: bold;">${product.price}</td>
+                            <td>${product.packaging}</td>
+                            <td>${product.minimum}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+        }
+
+        function addToComparison() {
+            const newProduct = prompt(currentLanguage === 'en'
+                ? "Enter product name to add to comparison:"
+                : "Ingiza jina la bidhaa kuongeza kwenye ulinganishaji:");
+            
+            if (newProduct) {
+                alert(currentLanguage === 'en'
+                    ? `"${newProduct}" added to comparison matrix`
+                    : `"${newProduct}" imeongezwa kwenye matrix ya kulinganisha`);
+                // In a real implementation, this would update the table
+            }
+        }
+
+        function clearComparison() {
+            if (confirm(currentLanguage === 'en'
+                ? "Clear all products from comparison?"
+                : "Futa bidhaa zote kutoka kwenye ulinganishaji?")) {
+                alert(currentLanguage === 'en'
+                    ? "Comparison cleared"
+                    : "Ulinganishaji umeftuliwa");
+            }
+        }
+
+        function exportComparison() {
+            alert(currentLanguage === 'en'
+                ? "Exporting comparison as PDF..."
+                : "Inahamisha ulinganishaji kama PDF...");
+        }
+
+        // Seasonal Availability Calendar
+        function loadSeasonalCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const months = currentLanguage === 'en' 
+                ? ["January", "February", "March", "April", "May", "June", 
+                   "July", "August", "September", "October", "November", "December"]
+                : ["Januari", "Februari", "Machi", "Aprili", "Mei", "Juni", 
+                   "Julai", "Agosti", "Septemba", "Oktoba", "Novemba", "Desemba"];
+            
+            grid.innerHTML = '';
+            
+            months.forEach((month, index) => {
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'calendar-month';
+                monthDiv.textContent = month;
+                monthDiv.dataset.monthIndex = index;
+                
+                monthDiv.addEventListener('click', () => {
+                    // Remove active class from all months
+                    document.querySelectorAll('.calendar-month').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked month
+                    monthDiv.classList.add('active');
+                    
+                    // Update seasonal info
+                    updateSeasonalInfo(index);
+                });
+                
+                grid.appendChild(monthDiv);
+            });
+            
+            // Set first month as active by default
+            document.querySelector('.calendar-month').classList.add('active');
+            updateSeasonalInfo(0);
+        }
+
+        function updateSeasonalInfo(monthIndex) {
+            const monthNames = currentLanguage === 'en' 
+                ? ["January", "February", "March", "April", "May", "June", 
+                   "July", "August", "September", "October", "November", "December"]
+                : ["Januari", "Februari", "Machi", "Aprili", "Mei", "Juni", 
+                   "Julai", "Agosti", "Septemba", "Oktoba", "Novemba", "Desemba"];
+            
+            const seasonalData = {
+                0: { // January
+                    products: ["Coffee", "Beans", "Maize"],
+                    status: "peak_season",
+                    description: currentLanguage === 'en'
+                        ? "Harvest season for coffee and beans is at its peak."
+                        : "Msimu wa mavuno wa kahawa na maharagwe uko kileleni."
+                },
+                1: { // February
+                    products: ["Coffee", "Spices", "Tea"],
+                    status: "good_availability",
+                    description: currentLanguage === 'en'
+                        ? "Good availability of spices and tea during this month."
+                        : "Upatikanaji mzuri wa viungo na chai wakati wa mwezi huu."
+                },
+                4: { // May
+                    products: ["Maize", "Beans", "Rice"],
+                    status: "peak_season",
+                    description: currentLanguage === 'en'
+                        ? "Main harvest season for grains and legumes."
+                        : "Msimu mkuu wa mavuno wa nafaka na legumes."
+                },
+                11: { // December
+                    products: ["Cashews", "Sesame", "Spices"],
+                    status: "good_availability",
+                    description: currentLanguage === 'en'
+                        ? "Good time for nuts and spices harvesting."
+                        : "Wakati mzuri wa mavuno ya njugu na viungo."
+                }
+            };
+            
+            const data = seasonalData[monthIndex] || {
+                products: ["Various Products"],
+                status: "good_availability",
+                description: currentLanguage === 'en'
+                    ? "Steady availability of various agricultural products."
+                    : "Upatikanaji thabiti wa bidhaa mbalimbali za kilimo."
+            };
+            
+            document.getElementById('selectedMonth').textContent = monthNames[monthIndex];
+            document.getElementById('seasonalDescription').textContent = data.description;
+            
+            const productsContainer = document.getElementById('seasonalProducts');
+            productsContainer.innerHTML = data.products.map(product => `
+                <div class="seasonal-product-tag">
+                    ${product}
+                </div>
+            `).join('');
+        }
+
+        function updateDynamicContent() {
+            loadInventoryHeatMap();
+            loadComparisonMatrix();
+            loadSeasonalCalendar();
+            calculateBulkOrder();
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage('en');
+            
+            // Initialize features
+            initHolographicViewer();
+            initBulkSimulator();
+            loadInventoryHeatMap();
+            loadComparisonMatrix();
+            loadSeasonalCalendar();
+        });
+    </script>
+</body>
+</html>
