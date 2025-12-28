@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications | FAMM ATL Company Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D Certificate Gallery -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <style>
+        /* Enhanced CSS for certifications page */
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #ffffff;
+            --bg-light-secondary: #f9f9f9;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Blockchain Certificate Explorer */
+        .blockchain-explorer {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blockchain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .blockchain-animation {
+            height: 200px;
+            position: relative;
+            margin: 30px 0;
+        }
+
+        .block-node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 176, 155, 0.3);
+            animation: blockNodeFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes blockNodeFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .blockchain-search {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .blockchain-search input {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .blockchain-search input:focus {
+            outline: none;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .blockchain-search button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .blockchain-search button:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+        }
+
+        .blockchain-search button:nth-child(3) {
+            background: #2196f3;
+        }
+
+        .blockchain-search button:nth-child(3):hover {
+            background: #0b7dda;
+        }
+
+        /* 3D Certificate Gallery */
+        .certificate-3d-gallery {
+            height: 500px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #certificate3dCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(0,0,0,0.7);
+            padding: 15px 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .gallery-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-btn:hover {
+            color: var(--secondary);
+            transform: scale(1.2);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .certificate-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .cert-selector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cert-selector:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Smart Compliance Checker */
+        .compliance-checker {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .compliance-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .compliance-input select, .compliance-input button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .compliance-input select {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .compliance-input select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+
+        .compliance-input button {
+            background: white;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .compliance-input button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .checker-result {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .compliance-status {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .status-compliant { background: #4caf50; }
+        .status-noncompliant { background: #f44336; }
+        .status-pending { background: #ff9800; }
+
+        /* Live Audit Trail Viewer */
+        .audit-trail {
+            background: #1a472a;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .audit-timeline {
+            margin: 30px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .audit-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .audit-event {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .audit-event:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .audit-dot {
+            position: absolute;
+            left: -35px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            z-index: 1;
+        }
+
+        .audit-time {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+            color: #a7ffa7;
+        }
+
+        .audit-details {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .audit-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .audit-buttons button {
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .audit-buttons button:first-child {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid white;
+        }
+
+        .audit-buttons button:first-child:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .audit-buttons button:last-child {
+            background: var(--secondary);
+            color: white;
+            border: none;
+        }
+
+        .audit-buttons button:last-child:hover {
+            background: #e68900;
+        }
+
+        /* International Standards Comparator */
+        .standards-comparator {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .comparator-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparator-table th {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparator-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparator-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparator-table tr:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .status-icon {
+            font-size: 1.2rem;
+        }
+
+        .icon-compliant { color: #4caf50; }
+        .icon-pending { color: #ff9800; }
+        .icon-missing { color: #f44336; }
+
+        /* Certificate Expiry Tracker */
+        .expiry-tracker {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .certificate-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .cert-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .expiry-countdown {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .expiry-soon { background: #ff9800; }
+        .expiry-critical { background: #f44336; }
+        .expiry-safe { background: #4caf50; }
+
+        .cert-details {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .cert-details div {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cert-progress {
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .cert-progress-bar {
+            height: 100%;
+            background: #4caf50;
+            width: 75%;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--primary-light);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blockchain-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .certificate-3d-gallery {
+                height: 400px;
+            }
+            
+            .certificate-info {
+                position: relative;
+                top: auto;
+                left: auto;
+                max-width: 100%;
+                margin: 20px;
+            }
+            
+            .audit-timeline::before {
+                left: 0;
+            }
+            
+            .audit-dot {
+                left: -25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .blockchain-search {
+                flex-direction: column;
+            }
+            
+            .compliance-input {
+                grid-template-columns: 1fr;
+            }
+            
+            .audit-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="changeLanguage('sw')">SW</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-seedling"></i>
+                <div class="logo-text">FAMM<span>ATL</span></div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home">Home</a></li>
+                    <li><a href="about.html" data-lang="about">About Us</a></li>
+                    <li><a href="products.html" data-lang="products">Products</a></li>
+                    <li><a href="services.html" data-lang="services">Export Services</a></li>
+                    <li><a href="certifications.html" class="active" data-lang="certifications">Certifications</a></li>
+                    <li><a href="contact.html" data-lang="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 data-lang="certifications_title">Certifications & Quality Standards</h1>
+            <div class="breadcrumb">
+                <a href="index.html" data-lang="home">Home</a>
+                <span>/</span>
+                <span data-lang="certifications">Certifications</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blockchain Certificate Explorer -->
+    <section class="section">
+        <div class="container">
+            <div class="blockchain-explorer">
+                <div class="blockchain-header">
+                    <div>
+                        <h2 data-lang="blockchain_title">Blockchain-Verified Certificates</h2>
+                        <p data-lang="blockchain_desc">Verify the authenticity of any certificate on our blockchain</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-link" style="font-size: 2rem;"></i>
+                        <div>
+                            <div style="font-size: 0.9rem;" data-lang="blockchain_network">Network: FAMM ATL Blockchain</div>
+                            <div style="font-size: 0.8rem; opacity: 0.8;">Last Block: #<span id="lastBlock">1,245,678</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="blockchain-animation" id="blockchainAnimation">
+                    <!-- Blockchain nodes generated by JavaScript -->
+                </div>
+                
+                <div class="blockchain-search">
+                    <input type="text" id="certificateHash" placeholder="Enter certificate hash or scan QR code..." data-lang="hash_placeholder">
+                    <button onclick="verifyCertificate()">
+                        <i class="fas fa-search"></i>
+                        <span data-lang="verify_certificate">Verify Certificate</span>
+                    </button>
+                    <button onclick="scanQrCode()">
+                        <i class="fas fa-qrcode"></i>
+                        <span data-lang="scan_qr">Scan QR</span>
+                    </button>
+                </div>
+                
+                <div id="verificationResult" style="margin-top: 20px;">
+                    <!-- Verification results appear here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Certificate Gallery -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="3d_gallery_title">Interactive 3D Certificate Gallery</h2>
+                <p data-lang="3d_gallery_desc">Rotate and explore our certificates in stunning 3D detail</p>
+            </div>
+            
+            <div class="certificate-3d-gallery">
+                <canvas id="certificate3dCanvas"></canvas>
+                
+                <div class="certificate-info" id="certificateInfo">
+                    <h3 id="certName">ISO 22000:2018</h3>
+                    <p id="certDesc">Food Safety Management System</p>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.9rem;" data-lang="cert_id">Certificate ID:</div>
+                        <div style="font-weight: bold;" id="certId">ISO-FS-2022-0456</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-controls">
+                    <button class="gallery-btn" onclick="prevCertificate()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-btn" onclick="rotateCertificate('left')">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="gallery-btn" onclick="zoomInCertificate()">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="gallery-btn" onclick="zoomOutCertificate()">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="gallery-btn" onclick="rotateCertificate('right')">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="gallery-btn" onclick="nextCertificate()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="gallery-btn" onclick="downloadCertificate()">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px;">
+                <button class="cert-selector" onclick="selectCertificate('iso')" style="background: #2196f3;">
+                    <i class="fas fa-certificate"></i>
+                    <span data-lang="iso_cert">ISO 22000</span>
+                </button>
+                <button class="cert-selector" onclick="selectCertificate('organic')" style="background: #4caf50;">
+                    <i class="fas fa-leaf"></i>
+                    <span data-lang="organic_cert">Organic</span>
+                </button>
+                <button class="cert-selector" onclick="selectCertificate('halal')" style="background: #9c27b0;">
+                    <i class="fas fa-star-and-crescent"></i>
+                    <span data-lang="halal_cert">Halal</span>
+                </button>
+                <button class="cert-selector" onclick="selectCertificate('fairtrade')" style="background: #ff9800;">
+                    <i class="fas fa-handshake"></i>
+                    <span data-lang="fairtrade_cert">Fair Trade</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Compliance Checker -->
+    <section class="section">
+        <div class="container">
+            <div class="compliance-checker">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="compliance_title">AI-Powered Compliance Checker</h2>
+                    <p data-lang="compliance_desc">Check if your products comply with international standards</p>
+                </div>
+                
+                <div class="compliance-input">
+                    <select id="countrySelect">
+                        <option value="" data-lang="select_country">Select Destination Country</option>
+                        <option value="germany">Germany</option>
+                        <option value="usa">United States</option>
+                        <option value="china">China</option>
+                        <option value="uae">UAE</option>
+                        <option value="saudi">Saudi Arabia</option>
+                    </select>
+                    
+                    <select id="productSelect">
+                        <option value="" data-lang="select_product">Select Product Type</option>
+                        <option value="coffee">Coffee</option>
+                        <option value="grains">Grains</option>
+                        <option value="spices">Spices</option>
+                        <option value="legumes">Legumes</option>
+                    </select>
+                    
+                    <button onclick="checkCompliance()">
+                        <i class="fas fa-robot"></i>
+                        <span data-lang="check_compliance">Check Compliance</span>
+                    </button>
+                </div>
+                
+                <div class="checker-result" id="checkerResult">
+                    <!-- Compliance results appear here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Audit Trail Viewer -->
+    <section class="section">
+        <div class="container">
+            <div class="audit-trail">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="audit_title">Live Audit Trail Viewer</h2>
+                    <p data-lang="audit_desc">Track the complete history of our certifications</p>
+                </div>
+                
+                <div class="audit-timeline" id="auditTimeline">
+                    <!-- Audit events generated by JavaScript -->
+                </div>
+                
+                <div class="audit-buttons">
+                    <button onclick="loadMoreAudits()">
+                        <i class="fas fa-history"></i>
+                        <span data-lang="load_more">Load More History</span>
+                    </button>
+                    <button onclick="exportAuditTrail()">
+                        <i class="fas fa-file-export"></i>
+                        <span data-lang="export_audit">Export Audit Trail</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Standards Comparator -->
+    <section class="section">
+        <div class="container">
+            <div class="standards-comparator">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="standards_title">International Standards Comparator</h2>
+                    <p data-lang="standards_desc">Compare certification requirements across different markets</p>
+                </div>
+                
+                <table class="comparator-table" id="standardsTable">
+                    <!-- Table generated by JavaScript -->
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Expiry Tracker -->
+    <section class="section">
+        <div class="container">
+            <div class="expiry-tracker">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="expiry_title">Certificate Expiry Tracker</h2>
+                    <p data-lang="expiry_desc">Monitor certificate validity and renewal dates</p>
+                </div>
+                
+                <div class="certificate-cards" id="certificateCards">
+                    <!-- Certificate cards generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <div class="logo-text">FAMM<span>ATL</span></div>
+                    </div>
+                    <p data-lang="footer_desc">Leading exporters of premium agricultural products from Tanzania, committed to quality and sustainability.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="quick_links">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-lang="home">Home</a></li>
+                        <li><a href="about.html" data-lang="about">About Us</a></li>
+                        <li><a href="products.html" data-lang="products">Products</a></li>
+                        <li><a href="certifications.html" data-lang="certifications">Certifications</a></li>
+                        <li><a href="contact.html" data-lang="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="certifications">Certifications</h3>
+                    <ul>
+                        <li><a href="#" data-lang="iso_cert">ISO 22000</a></li>
+                        <li><a href="#" data-lang="organic_cert">Organic Certification</a></li>
+                        <li><a href="#" data-lang="halal_cert">Halal Certification</a></li>
+                        <li><a href="#" data-lang="fairtrade_cert">Fair Trade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="contact_us">Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</li>
+                        <li><i class="fas fa-phone"></i> +255 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fammatl.co.tz</li>
+                        <li><i class="fas fa-globe"></i> www.fammatl.co.tz</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FAMM ATL Company Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Language data
+        const languageData = {
+            en: {
+                // Header
+                home: "Home",
+                about: "About Us",
+                products: "Products",
+                services: "Export Services",
+                certifications: "Certifications",
+                contact: "Contact",
+                certifications_title: "Certifications & Quality Standards",
+                
+                // Blockchain Explorer
+                blockchain_title: "Blockchain-Verified Certificates",
+                blockchain_desc: "Verify the authenticity of any certificate on our blockchain",
+                blockchain_network: "Network: FAMM ATL Blockchain",
+                hash_placeholder: "Enter certificate hash or scan QR code...",
+                verify_certificate: "Verify Certificate",
+                scan_qr: "Scan QR",
+                
+                // 3D Gallery
+                "3d_gallery_title": "Interactive 3D Certificate Gallery",
+                "3d_gallery_desc": "Rotate and explore our certificates in stunning 3D detail",
+                cert_id: "Certificate ID:",
+                iso_cert: "ISO 22000",
+                organic_cert: "Organic",
+                halal_cert: "Halal",
+                fairtrade_cert: "Fair Trade",
+                
+                // Compliance Checker
+                compliance_title: "AI-Powered Compliance Checker",
+                compliance_desc: "Check if your products comply with international standards",
+                select_country: "Select Destination Country",
+                select_product: "Select Product Type",
+                check_compliance: "Check Compliance",
+                
+                // Audit Trail
+                audit_title: "Live Audit Trail Viewer",
+                audit_desc: "Track the complete history of our certifications",
+                load_more: "Load More History",
+                export_audit: "Export Audit Trail",
+                
+                // Standards Comparator
+                standards_title: "International Standards Comparator",
+                standards_desc: "Compare certification requirements across different markets",
+                
+                // Expiry Tracker
+                expiry_title: "Certificate Expiry Tracker",
+                expiry_desc: "Monitor certificate validity and renewal dates",
+                
+                // Footer
+                footer_desc: "Leading exporters of premium agricultural products from Tanzania, committed to quality and sustainability.",
+                quick_links: "Quick Links",
+                contact_us: "Contact Us"
+            },
+            sw: {
+                // Header
+                home: "Nyumbani",
+                about: "Kuhusu Sisi",
+                products: "Bidhaa",
+                services: "Huduma za Usafirishaji",
+                certifications: "Vyeti",
+                contact: "Wasiliana",
+                certifications_title: "Vyeti na Viwango vya Ubora",
+                
+                // Blockchain Explorer
+                blockchain_title: "Vyeti Vilivyothibitishwa na Blockchain",
+                blockchain_desc: "Thibitisha ukweli wa cheti chochote kwenye blockchain yetu",
+                blockchain_network: "Mtandao: FAMM ATL Blockchain",
+                hash_placeholder: "Weka hash ya cheti au piga skana QR...",
+                verify_certificate: "Thibitisha Cheti",
+                scan_qr: "Piga Skana QR",
+                
+                // 3D Gallery
+                "3d_gallery_title": "Jumba la Maonyesho ya 3D ya Vyeti",
+                "3d_gallery_desc": "Zunguka na uchunguze vyeti vyetu kwa maelezo ya kuvutia ya 3D",
+                cert_id: "Kitambulisho cha Cheti:",
+                iso_cert: "ISO 22000",
+                organic_cert: "Asilia",
+                halal_cert: "Halali",
+                fairtrade_cert: "Biashara Haki",
+                
+                // Compliance Checker
+                compliance_title: "Kiangazio cha Kufuata Kanuni chenye AKI",
+                compliance_desc: "Angalia ikiwa bidhaa zako zinakidhi viwango vya kimataifa",
+                select_country: "Chagua Nchi Lengwa",
+                select_product: "Chagua Aina ya Bidhaa",
+                check_compliance: "Angalia Ufanisi",
+                
+                // Audit Trail
+                audit_title: "Mtazamo wa Wimbi wa Ukaguzi",
+                audit_desc: "Fuatilia historia kamili ya vyeti vyetu",
+                load_more: "Pakia Historia Zaidi",
+                export_audit: "Hamisha Wimbi wa Ukaguzi",
+                
+                // Standards Comparator
+                standards_title: "Kilinganishi cha Viwango vya Kimataifa",
+                standards_desc: "Linganisha mahitaji ya vyeti katika soko tofauti",
+                
+                // Expiry Tracker
+                expiry_title: "Kifuatiliaji cha Mwisho wa Vyeti",
+                expiry_desc: "Fuatilia uhalali wa cheti na tarehe za ufufuzi",
+                
+                // Footer
+                footer_desc: "Wasanifu wakuu wa bidhaa za kilimo bora kutoka Tanzania, wakijitolea kwa ubora na uendelevu.",
+                quick_links: "Viungo vya Haraka",
+                contact_us: "Wasiliana Nasi"
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'en';
+
+        // Change language function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    element.textContent = languageData[lang][key];
+                }
+            });
+            
+            // Update dropdown placeholders
+            document.querySelectorAll('select option[data-lang]').forEach(option => {
+                const key = option.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    option.textContent = languageData[lang][key];
+                }
+            });
+            
+            // Update input placeholders
+            document.querySelectorAll('input[data-lang]').forEach(input => {
+                const key = input.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    input.placeholder = languageData[lang][key];
+                }
+            });
+            
+            // Update the page with new data
+            updatePageContent();
+        }
+
+        // Blockchain Explorer
+        function initBlockchainAnimation() {
+            const container = document.getElementById('blockchainAnimation');
+            for (let i = 0; i < 15; i++) {
+                const node = document.createElement('div');
+                node.className = 'block-node';
+                node.style.left = `${Math.random() * 90}%`;
+                node.style.top = `${Math.random() * 80}%`;
+                node.style.animationDelay = `${Math.random() * 2}s`;
+                node.innerHTML = `<i class="fas fa-cube"></i>`;
+                container.appendChild(node);
+            }
+        }
+
+        function verifyCertificate() {
+            const hash = document.getElementById('certificateHash').value;
+            const resultDiv = document.getElementById('verificationResult');
+            
+            if (!hash) {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(255,0,0,0.1); color: #ff6b6b; padding: 15px; border-radius: 10px; border-left: 4px solid #ff6b6b;">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a certificate hash
+                    </div>
+                `;
+                return;
+            }
+            
+            // Simulate verification
+            const isValid = Math.random() > 0.3;
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(76, 175, 80, 0.1); color: #4caf50; padding: 20px; border-radius: 10px; border-left: 4px solid #4caf50;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fas fa-check-circle" style="font-size: 2rem;"></i>
+                            <div>
+                                <h3 style="margin: 0;">Certificate Verified</h3>
+                                <p style="margin: 5px 0 0 0; opacity: 0.9;">This certificate is valid and authentic</p>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                            <div>
+                                <div style="font-size: 0.9rem; opacity: 0.8;">Certificate ID</div>
+                                <div style="font-weight: bold;">CERT-${Math.floor(Math.random() * 10000)}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.9rem; opacity: 0.8;">Issued Date</div>
+                                <div style="font-weight: bold;">${new Date().toLocaleDateString()}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.9rem; opacity: 0.8;">Blockchain Confirmation</div>
+                                <div style="font-weight: bold;">${Math.floor(Math.random() * 50) + 10} confirmations</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(244, 67, 54, 0.1); color: #f44336; padding: 20px; border-radius: 10px; border-left: 4px solid #f44336;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fas fa-times-circle" style="font-size: 2rem;"></i>
+                            <div>
+                                <h3 style="margin: 0;">Certificate Not Found</h3>
+                                <p style="margin: 5px 0 0 0; opacity: 0.9;">This certificate hash does not exist in our blockchain</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function scanQrCode() {
+            alert('QR Code scanner would open here. In a real application, this would use the device camera to scan QR codes.');
+        }
+
+        // 3D Gallery
+        let scene, camera, renderer, currentCertificate = 0;
+        const certificates = [
+            { name: "ISO 22000:2018", desc: "Food Safety Management System", id: "ISO-FS-2022-0456" },
+            { name: "USDA Organic", desc: "Organic Certification", id: "ORG-2023-0789" },
+            { name: "Halal Certification", desc: "Islamic Food Standards", id: "HALAL-2023-1234" },
+            { name: "Fair Trade Certified", desc: "Ethical Trading Standards", id: "FT-2023-0567" }
+        ];
+
+        function init3DGallery() {
+            const canvas = document.getElementById('certificate3dCanvas');
+            
+            // Create a simple placeholder for 3D (since we don't have actual 3D models)
+            canvas.style.background = "linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))";
+            canvas.style.display = "flex";
+            canvas.style.alignItems = "center";
+            canvas.style.justifyContent = "center";
+            
+            const placeholder = document.createElement('div');
+            placeholder.style.textAlign = 'center';
+            placeholder.style.color = 'rgba(255,255,255,0.7)';
+            placeholder.innerHTML = `
+                <i class="fas fa-certificate" style="font-size: 8rem; margin-bottom: 20px;"></i>
+                <h2 style="margin-bottom: 10px;">3D Certificate Viewer</h2>
+                <p>Rotate and zoom certificates in 3D space</p>
+            `;
+            canvas.appendChild(placeholder);
+            
+            updateCertificateInfo();
+        }
+
+        function updateCertificateInfo() {
+            const cert = certificates[currentCertificate];
+            document.getElementById('certName').textContent = cert.name;
+            document.getElementById('certDesc').textContent = cert.desc;
+            document.getElementById('certId').textContent = cert.id;
+        }
+
+        function selectCertificate(type) {
+            const certMap = { iso: 0, organic: 1, halal: 2, fairtrade: 3 };
+            currentCertificate = certMap[type];
+            updateCertificateInfo();
+            
+            // Visual feedback
+            document.querySelectorAll('.cert-selector').forEach(btn => {
+                btn.style.transform = 'translateY(0)';
+            });
+            event.target.style.transform = 'translateY(-5px)';
+        }
+
+        function prevCertificate() {
+            currentCertificate = (currentCertificate - 1 + certificates.length) % certificates.length;
+            updateCertificateInfo();
+        }
+
+        function nextCertificate() {
+            currentCertificate = (currentCertificate + 1) % certificates.length;
+            updateCertificateInfo();
+        }
+
+        function rotateCertificate(direction) {
+            alert(`Rotating certificate ${direction} in 3D space`);
+        }
+
+        function zoomInCertificate() {
+            alert('Zooming in on certificate');
+        }
+
+        function zoomOutCertificate() {
+            alert('Zooming out of certificate');
+        }
+
+        function downloadCertificate() {
+            alert(`Downloading ${certificates[currentCertificate].name}`);
+        }
+
+        // Compliance Checker
+        function checkCompliance() {
+            const country = document.getElementById('countrySelect').value;
+            const product = document.getElementById('productSelect').value;
+            const resultDiv = document.getElementById('checkerResult');
+            
+            if (!country || !product) {
+                resultDiv.innerHTML = `
+                    <div style="color: white; padding: 15px; border-radius: 10px; background: rgba(255,0,0,0.2);">
+                        <i class="fas fa-exclamation-triangle"></i> Please select both country and product type
+                    </div>
+                `;
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            // Simulate AI analysis
+            const isCompliant = Math.random() > 0.4;
+            const missingCerts = isCompliant ? [] : ['Organic Certification', 'Fair Trade'];
+            
+            resultDiv.innerHTML = `
+                <div style="color: white;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <i class="fas fa-robot" style="font-size: 2rem;"></i>
+                        <div>
+                            <h3 style="margin: 0;">AI Compliance Analysis</h3>
+                            <p style="margin: 5px 0 0 0; opacity: 0.9;">Analysis for ${product} exports to ${country}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="compliance-status ${isCompliant ? 'status-compliant' : 'status-noncompliant'}">
+                        ${isCompliant ? 'FULLY COMPLIANT' : 'ACTION REQUIRED'}
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4>Analysis Results:</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            ${isCompliant ? 
+                                '<li><i class="fas fa-check" style="color: #4caf50;"></i> All requirements met for target market</li>' +
+                                '<li><i class="fas fa-check" style="color: #4caf50;"></i> Documentation complete and valid</li>' +
+                                '<li><i class="fas fa-check" style="color: #4caf50;"></i> No additional certifications required</li>'
+                                :
+                                '<li><i class="fas fa-times" style="color: #f44336;"></i> Missing certifications: ' + missingCerts.join(', ') + '</li>' +
+                                '<li><i class="fas fa-exclamation-triangle" style="color: #ff9800;"></i> Additional documentation required</li>' +
+                                '<li><i class="fas fa-clock" style="color: #ff9800;"></i> Processing time: 2-3 weeks for compliance</li>'
+                            }
+                        </ul>
+                    </div>
+                    
+                    ${!isCompliant ? `
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4>Recommended Actions:</h4>
+                            <ol style="padding-left: 20px; margin-top: 10px;">
+                                <li>Apply for ${missingCerts[0]} certification</li>
+                                <li>Update product labeling</li>
+                                <li>Submit additional quality reports</li>
+                            </ol>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Audit Trail
+        const auditEvents = [
+            { time: "2023-11-15 14:30", event: "Annual ISO 22000 Audit", auditor: "SGS International", status: "Passed" },
+            { time: "2023-10-28 09:15", event: "Organic Certification Renewal", auditor: "Control Union", status: "Completed" },
+            { time: "2023-09-12 11:45", event: "Halal Compliance Check", auditor: "Islamic Food Council", status: "Approved" },
+            { time: "2023-08-05 16:20", event: "Fair Trade Audit", auditor: "Fairtrade International", status: "Passed" },
+            { time: "2023-07-18 13:10", event: "Quality Management Review", auditor: "Internal Audit Team", status: "Completed" }
+        ];
+
+        function loadAuditTrail() {
+            const timeline = document.getElementById('auditTimeline');
+            timeline.innerHTML = '';
+            
+            auditEvents.forEach((event, index) => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'audit-event';
+                eventDiv.innerHTML = `
+                    <div class="audit-dot"></div>
+                    <div class="audit-time">${event.time}</div>
+                    <h3 style="margin-bottom: 5px;">${event.event}</h3>
+                    <div style="display: flex; gap: 15px; margin-bottom: 10px;">
+                        <span><i class="fas fa-user-check"></i> ${event.auditor}</span>
+                        <span style="color: #4caf50;"><i class="fas fa-check-circle"></i> ${event.status}</span>
+                    </div>
+                    <div class="audit-details">
+                        <p>All requirements were met during this audit. No major non-conformities were found. Certificate validity extended for 12 months.</p>
+                    </div>
+                `;
+                timeline.appendChild(eventDiv);
+            });
+        }
+
+        function loadMoreAudits() {
+            const newEvents = [
+                { time: "2023-06-22 10:00", event: "Supplier Quality Assessment", auditor: "Quality Assurance Team", status: "Completed" },
+                { time: "2023-05-30 15:45", event: "Export Documentation Review", auditor: "Customs Compliance", status: "Approved" }
+            ];
+            
+            auditEvents.push(...newEvents);
+            loadAuditTrail();
+        }
+
+        function exportAuditTrail() {
+            alert('Exporting audit trail as PDF...');
+        }
+
+        // Standards Comparator
+        function loadStandardsTable() {
+            const table = document.getElementById('standardsTable');
+            const standards = [
+                { standard: "ISO 22000", eu: "✓", usa: "✓", china: "✓", uae: "✓" },
+                { standard: "USDA Organic", eu: "✓", usa: "✓", china: "Pending", uae: "✓" },
+                { standard: "Halal", eu: "✓", usa: "✓", china: "Required", uae: "✓" },
+                { standard: "Fair Trade", eu: "✓", usa: "✓", china: "Optional", uae: "✓" },
+                { standard: "GMP", eu: "✓", usa: "✓", china: "✓", uae: "✓" }
+            ];
+            
+            table.innerHTML = `
+                <tr>
+                    <th>Standard</th>
+                    <th>European Union</th>
+                    <th>United States</th>
+                    <th>China</th>
+                    <th>UAE</th>
+                </tr>
+            `;
+            
+            standards.forEach(std => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${std.standard}</strong></td>
+                    <td><i class="fas fa-check icon-compliant"></i> ${std.eu}</td>
+                    <td><i class="fas fa-check icon-compliant"></i> ${std.usa}</td>
+                    <td><i class="${std.china === '✓' ? 'fas fa-check icon-compliant' : std.china === 'Pending' ? 'fas fa-clock icon-pending' : 'fas fa-exclamation-triangle icon-missing'}"></i> ${std.china}</td>
+                    <td><i class="fas fa-check icon-compliant"></i> ${std.uae}</td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        // Certificate Expiry Tracker
+        function loadCertificateCards() {
+            const container = document.getElementById('certificateCards');
+            const certificates = [
+                { name: "ISO 22000:2018", expiry: "2024-11-15", daysLeft: 345, status: "safe" },
+                { name: "USDA Organic", expiry: "2023-12-28", daysLeft: 42, status: "soon" },
+                { name: "Halal Certification", expiry: "2024-06-30", daysLeft: 225, status: "safe" },
+                { name: "Fair Trade", expiry: "2023-11-30", daysLeft: 14, status: "critical" }
+            ];
+            
+            container.innerHTML = '';
+            
+            certificates.forEach(cert => {
+                const card = document.createElement('div');
+                card.className = 'cert-card';
+                card.innerHTML = `
+                    <div class="expiry-countdown expiry-${cert.status}">
+                        ${cert.daysLeft} days
+                    </div>
+                    <h3 style="margin-bottom: 10px;">${cert.name}</h3>
+                    <div class="cert-details">
+                        <div>
+                            <span>Expiry Date:</span>
+                            <span>${cert.expiry}</span>
+                        </div>
+                        <div>
+                            <span>Status:</span>
+                            <span style="color: ${cert.status === 'safe' ? '#4caf50' : cert.status === 'soon' ? '#ff9800' : '#f44336'}; font-weight: bold;">
+                                ${cert.status === 'safe' ? 'Valid' : cert.status === 'soon' ? 'Expiring Soon' : 'Renewal Urgent'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cert-progress">
+                        <div class="cert-progress-bar" style="width: ${100 - (cert.daysLeft / 365 * 100)}%"></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Update page content
+        function updatePageContent() {
+            loadStandardsTable();
+            loadCertificateCards();
+            loadAuditTrail();
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initBlockchainAnimation();
+            init3DGallery();
+            updatePageContent();
+            
+            // Set initial language
+            changeLanguage('en');
+        });
+    </script>
+</body>
+</html>
