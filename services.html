@@ -16,11 +16,218 @@
             --primary-dark: #1b5e20;
             --primary-light: #4caf50;
             --secondary: #ff9800;
+            --secondary-dark: #f57c00;
             --text-dark: #333333;
             --text-light: #666666;
             --bg-light: #ffffff;
             --bg-light-secondary: #f9f9f9;
             --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card p {
+            color: var(--text-light);
+            font-size: 1.1rem;
         }
 
         /* Interactive Shipping Map */
@@ -44,73 +251,111 @@
             top: 20px;
             right: 20px;
             background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             z-index: 1000;
+            min-width: 200px;
         }
 
         .route-selector {
             display: flex;
+            flex-direction: column;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .route-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 12px 20px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .route-btn:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateX(-5px);
+        }
+
+        .route-btn.active {
+            background: var(--secondary);
         }
 
         /* AI Documentation Wizard */
         .ai-document-wizard {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 60px 0;
+            padding: 50px;
+            border-radius: 25px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-document-wizard::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .wizard-steps {
             display: flex;
             justify-content: space-between;
-            margin: 40px 0;
+            margin: 50px 0;
             position: relative;
+            padding: 0 20px;
         }
 
         .wizard-step {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: rgba(255,255,255,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             position: relative;
             z-index: 2;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 3px solid transparent;
+        }
+
+        .wizard-step:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
         }
 
         .wizard-step.active {
             background: var(--secondary);
             transform: scale(1.2);
-            box-shadow: 0 10px 20px rgba(255,152,0,0.3);
+            box-shadow: 0 10px 25px rgba(255,152,0,0.4);
+            border-color: white;
         }
 
         .wizard-step.completed {
             background: #4caf50;
+            border-color: #4caf50;
         }
 
         .wizard-progress {
@@ -118,193 +363,446 @@
             top: 50%;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 6px;
             background: rgba(255,255,255,0.2);
             transform: translateY(-50%);
+            border-radius: 3px;
+            overflow: hidden;
         }
 
         .wizard-progress-bar {
             height: 100%;
             background: var(--secondary);
             width: 0%;
-            transition: width 0.5s;
+            transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            border-radius: 3px;
         }
 
         .wizard-content {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
-            min-height: 300px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            min-height: 350px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* Port Congestion Heat Map */
-        .port-congestion-map {
-            height: 400px;
-            background: #1a1a1a;
-            border-radius: 15px;
-            margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
         .congestion-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 30px 0;
         }
 
         .port-cell {
-            background: #2a2a2a;
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
         }
 
         .port-cell:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .port-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .port-cell.low-congestion::before {
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+        }
+
+        .port-cell.medium-congestion::before {
+            background: linear-gradient(90deg, #ff9800, #ffc107);
+        }
+
+        .port-cell.high-congestion::before {
+            background: linear-gradient(90deg, #f44336, #ff5252);
         }
 
         .congestion-level {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50px;
-            height: 100%;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            gap: 10px;
         }
 
-        .low-congestion { background: linear-gradient(90deg, transparent 0%, #4caf50 100%); }
-        .medium-congestion { background: linear-gradient(90deg, transparent 0%, #ff9800 100%); }
-        .high-congestion { background: linear-gradient(90deg, transparent 0%, #f44336 100%); }
+        .congestion-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+        }
 
         /* Carbon Footprint Calculator */
         .carbon-calculator {
             background: linear-gradient(135deg, #00b09b, #96c93d);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 60px 0;
+            padding: 50px;
+            border-radius: 25px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carbon-calculator::after {
+            content: '🌿';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            font-size: 400px;
+            opacity: 0.1;
+            transform: rotate(45deg);
         }
 
         .calculator-inputs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .calc-input-group {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .carbon-visualization {
-            height: 200px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .carbon-bar {
-            width: 40px;
-            background: #ff9800;
-            border-radius: 10px 10px 0 0;
-            position: relative;
-            transition: height 1s;
-        }
-
-        .carbon-bar::after {
-            content: attr(data-co2);
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-        }
-
-        /* Smart Logistics Cost Estimator */
-        .logistics-estimator {
-            background: #1a472a;
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 60px 0;
-        }
-
-        .estimator-controls {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin: 40px 0;
         }
 
-        .estimator-result {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
+        .calc-input-group {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
             border-radius: 15px;
-            margin-top: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .calc-input-group label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        select {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .carbon-visualization {
+            height: 250px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 0;
+            padding: 0 20px;
+        }
+
+        .carbon-bar {
+            width: 60px;
+            background: linear-gradient(to top, #ff9800, #ffc107);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 -5px 20px rgba(255,152,0,0.3);
+        }
+
+        .carbon-bar::after {
+            content: attr(data-co2);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .carbon-bar::before {
+            content: attr(data-mode);
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Smart Logistics Cost Estimator */
+        .logistics-estimator {
+            background: linear-gradient(135deg, #1a472a, #2e7d32);
+            color: white;
+            padding: 50px;
+            border-radius: 25px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .estimator-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .estimator-controls > div {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .container-btn {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .container-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .container-btn.active {
+            background: var(--secondary);
+            box-shadow: 0 5px 15px rgba(255,152,0,0.3);
+        }
+
+        .estimator-result {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* Document Processing Timeline */
         .document-timeline {
             background: linear-gradient(135deg, #8e2de2, #4a00e0);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 60px 0;
+            padding: 50px;
+            border-radius: 25px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
         }
 
         .timeline-visual {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 40px 0;
+            margin: 60px 0;
             position: relative;
+            padding: 0 20px;
+        }
+
+        .timeline-visual::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
         }
 
         .timeline-step {
             text-align: center;
             position: relative;
             z-index: 2;
+            flex: 1;
         }
 
         .step-circle {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: rgba(255,255,255,0.2);
             border-radius: 50%;
-            margin: 0 auto 10px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            font-size: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 3px solid transparent;
         }
 
         .step-circle.active {
             background: var(--secondary);
-            transform: scale(1.2);
+            transform: scale(1.3);
+            box-shadow: 0 10px 25px rgba(255,152,0,0.4);
+            border-color: white;
         }
 
         .step-circle.completed {
             background: #4caf50;
+            border-color: #4caf50;
         }
 
-        /* Continue with original CSS... */
+        .timeline-step > div:last-child {
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Button Styles */
+        button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .shipping-map-container {
+                height: 400px;
+            }
+
+            .map-controls {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 20px;
+            }
+
+            .timeline-visual {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .timeline-visual::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 80px 0 40px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .ai-document-wizard,
+            .carbon-calculator,
+            .logistics-estimator,
+            .document-timeline {
+                padding: 30px;
+            }
+
+            .wizard-steps {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .carbon-visualization {
+                flex-direction: column;
+                height: auto;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .carbon-bar {
+                width: 80%;
+                height: 50px !important;
+                border-radius: 10px;
+            }
+
+            .carbon-bar::before {
+                top: -30px;
+            }
+
+            .carbon-bar::after {
+                bottom: -30px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.8s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -360,26 +858,35 @@
                 
                 <div class="map-controls">
                     <div class="route-selector">
-                        <button class="route-btn" onclick="showRoute('dar_to_rotterdam')" data-lang="route_europe">
-                            <i class="fas fa-ship"></i> Europe
+                        <button class="route-btn active" onclick="showRoute('dar_to_rotterdam')" data-lang="route_europe">
+                            <i class="fas fa-ship"></i> <span>Europe</span>
                         </button>
                         <button class="route-btn" onclick="showRoute('dar_to_shanghai')" data-lang="route_asia">
-                            <i class="fas fa-ship"></i> Asia
+                            <i class="fas fa-ship"></i> <span>Asia</span>
                         </button>
                         <button class="route-btn" onclick="showRoute('dar_to_dubai')" data-lang="route_middle_east">
-                            <i class="fas fa-ship"></i> Middle East
+                            <i class="fas fa-ship"></i> <span>Middle East</span>
                         </button>
                     </div>
                     
                     <div style="color: #666; font-size: 0.9rem;">
-                        <div><i class="fas fa-circle" style="color: #4caf50;"></i> <span data-lang="low_congestion">Low Congestion</span></div>
-                        <div><i class="fas fa-circle" style="color: #ff9800;"></i> <span data-lang="medium_congestion">Medium Congestion</span></div>
-                        <div><i class="fas fa-circle" style="color: #f44336;"></i> <span data-lang="high_congestion">High Congestion</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="width: 12px; height: 12px; background: #4caf50; border-radius: 50%;"></div>
+                            <span data-lang="low_congestion">Low Congestion</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="width: 12px; height: 12px; background: #ff9800; border-radius: 50%;"></div>
+                            <span data-lang="medium_congestion">Medium Congestion</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 12px; height: 12px; background: #f44336; border-radius: 50%;"></div>
+                            <span data-lang="high_congestion">High Congestion</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px;">
                 <div class="info-card">
                     <h3><i class="fas fa-route"></i> <span data-lang="optimal_route">Optimal Route</span></h3>
                     <p id="routeInfo" data-lang="route_default">Select a route to see details</p>
@@ -432,19 +939,7 @@
                 </div>
                 
                 <div class="wizard-content" id="wizardContent">
-                    <h3 data-lang="step1_title">Step 1: Product Information</h3>
-                    <p data-lang="step1_desc">Enter details about the product you're exporting</p>
-                    
-                    <div style="margin-top: 20px;">
-                        <input type="text" id="productName" placeholder="Product name..." style="width: 100%; padding: 15px; border: none; border-radius: 8px; margin-bottom: 15px;">
-                        <input type="number" id="productQuantity" placeholder="Quantity (MT)..." style="width: 100%; padding: 15px; border: none; border-radius: 8px;">
-                    </div>
-                    
-                    <div style="margin-top: 30px; text-align: right;">
-                        <button onclick="nextStep()" style="background: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer;">
-                            <span data-lang="next_step">Next Step</span> <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
+                    <!-- Content dynamically loaded by JavaScript -->
                 </div>
             </div>
         </div>
@@ -462,9 +957,12 @@
                 <!-- Port cells generated by JavaScript -->
             </div>
             
-            <div style="text-align: center; margin-top: 30px;">
-                <p data-lang="last_updated">Last updated: <span id="lastUpdated">Just now</span></p>
-                <button onclick="refreshCongestionData()" style="background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer;">
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: var(--text-light); margin-bottom: 20px;">
+                    <span data-lang="last_updated">Last updated:</span> 
+                    <span id="lastUpdated" style="font-weight: 600;">Just now</span>
+                </p>
+                <button onclick="refreshCongestionData()" style="background: var(--primary); color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px;">
                     <i class="fas fa-sync-alt"></i>
                     <span data-lang="refresh_data">Refresh Data</span>
                 </button>
@@ -485,18 +983,18 @@
                     <div class="calc-input-group">
                         <label data-lang="shipment_weight">Shipment Weight (MT)</label>
                         <input type="range" id="weightSlider" min="1" max="1000" value="100" style="width: 100%; margin: 15px 0;">
-                        <div id="weightValue">100 MT</div>
+                        <div id="weightValue" style="text-align: center; font-size: 1.2rem; font-weight: 600;">100 MT</div>
                     </div>
                     
                     <div class="calc-input-group">
                         <label data-lang="distance">Distance (km)</label>
                         <input type="range" id="distanceSlider" min="1000" max="20000" value="8000" style="width: 100%; margin: 15px 0;">
-                        <div id="distanceValue">8,000 km</div>
+                        <div id="distanceValue" style="text-align: center; font-size: 1.2rem; font-weight: 600;">8,000 km</div>
                     </div>
                     
                     <div class="calc-input-group">
                         <label data-lang="transport_mode">Transport Mode</label>
-                        <select id="transportMode" style="width: 100%; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                        <select id="transportMode" style="width: 100%; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 1rem;">
                             <option value="ship" data-lang="sea_transport">Sea Transport</option>
                             <option value="air" data-lang="air_transport">Air Transport</option>
                             <option value="road" data-lang="road_transport">Road Transport</option>
@@ -504,8 +1002,8 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin: 30px 0;">
-                    <button onclick="calculateCarbonFootprint()" style="background: white; color: #00b09b; border: none; padding: 15px 40px; border-radius: 30px; font-size: 1.1rem; cursor: pointer;">
+                <div style="text-align: center; margin: 40px 0;">
+                    <button onclick="calculateCarbonFootprint()" style="background: white; color: #00b09b; border: none; padding: 16px 45px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                         <i class="fas fa-leaf"></i>
                         <span data-lang="calculate_carbon">Calculate Carbon Footprint</span>
                     </button>
@@ -515,9 +1013,9 @@
                     <!-- Carbon bars generated by JavaScript -->
                 </div>
                 
-                <div style="text-align: center;">
-                    <div id="carbonResult" style="font-size: 1.5rem; margin-bottom: 20px;"></div>
-                    <button onclick="offsetCarbon()" style="background: #ff9800; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer;">
+                <div style="text-align: center; margin-top: 40px;">
+                    <div id="carbonResult" style="font-size: 1.5rem; margin-bottom: 25px; font-weight: 600; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px);"></div>
+                    <button onclick="offsetCarbon()" style="background: #ff9800; color: white; border: none; padding: 16px 45px; border-radius: 50px; cursor: pointer; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 12px; font-weight: 600; box-shadow: 0 10px 30px rgba(255,152,0,0.3);">
                         <i class="fas fa-tree"></i>
                         <span data-lang="offset_carbon">Offset Carbon Emissions</span>
                     </button>
@@ -537,8 +1035,8 @@
                 
                 <div class="estimator-controls">
                     <div>
-                        <label data-lang="origin_port">Origin Port</label>
-                        <select id="originPort" style="width: 100%; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <label style="display: block; margin-bottom: 15px; font-weight: 600; font-size: 1.1rem;" data-lang="origin_port">Origin Port</label>
+                        <select id="originPort" style="width: 100%; padding: 15px; border-radius: 10px; font-size: 1rem;">
                             <option value="dar" data-lang="port_dar">Dar es Salaam</option>
                             <option value="mombasa" data-lang="port_mombasa">Mombasa</option>
                             <option value="durban" data-lang="port_durban">Durban</option>
@@ -546,8 +1044,8 @@
                     </div>
                     
                     <div>
-                        <label data-lang="destination_port">Destination Port</label>
-                        <select id="destinationPort" style="width: 100%; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <label style="display: block; margin-bottom: 15px; font-weight: 600; font-size: 1.1rem;" data-lang="destination_port">Destination Port</label>
+                        <select id="destinationPort" style="width: 100%; padding: 15px; border-radius: 10px; font-size: 1rem;">
                             <option value="rotterdam" data-lang="port_rotterdam">Rotterdam</option>
                             <option value="shanghai" data-lang="port_shanghai">Shanghai</option>
                             <option value="dubai" data-lang="port_dubai">Dubai</option>
@@ -556,17 +1054,17 @@
                     </div>
                     
                     <div>
-                        <label data-lang="container_size">Container Size</label>
-                        <div style="display: flex; gap: 10px; margin-top: 10px;">
-                            <button class="container-btn" onclick="selectContainer(20)" style="background: #4caf50;">20ft</button>
-                            <button class="container-btn" onclick="selectContainer(40)" style="background: #ff9800;">40ft</button>
-                            <button class="container-btn" onclick="selectContainer(40, 'hc')" style="background: #2196f3;">40ft HC</button>
+                        <label style="display: block; margin-bottom: 15px; font-weight: 600; font-size: 1.1rem;" data-lang="container_size">Container Size</label>
+                        <div style="display: flex; gap: 15px; margin-top: 10px;">
+                            <button class="container-btn active" onclick="selectContainer(20)" data-size="20">20ft</button>
+                            <button class="container-btn" onclick="selectContainer(40)" data-size="40">40ft</button>
+                            <button class="container-btn" onclick="selectContainer(40, 'hc')" data-size="40hc">40ft HC</button>
                         </div>
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin: 30px 0;">
-                    <button onclick="calculateLogisticsCost()" style="background: var(--secondary); color: white; border: none; padding: 15px 40px; border-radius: 30px; font-size: 1.1rem; cursor: pointer;">
+                <div style="text-align: center; margin: 40px 0;">
+                    <button onclick="calculateLogisticsCost()" style="background: var(--secondary); color: white; border: none; padding: 16px 45px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; font-weight: 600; box-shadow: 0 10px 30px rgba(255,152,0,0.3);">
                         <i class="fas fa-calculator"></i>
                         <span data-lang="calculate_cost">Calculate Total Cost</span>
                     </button>
@@ -625,17 +1123,17 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin-top: 40px;">
-                    <div id="documentStatus" style="font-size: 1.2rem; margin-bottom: 20px;" data-lang="status_preparing">
+                <div style="text-align: center; margin-top: 50px;">
+                    <div id="documentStatus" style="font-size: 1.3rem; margin-bottom: 25px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px);" data-lang="status_preparing">
                         Status: Document Preparation in Progress
                     </div>
                     
-                    <button onclick="simulateDocumentProcess()" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 12px 30px; border-radius: 30px; cursor: pointer;">
+                    <button onclick="simulateDocumentProcess()" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; font-weight: 600;">
                         <i class="fas fa-play"></i>
                         <span data-lang="simulate_process">Simulate Document Process</span>
                     </button>
                     
-                    <button onclick="verifyOnBlockchain()" style="background: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; margin-left: 15px;">
+                    <button onclick="verifyOnBlockchain()" style="background: var(--secondary); color: white; border: none; padding: 14px 35px; border-radius: 50px; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; margin-left: 15px; box-shadow: 0 10px 30px rgba(255,152,0,0.3);">
                         <i class="fas fa-link"></i>
                         <span data-lang="verify_blockchain">Verify on Blockchain</span>
                     </button>
@@ -644,7 +1142,78 @@
         </div>
     </section>
 
-    <!-- Continue with original services page content... -->
+    <!-- Footer -->
+    <footer style="background: var(--primary-dark); color: white; padding: 80px 0 40px; margin-top: 80px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                <div>
+                    <div class="logo" style="margin-bottom: 25px;">
+                        <i class="fas fa-seedling"></i>
+                        <div class="logo-text" style="color: white;">FAMM<span style="color: var(--secondary);">ATL</span></div>
+                    </div>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        Leading agricultural export company from Tanzania, delivering quality products worldwide with sustainable practices.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 style="color: white; margin-bottom: 25px; font-size: 1.3rem;">Quick Links</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 15px;"><a href="index.html" style="color: rgba(255,255,255,0.9); text-decoration: none; transition: color 0.3s;">Home</a></li>
+                        <li style="margin-bottom: 15px;"><a href="about.html" style="color: rgba(255,255,255,0.9); text-decoration: none; transition: color 0.3s;">About Us</a></li>
+                        <li style="margin-bottom: 15px;"><a href="products.html" style="color: rgba(255,255,255,0.9); text-decoration: none; transition: color 0.3s;">Products</a></li>
+                        <li style="margin-bottom: 15px;"><a href="services.html" style="color: var(--secondary); text-decoration: none; transition: color 0.3s;">Export Services</a></li>
+                        <li style="margin-bottom: 15px;"><a href="contact.html" style="color: rgba(255,255,255,0.9); text-decoration: none; transition: color 0.3s;">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: white; margin-bottom: 25px; font-size: 1.3rem;">Contact Info</h3>
+                    <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-top: 5px;"></i>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 5px;">Head Office</div>
+                            <div style="opacity: 0.9;">Dar es Salaam, Tanzania</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px;">
+                        <i class="fas fa-phone" style="color: var(--secondary); margin-top: 5px;"></i>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 5px;">Phone</div>
+                            <div style="opacity: 0.9;">+255 123 456 789</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <i class="fas fa-envelope" style="color: var(--secondary); margin-top: 5px;"></i>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 5px;">Email</div>
+                            <div style="opacity: 0.9;">info@famm-atl.co.tz</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: white; margin-bottom: 25px; font-size: 1.3rem;">Certifications</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.9rem;">ISO 9001</div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.9rem;">HACCP</div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.9rem;">Organic</div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.9rem;">Fair Trade</div>
+                    </div>
+                    <div style="display: flex; gap: 20px;">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; opacity: 0.8;">
+                <p>&copy; 2024 FAMM ATL Company Ltd. All rights reserved. | <a href="privacy.html" style="color: var(--secondary); text-decoration: none;">Privacy Policy</a> | <a href="terms.html" style="color: var(--secondary); text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
 
     <!-- JavaScript for Enhanced Features -->
     <script>
@@ -676,6 +1245,7 @@
                 step1_title: "Step 1: Product Information",
                 step1_desc: "Enter details about the product you're exporting",
                 next_step: "Next Step",
+                previous: "Previous",
                 port_congestion_title: "Global Port Congestion Monitor",
                 port_congestion_desc: "Real-time congestion levels at major global ports",
                 last_updated: "Last updated:",
@@ -740,6 +1310,7 @@
                 step1_title: "Hatua ya 1: Taarifa za Bidhaa",
                 step1_desc: "Ingiza maelezo kuhusu bidhaa unayosafirisha",
                 next_step: "Hatua Inayofuata",
+                previous: "Nyuma",
                 port_congestion_title: "Kifuatiliaji cha Msongamano wa Bandari Duniani",
                 port_congestion_desc: "Viwango vya msongamano vya wakati halisi katika bandari kuu duniani",
                 last_updated: "Ilisasishwa mwisho:",
@@ -790,12 +1361,17 @@
             document.querySelectorAll('[data-lang]').forEach(element => {
                 const key = element.getAttribute('data-lang');
                 if (translations[lang][key]) {
-                    element.textContent = translations[lang][key];
+                    if (element.tagName === 'INPUT' || element.tagName === 'OPTION') {
+                        element.setAttribute('placeholder', translations[lang][key]);
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
                 }
             });
             
             updateMap();
             updateWizardContent();
+            initPortCongestion(); // Refresh congestion data with new language
         }
 
         // Interactive Shipping Map
@@ -827,8 +1403,8 @@
                 L.circleMarker(port.coords, {
                     color: color,
                     fillColor: color,
-                    fillOpacity: 0.5,
-                    radius: 8
+                    fillOpacity: 0.7,
+                    radius: 10
                 }).addTo(map).bindPopup(`<b>${port.name} Port</b><br>Congestion: ${port.congestion}`);
             });
             
@@ -843,6 +1419,12 @@
                     map.removeLayer(layer);
                 }
             });
+            
+            // Update button states
+            document.querySelectorAll('.route-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
             
             const routes = {
                 'dar_to_rotterdam': {
@@ -878,7 +1460,12 @@
             };
             
             const selected = routes[route];
-            const polyline = L.polyline(selected.points, { color: selected.color, weight: 3 }).addTo(map);
+            const polyline = L.polyline(selected.points, { 
+                color: selected.color, 
+                weight: 4,
+                opacity: 0.8,
+                dashArray: '10, 10'
+            }).addTo(map);
             
             // Update info cards
             document.getElementById('routeInfo').textContent = selected.info;
@@ -893,7 +1480,7 @@
         function updateMap() {
             if (map) {
                 // Update route info if a route is selected
-                const activeButton = document.querySelector('.route-btn:active, .route-btn:hover');
+                const activeButton = document.querySelector('.route-btn.active');
                 if (activeButton) {
                     const route = activeButton.onclick.toString().match(/showRoute\('(.+)'\)/)?.[1];
                     if (route) showRoute(route);
@@ -908,35 +1495,35 @@
                     title: currentLang === 'en' ? 'Step 1: Product Information' : 'Hatua ya 1: Taarifa za Bidhaa',
                     desc: currentLang === 'en' ? 'Enter details about the product you\'re exporting' : 'Ingiza maelezo kuhusu bidhaa unayosafirisha',
                     content: `
-                        <input type="text" id="productName" placeholder="${currentLang === 'en' ? 'Product name...' : 'Jina la bidhaa...'}" style="width: 100%; padding: 15px; border: none; border-radius: 8px; margin-bottom: 15px;">
-                        <input type="number" id="productQuantity" placeholder="${currentLang === 'en' ? 'Quantity (MT)...' : 'Kiasi (MT)...'}" style="width: 100%; padding: 15px; border: none; border-radius: 8px;">
+                        <input type="text" id="productName" placeholder="${currentLang === 'en' ? 'Product name...' : 'Jina la bidhaa...'}" style="width: 100%; padding: 15px; border: none; border-radius: 10px; margin-bottom: 15px; font-size: 1rem;">
+                        <input type="number" id="productQuantity" placeholder="${currentLang === 'en' ? 'Quantity (MT)...' : 'Kiasi (MT)...'}" style="width: 100%; padding: 15px; border: none; border-radius: 10px; font-size: 1rem;">
                     `
                 },
                 {
                     title: currentLang === 'en' ? 'Step 2: Destination Details' : 'Hatua ya 2: Maelezo ya Lengwa',
                     desc: currentLang === 'en' ? 'Select destination country and port' : 'Chagua nchi ya lengwa na bandari',
                     content: `
-                        <select id="destinationCountry" style="width: 100%; padding: 15px; border: none; border-radius: 8px; margin-bottom: 15px;">
+                        <select id="destinationCountry" style="width: 100%; padding: 15px; border: none; border-radius: 10px; margin-bottom: 15px; font-size: 1rem;">
                             <option value="">${currentLang === 'en' ? 'Select country' : 'Chagua nchi'}</option>
                             <option value="germany">Germany</option>
                             <option value="china">China</option>
                             <option value="uae">UAE</option>
                             <option value="usa">USA</option>
                         </select>
-                        <input type="text" id="destinationPort" placeholder="${currentLang === 'en' ? 'Destination port...' : 'Bandari ya lengwa...'}" style="width: 100%; padding: 15px; border: none; border-radius: 8px;">
+                        <input type="text" id="destinationPort" placeholder="${currentLang === 'en' ? 'Destination port...' : 'Bandari ya lengwa...'}" style="width: 100%; padding: 15px; border: none; border-radius: 10px; font-size: 1rem;">
                     `
                 },
                 {
                     title: currentLang === 'en' ? 'Step 3: Required Documents' : 'Hatua ya 3: Nyaraka Zinazohitajika',
                     desc: currentLang === 'en' ? 'Our AI analyzes and lists required documents' : 'AI yetu inachambua na kuorodhesha nyaraka zinazohitajika',
                     content: `
-                        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 8px;">
-                            <h4>${currentLang === 'en' ? 'Documents needed:' : 'Nyaraka zinazohitajika:'}</h4>
-                            <ul style="margin: 15px 0; padding-left: 20px;">
-                                <li>${currentLang === 'en' ? 'Commercial Invoice' : 'Ankara ya Biashara'}</li>
-                                <li>${currentLang === 'en' ? 'Packing List' : 'Orodha ya Kufunga'}</li>
-                                <li>${currentLang === 'en' ? 'Certificate of Origin' : 'Cheti cha Asili'}</li>
-                                <li>${currentLang === 'en' ? 'Phytosanitary Certificate' : 'Cheti cha Afya ya Mimea'}</li>
+                        <div style="background: rgba(255,255,255,0.2); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                            <h4 style="margin-bottom: 20px; font-size: 1.3rem;">${currentLang === 'en' ? 'Documents needed:' : 'Nyaraka zinazohitajika:'}</h4>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 1.1rem;">
+                                <li style="margin-bottom: 15px; padding-left: 10px;">${currentLang === 'en' ? 'Commercial Invoice' : 'Ankara ya Biashara'}</li>
+                                <li style="margin-bottom: 15px; padding-left: 10px;">${currentLang === 'en' ? 'Packing List' : 'Orodha ya Kufunga'}</li>
+                                <li style="margin-bottom: 15px; padding-left: 10px;">${currentLang === 'en' ? 'Certificate of Origin' : 'Cheti cha Asili'}</li>
+                                <li style="padding-left: 10px;">${currentLang === 'en' ? 'Phytosanitary Certificate' : 'Cheti cha Afya ya Mimea'}</li>
                             </ul>
                         </div>
                     `
@@ -945,10 +1532,10 @@
                     title: currentLang === 'en' ? 'Step 4: Generate Documents' : 'Hatua ya 4: Tunga Nyaraka',
                     desc: currentLang === 'en' ? 'AI generates filled documents for review' : 'AI inatunga nyaraka zilizojazwa kwa ukaguzi',
                     content: `
-                        <div style="text-align: center;">
-                            <i class="fas fa-file-pdf" style="font-size: 4rem; margin-bottom: 20px;"></i>
-                            <p>${currentLang === 'en' ? 'Documents generated successfully!' : 'Nyaraka zimetungwa kwa mafanikio!'}</p>
-                            <button onclick="downloadDocuments()" style="background: white; color: #667eea; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; margin-top: 15px;">
+                        <div style="text-align: center; padding: 20px 0;">
+                            <i class="fas fa-file-pdf" style="font-size: 5rem; margin-bottom: 25px; color: rgba(255,255,255,0.9);"></i>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px;">${currentLang === 'en' ? 'Documents generated successfully!' : 'Nyaraka zimetungwa kwa mafanikio!'}</p>
+                            <button onclick="downloadDocuments()" style="background: white; color: #667eea; border: none; padding: 15px 40px; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                                 <i class="fas fa-download"></i>
                                 ${currentLang === 'en' ? 'Download Documents' : 'Pakua Nyaraka'}
                             </button>
@@ -959,10 +1546,10 @@
                     title: currentLang === 'en' ? 'Step 5: Complete & Submit' : 'Hatua ya 5: Kamilisha na Wasilisha',
                     desc: currentLang === 'en' ? 'Submit documents for processing' : 'Wasilisha nyaraka kwa usindikaji',
                     content: `
-                        <div style="text-align: center;">
-                            <i class="fas fa-check-circle" style="font-size: 4rem; color: #4caf50; margin-bottom: 20px;"></i>
-                            <p>${currentLang === 'en' ? 'Ready to submit! Our team will process within 24 hours.' : 'Tayari kwa kusajiliwa! Timu yetu itasindika ndani ya masaa 24.'}</p>
-                            <button onclick="submitDocuments()" style="background: #4caf50; color: white; border: none; padding: 15px 40px; border-radius: 8px; cursor: pointer; font-size: 1.1rem;">
+                        <div style="text-align: center; padding: 20px 0;">
+                            <i class="fas fa-check-circle" style="font-size: 5rem; margin-bottom: 25px; color: #4caf50;"></i>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px;">${currentLang === 'en' ? 'Ready to submit! Our team will process within 24 hours.' : 'Tayari kwa kusajiliwa! Timu yetu itasindika ndani ya masaa 24.'}</p>
+                            <button onclick="submitDocuments()" style="background: #4caf50; color: white; border: none; padding: 18px 50px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(76,175,80,0.3);">
                                 <i class="fas fa-paper-plane"></i>
                                 ${currentLang === 'en' ? 'Submit for Processing' : 'Wasilisha kwa Usindikaji'}
                             </button>
@@ -975,19 +1562,19 @@
                 const step = steps[currentStep - 1];
                 const content = document.getElementById('wizardContent');
                 content.innerHTML = `
-                    <h3>${step.title}</h3>
-                    <p>${step.desc}</p>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">${step.title}</h3>
+                    <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 30px;">${step.desc}</p>
                     <div style="margin-top: 20px;">${step.content}</div>
-                    <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+                    <div style="margin-top: 40px; display: flex; justify-content: space-between;">
                         ${currentStep > 1 ? `
-                            <button onclick="prevStep()" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer;">
+                            <button onclick="prevStep()" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 10px;">
                                 <i class="fas fa-arrow-left"></i>
                                 ${currentLang === 'en' ? 'Previous' : 'Nyuma'}
                             </button>
                         ` : '<div></div>'}
                         
                         ${currentStep < steps.length ? `
-                            <button onclick="nextStep()" style="background: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer;">
+                            <button onclick="nextStep()" style="background: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(255,152,0,0.3);">
                                 ${currentLang === 'en' ? 'Next Step' : 'Hatua Inayofuata'} <i class="fas fa-arrow-right"></i>
                             </button>
                         ` : ''}
@@ -1036,27 +1623,27 @@
 
         function downloadDocuments() {
             alert(currentLang === 'en'
-                ? "Downloading export documents package...\nIncludes: Commercial Invoice, Packing List, Certificate of Origin"
-                : "Inapakua kifurushi cha nyaraka za usafirishaji...\nInajumuisha: Ankara ya Biashara, Orodha ya Kufunga, Cheti cha Asili");
+                ? "📄 Downloading export documents package...\n\nIncludes:\n• Commercial Invoice\n• Packing List\n• Certificate of Origin\n• Bill of Lading\n\nFiles will be downloaded as a ZIP archive."
+                : "📄 Inapakua kifurushi cha nyaraka za usafirishaji...\n\nInajumuisha:\n• Ankara ya Biashara\n• Orodha ya Kufunga\n• Cheti cha Asili\n• Mkataba wa Shehena\n\nFaili zitapakuliwa kama kumbukumbu ya ZIP.");
         }
 
         function submitDocuments() {
             alert(currentLang === 'en'
-                ? "Documents submitted successfully!\nOur team will process them within 24 hours.\nYou'll receive a tracking number via email."
-                : "Nyaraka zimesajiliwa kwa mafanikio!\nTimu yetu itazisindika ndani ya masaa 24.\nUtapokea nambari ya ufuatiliaji kupitia barua pepe.");
+                ? "✅ Documents submitted successfully!\n\nOur team will process them within 24 hours.\nYou'll receive a tracking number via email.\n\nThank you for choosing FAMM ATL!"
+                : "✅ Nyaraka zimesajiliwa kwa mafanikio!\n\nTimu yetu itazisindika ndani ya masaa 24.\nUtapokea nambari ya ufuatiliaji kupitia barua pepe.\n\nAsante kwa kuchagua FAMM ATL!");
         }
 
         // Port Congestion Monitor
         function initPortCongestion() {
             const ports = [
-                { name: 'Rotterdam', country: 'Netherlands', congestion: 35, status: 'low' },
-                { name: 'Shanghai', country: 'China', congestion: 85, status: 'high' },
-                { name: 'Singapore', country: 'Singapore', congestion: 60, status: 'medium' },
-                { name: 'Dubai', country: 'UAE', congestion: 45, status: 'medium' },
-                { name: 'Hamburg', country: 'Germany', congestion: 40, status: 'low' },
-                { name: 'Los Angeles', country: 'USA', congestion: 75, status: 'high' },
-                { name: 'Dar es Salaam', country: 'Tanzania', congestion: 30, status: 'low' },
-                { name: 'Mombasa', country: 'Kenya', congestion: 55, status: 'medium' }
+                { name: 'Rotterdam', country: 'Netherlands', congestion: 35, status: 'low', delay: '0-2 days' },
+                { name: 'Shanghai', country: 'China', congestion: 85, status: 'high', delay: '8-14 days' },
+                { name: 'Singapore', country: 'Singapore', congestion: 60, status: 'medium', delay: '3-7 days' },
+                { name: 'Dubai', country: 'UAE', congestion: 45, status: 'medium', delay: '3-7 days' },
+                { name: 'Hamburg', country: 'Germany', congestion: 40, status: 'low', delay: '0-2 days' },
+                { name: 'Los Angeles', country: 'USA', congestion: 75, status: 'high', delay: '8-14 days' },
+                { name: 'Dar es Salaam', country: 'Tanzania', congestion: 30, status: 'low', delay: '0-2 days' },
+                { name: 'Mombasa', country: 'Kenya', congestion: 55, status: 'medium', delay: '3-7 days' }
             ];
 
             const grid = document.getElementById('congestionGrid');
@@ -1064,21 +1651,37 @@
 
             ports.forEach(port => {
                 const cell = document.createElement('div');
-                cell.className = 'port-cell';
+                cell.className = `port-cell ${port.status}-congestion`;
                 
-                const statusClass = port.status === 'low' ? 'low-congestion' : 
-                                   port.status === 'medium' ? 'medium-congestion' : 'high-congestion';
+                const statusText = currentLang === 'en' 
+                    ? `${port.status.charAt(0).toUpperCase() + port.status.slice(1)} Congestion`
+                    : port.status === 'low' ? 'Msongamano Mdogo' : 
+                      port.status === 'medium' ? 'Msongamano wa Kati' : 'Msongamano Mwingi';
                 
                 cell.innerHTML = `
-                    <div style="font-weight: bold; margin-bottom: 5px;">${port.name}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.8;">${port.country}</div>
-                    <div class="congestion-level ${statusClass}">${port.congestion}%</div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.3rem; margin-bottom: 5px;">${port.name}</div>
+                            <div style="font-size: 0.95rem; opacity: 0.8;">${port.country}</div>
+                        </div>
+                        <div style="background: ${port.status === 'low' ? '#e8f5e9' : port.status === 'medium' ? '#fff3e0' : '#ffebee'}; color: ${port.status === 'low' ? '#2e7d32' : port.status === 'medium' ? '#f57c00' : '#d32f2f'}; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+                            ${statusText}
+                        </div>
+                    </div>
+                    <div class="congestion-level">
+                        <span style="font-size: 2.8rem; font-weight: 800;">${port.congestion}%</span>
+                        <span class="congestion-indicator" style="background: ${port.status === 'low' ? '#4caf50' : port.status === 'medium' ? '#ff9800' : '#f44336'};"></span>
+                    </div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
+                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 5px;">${currentLang === 'en' ? 'Expected Delay' : 'Ucheleweshaji Unaotarajiwa'}</div>
+                        <div style="font-weight: 600; font-size: 1.1rem;">${port.delay}</div>
+                    </div>
                 `;
                 
                 cell.addEventListener('click', () => {
                     const statusText = currentLang === 'en'
-                        ? `Port of ${port.name}: ${port.congestion}% congestion\nExpected delay: ${getDelayText(port.congestion)}`
-                        : `Bandari ya ${port.name}: ${port.congestion}% msongamano\nUcheleweshaji unaotarajiwa: ${getDelayText(port.congestion)}`;
+                        ? `Port of ${port.name}\n\nCongestion Level: ${port.congestion}%\nStatus: ${statusText}\nExpected Delay: ${port.delay}\n\nClick Refresh Data for latest updates.`
+                        : `Bandari ya ${port.name}\n\nKiwango cha Msongamano: ${port.congestion}%\nHali: ${statusText}\nUcheleweshaji Unaotarajiwa: ${port.delay}\n\nBonyeza Sasisha Data kwa sasisho za hivi karibuni.`;
                     
                     alert(statusText);
                 });
@@ -1089,34 +1692,87 @@
             updateLastUpdated();
         }
 
-        function getDelayText(congestion) {
-            if (congestion < 40) return currentLang === 'en' ? '0-2 days' : 'siku 0-2';
-            if (congestion < 70) return currentLang === 'en' ? '3-7 days' : 'siku 3-7';
-            return currentLang === 'en' ? '8-14 days' : 'siku 8-14';
-        }
-
         function refreshCongestionData() {
-            // Simulate data refresh
-            const cells = document.querySelectorAll('.port-cell .congestion-level');
+            // Simulate data refresh with realistic fluctuations
+            const cells = document.querySelectorAll('.port-cell');
             cells.forEach(cell => {
-                const current = parseInt(cell.textContent);
+                const currentLevel = parseInt(cell.querySelector('.congestion-level span:first-child').textContent);
                 const change = Math.floor(Math.random() * 20 - 10); // -10 to +10
-                const newValue = Math.max(10, Math.min(100, current + change));
+                const newLevel = Math.max(10, Math.min(100, currentLevel + change));
                 
-                cell.textContent = `${newValue}%`;
+                // Update congestion level
+                cell.querySelector('.congestion-level span:first-child').textContent = `${newLevel}%`;
                 
-                // Update status class
-                cell.classList.remove('low-congestion', 'medium-congestion', 'high-congestion');
-                if (newValue < 40) cell.classList.add('low-congestion');
-                else if (newValue < 70) cell.classList.add('medium-congestion');
-                else cell.classList.add('high-congestion');
+                // Update status
+                let newStatus, newStatusText, newDelay, statusColor, statusBgColor;
+                if (newLevel < 40) {
+                    newStatus = 'low';
+                    newStatusText = currentLang === 'en' ? 'Low Congestion' : 'Msongamano Mdogo';
+                    newDelay = currentLang === 'en' ? '0-2 days' : 'siku 0-2';
+                    statusColor = '#2e7d32';
+                    statusBgColor = '#e8f5e9';
+                } else if (newLevel < 70) {
+                    newStatus = 'medium';
+                    newStatusText = currentLang === 'en' ? 'Medium Congestion' : 'Msongamano wa Kati';
+                    newDelay = currentLang === 'en' ? '3-7 days' : 'siku 3-7';
+                    statusColor = '#f57c00';
+                    statusBgColor = '#fff3e0';
+                } else {
+                    newStatus = 'high';
+                    newStatusText = currentLang === 'en' ? 'High Congestion' : 'Msongamano Mwingi';
+                    newDelay = currentLang === 'en' ? '8-14 days' : 'siku 8-14';
+                    statusColor = '#d32f2f';
+                    statusBgColor = '#ffebee';
+                }
+                
+                // Update status indicator
+                const statusDiv = cell.querySelector('div > div > div:last-child');
+                statusDiv.textContent = newStatusText;
+                statusDiv.style.background = statusBgColor;
+                statusDiv.style.color = statusColor;
+                
+                // Update congestion indicator color
+                cell.querySelector('.congestion-indicator').style.background = 
+                    newStatus === 'low' ? '#4caf50' : newStatus === 'medium' ? '#ff9800' : '#f44336';
+                
+                // Update delay
+                cell.querySelector('.port-cell > div:last-child > div:last-child').textContent = newDelay;
+                
+                // Update cell class
+                cell.className = `port-cell ${newStatus}-congestion`;
             });
             
             updateLastUpdated();
             
-            alert(currentLang === 'en'
-                ? "Port congestion data refreshed!\nUpdated with latest vessel tracking information."
-                : "Data ya msongamano wa bandari imesasishwa!\nImehakikishiwa na taarifa za hivi karibuni za ufuatiliaji wa meli.");
+            // Show success notification
+            showNotification(currentLang === 'en'
+                ? "Port congestion data refreshed successfully!"
+                : "Data ya msongamano wa bandari imesasishwa kwa mafanikio!");
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--primary);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.5s ease-out;
+                font-weight: 500;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease-out';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
         }
 
         function updateLastUpdated() {
@@ -1165,48 +1821,47 @@
             visualization.innerHTML = '';
             
             const modes = [
-                { name: currentLang === 'en' ? 'Sea' : 'Bahari', factor: 0.015 },
-                { name: currentLang === 'en' ? 'Air' : 'Anga', factor: 0.500 },
-                { name: currentLang === 'en' ? 'Road' : 'Barabara', factor: 0.060 }
+                { name: currentLang === 'en' ? 'Sea' : 'Bahari', factor: 0.015, color: '#2196f3' },
+                { name: currentLang === 'en' ? 'Air' : 'Anga', factor: 0.500, color: '#f44336' },
+                { name: currentLang === 'en' ? 'Road' : 'Barabara', factor: 0.060, color: '#4caf50' }
             ];
+            
+            let maxCo2 = 0;
+            const co2Values = modes.map(m => weight * distance * m.factor);
+            maxCo2 = Math.max(...co2Values);
             
             modes.forEach(m => {
                 const barCo2 = weight * distance * m.factor;
-                const barHeight = (barCo2 / 1000) * 5; // Scale for visualization
+                const barHeight = (barCo2 / maxCo2) * 180; // Scale for visualization
                 
                 const bar = document.createElement('div');
                 bar.className = 'carbon-bar';
-                bar.style.height = `${Math.min(barHeight, 200)}px`;
-                bar.setAttribute('data-co2', `${Math.round(barCo2)} kg`);
+                bar.style.height = `${barHeight}px`;
+                bar.style.background = `linear-gradient(to top, ${m.color}, ${m.color}99)`;
+                bar.setAttribute('data-co2', `${Math.round(barCo2)} kg CO₂`);
+                bar.setAttribute('data-mode', m.name);
                 
-                const label = document.createElement('div');
-                label.style.position = 'absolute';
-                label.style.bottom = '-50px';
-                label.style.left = '50%';
-                label.style.transform = 'translateX(-50%)';
-                label.style.fontSize = '0.9rem';
-                label.textContent = m.name;
-                
-                bar.appendChild(label);
                 visualization.appendChild(bar);
             });
             
             // Update result
             const result = document.getElementById('carbonResult');
             result.innerHTML = currentLang === 'en'
-                ? `Estimated CO₂ Emissions: <strong>${Math.round(co2)} kg</strong><br>
-                   Equivalent to planting <strong>${Math.round(trees)} trees</strong>`
-                : `Utoaji wa CO₂ unaokadiriwa: <strong>${Math.round(co2)} kg</strong><br>
-                   Sawa na kupanda <strong>${Math.round(trees)} miti</strong>`;
+                ? `Estimated CO₂ Emissions: <strong style="color: #ffeb3b;">${Math.round(co2).toLocaleString()} kg</strong><br>
+                   Equivalent to planting <strong>${Math.round(trees)} trees</strong> for one year`
+                : `Utoaji wa CO₂ unaokadiriwa: <strong style="color: #ffeb3b;">${Math.round(co2).toLocaleString()} kg</strong><br>
+                   Sawa na kupanda <strong>${Math.round(trees)} miti</strong> kwa mwaka mmoja`;
         }
 
         function offsetCarbon() {
             const co2 = Math.round(parseInt(document.getElementById('weightSlider').value) * 
                                   parseInt(document.getElementById('distanceSlider').value) * 0.015);
+            const cost = (co2 * 0.02).toFixed(2);
+            const trees = Math.round(co2 / 21.77);
             
             alert(currentLang === 'en'
-                ? `🌱 Carbon Offset Initiated!\n\nOffsetting ${co2} kg CO₂\nCost: $${(co2 * 0.02).toFixed(2)}\n\nWe'll plant ${Math.round(co2/21.77)} trees in Tanzania to offset your shipment.`
-                : `🌱 Usawazishaji wa Kaboni Umeanzishwa!\n\nKusawazisha ${co2} kg CO₂\nGharama: $${(co2 * 0.02).toFixed(2)}\n\nTutapanda ${Math.round(co2/21.77)} miti Tanzania kusawazisha shehena yako.`);
+                ? `🌱 Carbon Offset Initiated!\n\n• Offset Amount: ${co2.toLocaleString()} kg CO₂\n• Cost: $${cost}\n• Trees to be Planted: ${trees}\n• Location: Tanzanian Reforestation Project\n\nYour contribution supports sustainable forestry in Tanzania.`
+                : `🌱 Usawazishaji wa Kaboni Umeanzishwa!\n\n• Kiasi cha Kusawazisha: ${co2.toLocaleString()} kg CO₂\n• Gharama: $${cost}\n• Miti Itakayopandwa: ${trees}\n• Mahali: Mradi wa Upandaji Miti Tanzania\n\nMchango wako unaunga mkono misitu endelevu Tanzania.`);
         }
 
         // Logistics Cost Estimator
@@ -1215,8 +1870,10 @@
             
             // Update button styles
             document.querySelectorAll('.container-btn').forEach(btn => {
+                btn.classList.remove('active');
                 btn.style.background = '#666';
             });
+            event.target.classList.add('active');
             event.target.style.background = '#4caf50';
             
             calculateLogisticsCost(); // Recalculate
@@ -1226,12 +1883,16 @@
             const origin = document.getElementById('originPort').value;
             const destination = document.getElementById('destinationPort').value;
             
-            // Base costs
+            // Base costs for different routes
             const baseCosts = {
                 'dar_rotterdam': { sea: 2800, air: 8500, road: 0 },
                 'dar_shanghai': { sea: 3200, air: 9200, road: 0 },
                 'dar_dubai': { sea: 1800, air: 5200, road: 0 },
-                'dar_newyork': { sea: 3500, air: 9500, road: 0 }
+                'dar_newyork': { sea: 3500, air: 9500, road: 0 },
+                'mombasa_rotterdam': { sea: 2600, air: 8300, road: 0 },
+                'mombasa_shanghai': { sea: 3100, air: 9000, road: 0 },
+                'durban_rotterdam': { sea: 2400, air: 8100, road: 0 },
+                'durban_shanghai': { sea: 2900, air: 8800, road: 0 }
             };
             
             const key = `${origin}_${destination}`;
@@ -1247,36 +1908,37 @@
             const documentationCost = 350;
             const insuranceCost = shippingCost * 0.02;
             const customsCost = shippingCost * 0.05;
-            const totalCost = shippingCost + documentationCost + insuranceCost + customsCost;
+            const handlingCost = shippingCost * 0.03;
+            const totalCost = shippingCost + documentationCost + insuranceCost + customsCost + handlingCost;
             
             // Update results
             const result = document.getElementById('estimatorResult');
             result.innerHTML = `
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 30px;">
                     <div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">${currentLang === 'en' ? 'Shipping Cost' : 'Gharama ya Usafirishaji'}</div>
-                        <div style="font-size: 1.5rem; font-weight: bold;">$${shippingCost.toLocaleString()}</div>
+                        <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 8px;">${currentLang === 'en' ? 'Shipping Cost' : 'Gharama ya Usafirishaji'}</div>
+                        <div style="font-size: 1.8rem; font-weight: 700;">$${shippingCost.toLocaleString()}</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">${currentLang === 'en' ? 'Documentation' : 'Nyaraka'}</div>
-                        <div style="font-size: 1.5rem; font-weight: bold;">$${documentationCost.toLocaleString()}</div>
+                        <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 8px;">${currentLang === 'en' ? 'Documentation' : 'Nyaraka'}</div>
+                        <div style="font-size: 1.8rem; font-weight: 700;">$${documentationCost.toLocaleString()}</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">${currentLang === 'en' ? 'Insurance' : 'Bima'}</div>
-                        <div style="font-size: 1.5rem; font-weight: bold;">$${insuranceCost.toLocaleString()}</div>
+                        <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 8px;">${currentLang === 'en' ? 'Insurance' : 'Bima'}</div>
+                        <div style="font-size: 1.8rem; font-weight: 700;">$${insuranceCost.toLocaleString()}</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">${currentLang === 'en' ? 'Customs & Duties' : 'Forodha na Usuru'}</div>
-                        <div style="font-size: 1.5rem; font-weight: bold;">$${customsCost.toLocaleString()}</div>
+                        <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 8px;">${currentLang === 'en' ? 'Customs & Duties' : 'Forodha na Usuru'}</div>
+                        <div style="font-size: 1.8rem; font-weight: 700;">$${customsCost.toLocaleString()}</div>
                     </div>
                 </div>
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.2); text-align: center;">
-                    <div style="font-size: 0.9rem; opacity: 0.8;">${currentLang === 'en' ? 'TOTAL ESTIMATED COST' : 'GHARAMA YA JUMLA ILIYOKADIRIWA'}</div>
-                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--secondary);">$${totalCost.toLocaleString()}</div>
-                    <div style="margin-top: 10px; font-size: 0.9rem;">
+                <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; text-align: center;">
+                    <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 10px; letter-spacing: 1px;">${currentLang === 'en' ? 'TOTAL ESTIMATED COST' : 'GHARAMA YA JUMLA ILIYOKADIRIWA'}</div>
+                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--secondary); line-height: 1.2;">$${totalCost.toLocaleString()}</div>
+                    <div style="margin-top: 20px; font-size: 0.95rem; opacity: 0.9;">
                         ${currentLang === 'en' 
-                            ? '*Estimate valid for 7 days. Contact for exact quote.' 
-                            : '*Kadirio halali kwa siku 7. Wasiliana kwa nakala kamili.'}
+                            ? '* Estimate valid for 7 days. Contact our team for exact quotation.' 
+                            : '* Kadirio halali kwa siku 7. Wasiliana na timu yetu kwa nakala kamili.'}
                     </div>
                 </div>
             `;
@@ -1302,27 +1964,27 @@
                         "Document Preparation in Progress",
                         "Verifying document authenticity",
                         "Awaiting regulatory approval",
-                        "Recording on blockchain",
+                        "Recording on blockchain network",
                         "Documents delivered successfully!"
                     ] : [
                         "Utayarishaji wa Nyaraka Unaendelea",
                         "Kuthibitisha ukweli wa nyaraka",
                         "Ngoja idhini ya udhibiti",
-                        "Kurekodi kwenye blockchain",
+                        "Kurekodi kwenye mtandao wa blockchain",
                         "Nyaraka zimewasilishwa kwa mafanikio!"
                     ];
                     
-                    status.textContent = currentLang === 'en'
-                        ? `Status: ${statusMessages[currentIndex]}`
-                        : `Hali: ${statusMessages[currentIndex]}`;
+                    status.innerHTML = currentLang === 'en'
+                        ? `Status: <strong>${statusMessages[currentIndex]}</strong>`
+                        : `Hali: <strong>${statusMessages[currentIndex]}</strong>`;
                     
                     currentIndex++;
                 } else {
                     clearInterval(processInterval);
                     setTimeout(() => {
-                        alert(currentLang === 'en'
-                            ? "✅ Document Processing Complete!\n\nAll documents have been processed and recorded on our blockchain.\nYou can now verify the transaction."
-                            : "✅ Usindikaji wa Nyaraka Umekamilika!\n\nNyaraka zote zimesindikwa na kurekodiwa kwenye blockchain yetu.\nSasa unaweza kuthibitisha muamala.");
+                        showNotification(currentLang === 'en'
+                            ? "✅ Document Processing Complete!"
+                            : "✅ Usindikaji wa Nyaraka Umekamilika!");
                     }, 500);
                 }
             }, 1500);
@@ -1331,10 +1993,13 @@
         function verifyOnBlockchain() {
             const txHash = '0x' + Array(64).fill(0).map(() => 
                 Math.floor(Math.random() * 16).toString(16)).join('');
+            const blockNumber = Math.floor(Math.random() * 10000) + 15000000;
             
-            alert(currentLang === 'en'
-                ? `🔗 Blockchain Verification\n\nTransaction Hash: ${txHash}\nStatus: ✅ Verified\nBlock: #${Math.floor(Math.random() * 10000) + 15000000}\nTimestamp: Just now\n\nThis document is permanently recorded on the blockchain.`
-                : `🔗 Uthibitishaji wa Blockchain\n\nHash ya Muamala: ${txHash}\nHali: ✅ Imethibitishwa\nBlock: #${Math.floor(Math.random() * 10000) + 15000000}\nMuda: Hivi sasa\n\nHati hii imerekodiwa kwa kudumu kwenye blockchain.`);
+            const verificationMessage = currentLang === 'en'
+                ? `🔗 Blockchain Verification\n\nTransaction Hash: ${txHash}\nStatus: ✅ Verified & Confirmed\nBlock: #${blockNumber}\nTimestamp: ${new Date().toLocaleString()}\nNetwork: Ethereum Mainnet\n\nThis document is permanently and immutably recorded on the blockchain.`
+                : `🔗 Uthibitishaji wa Blockchain\n\nHash ya Muamala: ${txHash}\nHali: ✅ Imethibitishwa na Imethibitishwa\nBlock: #${blockNumber}\nMuda: ${new Date().toLocaleString()}\nMtandao: Ethereum Mainnet\n\nHati hii imerekodiwa kwa kudumu na haibadilishi kwenye blockchain.`;
+            
+            alert(verificationMessage);
         }
 
         // Initialize everything
@@ -1350,7 +2015,7 @@
             
             // Simulate live vessel movements on map
             setInterval(() => {
-                if (Math.random() > 0.7) {
+                if (Math.random() > 0.7 && map) {
                     // Add a temporary vessel marker
                     const lat = -30 + Math.random() * 60;
                     const lng = -30 + Math.random() * 60;
@@ -1358,19 +2023,33 @@
                     const vessel = L.circleMarker([lat, lng], {
                         color: '#2196f3',
                         fillColor: '#2196f3',
-                        fillOpacity: 0.7,
-                        radius: 5
+                        fillOpacity: 0.8,
+                        radius: 6
                     }).addTo(map);
                     
                     vessel.bindPopup(currentLang === 'en'
-                        ? '🛳️ Live Vessel<br>Speed: 18 knots<br>Destination: Rotterdam'
-                        : '🛳️ Meli ya Wakati Halisi<br>Kasi: knots 18<br>Lengwa: Rotterdam');
+                        ? '🛳️ Live Vessel Tracking<br>Speed: 18 knots<br>Destination: Rotterdam<br>ETA: 5 days'
+                        : '🛳️ Ufuatiliaji wa Meli ya Wakati Halisi<br>Kasi: knots 18<br>Lengwa: Rotterdam<br>Muda wa Kufika: siku 5');
                     
                     setTimeout(() => {
-                        map.removeLayer(vessel);
+                        if (map && vessel) map.removeLayer(vessel);
                     }, 10000);
                 }
             }, 5000);
+            
+            // Add CSS for notifications
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
