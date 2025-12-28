@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | FAMM ATL Company Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced CSS for contact page */
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #ffffff;
+            --bg-light-secondary: #f9f9f9;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .form-control.error {
+            border-color: #f44336;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 125, 50, 0.2);
+        }
+
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
+            border-left: 4px solid #4caf50;
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #d32f2f;
+            border-left: 4px solid #f44336;
+            display: block;
+        }
+
+        /* Contact Info Cards */
+        .contact-info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-info-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .contact-details {
+            color: var(--text-light);
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-details i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        /* Interactive Map */
+        .map-container {
+            height: 400px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            margin: 60px 0;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .map-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .map-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        /* Team Contact Section */
+        .team-contact {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #8e2de2;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-role {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .member-contact {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .member-contact p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-question.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.open {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        /* Contact Channels */
+        .contact-channels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .channel-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .channel-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary), #ff5722);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .channel-card:nth-child(2) .channel-icon {
+            background: linear-gradient(135deg, #2196f3, #0d47a1);
+        }
+
+        .channel-card:nth-child(3) .channel-icon {
+            background: linear-gradient(135deg, #9c27b0, #4a148c);
+        }
+
+        .channel-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: var(--primary-light);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .channel-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--primary-light);
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form-container {
+                padding: 30px 20px;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-info-card, .channel-card {
+                padding: 20px;
+            }
+            
+            .team-member {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="changeLanguage('sw')">SW</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-seedling"></i>
+                <div class="logo-text">FAMM<span>ATL</span></div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home">Home</a></li>
+                    <li><a href="about.html" data-lang="about">About Us</a></li>
+                    <li><a href="products.html" data-lang="products">Products</a></li>
+                    <li><a href="services.html" data-lang="services">Export Services</a></li>
+                    <li><a href="certifications.html" data-lang="certifications">Certifications</a></li>
+                    <li><a href="contact.html" class="active" data-lang="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 data-lang="contact_title">Contact Us</h1>
+            <div class="breadcrumb">
+                <a href="index.html" data-lang="home">Home</a>
+                <span>/</span>
+                <span data-lang="contact">Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="get_in_touch">Get in Touch</h2>
+                <p data-lang="contact_desc">We're here to help with your agricultural export needs. Reach out to us through any channel below.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h3 data-lang="send_message">Send us a Message</h3>
+                    <p style="color: var(--text-light); margin-bottom: 30px;" data-lang="form_desc">Fill out the form below and we'll get back to you within 24 hours.</p>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" data-lang="first_name">First Name *</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                                <div class="error-message" style="color: #f44336; font-size: 0.9rem; margin-top: 5px; display: none;"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" data-lang="last_name">Last Name *</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                                <div class="error-message" style="color: #f44336; font-size: 0.9rem; margin-top: 5px; display: none;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" data-lang="email_address">Email Address *</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="error-message" style="color: #f44336; font-size: 0.9rem; margin-top: 5px; display: none;"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" data-lang="phone_number">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" data-lang="subject">Subject *</label>
+                            <input type="text" class="form-control" id="subject" required>
+                            <div class="error-message" style="color: #f44336; font-size: 0.9rem; margin-top: 5px; display: none;"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" data-lang="message">Message *</label>
+                            <textarea class="form-control" id="message" required></textarea>
+                            <div class="error-message" style="color: #f44336; font-size: 0.9rem; margin-top: 5px; display: none;"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" data-lang="inquiry_type">Type of Inquiry</label>
+                            <select class="form-control" id="inquiryType">
+                                <option value="" data-lang="select_inquiry">Select inquiry type</option>
+                                <option value="product" data-lang="product_inquiry">Product Inquiry</option>
+                                <option value="export" data-lang="export_inquiry">Export Services</option>
+                                <option value="certification" data-lang="certification_inquiry">Certification</option>
+                                <option value="partnership" data-lang="partnership_inquiry">Partnership</option>
+                                <option value="other" data-lang="other_inquiry">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-lang="send_message">Send Message</span>
+                        </button>
+                        
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div>
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 data-lang="visit_us">Visit Us</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-building"></i> <strong data-lang="head_office">Head Office:</strong></p>
+                            <p style="margin-left: 30px;">FAMM ATL Company Ltd</p>
+                            <p style="margin-left: 30px;">Plot 123, Nyerere Road</p>
+                            <p style="margin-left: 30px;">Dar es Salaam, Tanzania</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 data-lang="call_us">Call Us</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-phone"></i> +255 123 456 789</p>
+                            <p><i class="fas fa-fax"></i> +255 123 456 788</p>
+                            <p><i class="fas fa-clock"></i> <span data-lang="business_hours">Business Hours:</span> Mon-Fri 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 data-lang="email_us">Email Us</h3>
+                        <div class="contact-details">
+                            <p><i class="fas fa-inbox"></i> info@fammatl.co.tz</p>
+                            <p><i class="fas fa-shopping-cart"></i> sales@fammatl.co.tz</p>
+                            <p><i class="fas fa-certificate"></i> certification@fammatl.co.tz</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map -->
+    <section class="section">
+        <div class="container">
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3 data-lang="find_us">Find Our Location</h3>
+                    <p data-lang="map_desc">Interactive map showing our headquarters and regional offices</p>
+                    <button onclick="openGoogleMaps()" style="margin-top: 20px; background: white; color: #667eea; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span data-lang="open_maps">Open in Google Maps</span>
+                    </button>
+                </div>
+                
+                <div class="map-controls">
+                    <button class="map-btn" onclick="zoomInMap()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="map-btn" onclick="zoomOutMap()">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="map-btn" onclick="locateMe()">
+                        <i class="fas fa-location-arrow"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Channels -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="contact_channels">Contact Channels</h2>
+                <p data-lang="channels_desc">Connect with us through your preferred communication channel</p>
+            </div>
+            
+            <div class="contact-channels">
+                <div class="channel-card">
+                    <div class="channel-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 data-lang="whatsapp">WhatsApp Business</h3>
+                    <p data-lang="whatsapp_desc">Chat with us directly for quick responses</p>
+                    <a href="https://wa.me/255123456789" class="channel-link" target="_blank" data-lang="start_chat">
+                        Start Chat
+                    </a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 data-lang="live_chat">Live Chat Support</h3>
+                    <p data-lang="live_chat_desc">Get instant help from our support team</p>
+                    <a href="#" class="channel-link" onclick="openLiveChat()" data-lang="start_chat">
+                        Start Live Chat
+                    </a>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 data-lang="video_call">Video Conference</h3>
+                    <p data-lang="video_call_desc">Schedule a virtual meeting with our team</p>
+                    <a href="#" class="channel-link" onclick="scheduleMeeting()" data-lang="schedule_now">
+                        Schedule Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="team-contact">
+                <div class="section-title" style="color: white;">
+                    <h2 data-lang="meet_team">Meet Our Team</h2>
+                    <p data-lang="team_desc">Contact our dedicated team members directly</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>John Mwenda</h3>
+                        <div class="member-role" data-lang="export_manager">Export Manager</div>
+                        <div class="member-contact">
+                            <p><i class="fas fa-phone"></i> +255 789 123 456</p>
+                            <p><i class="fas fa-envelope"></i> john@fammatl.co.tz</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Sarah Kimambo</h3>
+                        <div class="member-role" data-lang="quality_manager">Quality Assurance Manager</div>
+                        <div class="member-contact">
+                            <p><i class="fas fa-phone"></i> +255 789 123 457</p>
+                            <p><i class="fas fa-envelope"></i> sarah@fammatl.co.tz</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3>David Mushi</h3>
+                        <div class="member-role" data-lang="sales_director">Sales Director</div>
+                        <div class="member-contact">
+                            <p><i class="fas fa-phone"></i> +255 789 123 458</p>
+                            <p><i class="fas fa-envelope"></i> david@fammatl.co.tz</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>Fatuma Hassan</h3>
+                        <div class="member-role" data-lang="certification_specialist">Certification Specialist</div>
+                        <div class="member-contact">
+                            <p><i class="fas fa-phone"></i> +255 789 123 459</p>
+                            <p><i class="fas fa-envelope"></i> fatuma@fammatl.co.tz</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="faq_title">Frequently Asked Questions</h2>
+                <p data-lang="faq_desc">Find quick answers to common questions</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(0)">
+                        <span data-lang="faq1_q">What are your working hours?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer0">
+                        <p data-lang="faq1_a">Our offices are open Monday to Friday from 8:00 AM to 5:00 PM East Africa Time. For urgent export-related matters, we provide 24/7 emergency support through our hotline.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(1)">
+                        <span data-lang="faq2_q">How do I request a product sample?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer1">
+                        <p data-lang="faq2_a">You can request product samples through our contact form, by emailing sales@fammatl.co.tz, or by contacting our sales team directly. We typically process sample requests within 2-3 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(2)">
+                        <span data-lang="faq3_q">What is your minimum order quantity?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer2">
+                        <p data-lang="faq3_a">Minimum order quantities vary by product. For most agricultural products, our MOQ is 1 container (20ft or 40ft). However, we offer flexible arrangements for new customers and bulk discounts for larger orders.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(3)">
+                        <span data-lang="faq4_q">How do I verify your certifications?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer3">
+                        <p data-lang="faq4_a">All our certifications are blockchain-verified. You can use the verification tool on our Certifications page or contact certification@fammatl.co.tz for direct verification.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(4)">
+                        <span data-lang="faq5_q">Do you offer logistics support?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer4">
+                        <p data-lang="faq5_a">Yes, we provide complete end-to-end logistics support including shipping, customs clearance, and documentation. Our logistics team handles everything from farm to port to final destination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <div class="logo-text">FAMM<span>ATL</span></div>
+                    </div>
+                    <p data-lang="footer_desc">Leading exporters of premium agricultural products from Tanzania, committed to quality and sustainability.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="quick_links">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-lang="home">Home</a></li>
+                        <li><a href="about.html" data-lang="about">About Us</a></li>
+                        <li><a href="products.html" data-lang="products">Products</a></li>
+                        <li><a href="certifications.html" data-lang="certifications">Certifications</a></li>
+                        <li><a href="contact.html" data-lang="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="certifications">Certifications</h3>
+                    <ul>
+                        <li><a href="certifications.html" data-lang="iso_cert">ISO 22000</a></li>
+                        <li><a href="certifications.html" data-lang="organic_cert">Organic Certification</a></li>
+                        <li><a href="certifications.html" data-lang="halal_cert">Halal Certification</a></li>
+                        <li><a href="certifications.html" data-lang="fairtrade_cert">Fair Trade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="contact_us">Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</li>
+                        <li><i class="fas fa-phone"></i> +255 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@fammatl.co.tz</li>
+                        <li><i class="fab fa-whatsapp"></i> +255 123 456 789</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FAMM ATL Company Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Language data
+        const languageData = {
+            en: {
+                // Header
+                home: "Home",
+                about: "About Us",
+                products: "Products",
+                services: "Export Services",
+                certifications: "Certifications",
+                contact: "Contact",
+                contact_title: "Contact Us",
+                
+                // Page Header
+                get_in_touch: "Get in Touch",
+                contact_desc: "We're here to help with your agricultural export needs. Reach out to us through any channel below.",
+                
+                // Contact Form
+                send_message: "Send us a Message",
+                form_desc: "Fill out the form below and we'll get back to you within 24 hours.",
+                first_name: "First Name *",
+                last_name: "Last Name *",
+                email_address: "Email Address *",
+                phone_number: "Phone Number",
+                subject: "Subject *",
+                message: "Message *",
+                inquiry_type: "Type of Inquiry",
+                select_inquiry: "Select inquiry type",
+                product_inquiry: "Product Inquiry",
+                export_inquiry: "Export Services",
+                certification_inquiry: "Certification",
+                partnership_inquiry: "Partnership",
+                other_inquiry: "Other",
+                
+                // Contact Info
+                visit_us: "Visit Us",
+                head_office: "Head Office:",
+                call_us: "Call Us",
+                business_hours: "Business Hours:",
+                email_us: "Email Us",
+                
+                // Map
+                find_us: "Find Our Location",
+                map_desc: "Interactive map showing our headquarters and regional offices",
+                open_maps: "Open in Google Maps",
+                
+                // Contact Channels
+                contact_channels: "Contact Channels",
+                channels_desc: "Connect with us through your preferred communication channel",
+                whatsapp: "WhatsApp Business",
+                whatsapp_desc: "Chat with us directly for quick responses",
+                live_chat: "Live Chat Support",
+                live_chat_desc: "Get instant help from our support team",
+                video_call: "Video Conference",
+                video_call_desc: "Schedule a virtual meeting with our team",
+                start_chat: "Start Chat",
+                schedule_now: "Schedule Now",
+                
+                // Team Section
+                meet_team: "Meet Our Team",
+                team_desc: "Contact our dedicated team members directly",
+                export_manager: "Export Manager",
+                quality_manager: "Quality Assurance Manager",
+                sales_director: "Sales Director",
+                certification_specialist: "Certification Specialist",
+                
+                // FAQ Section
+                faq_title: "Frequently Asked Questions",
+                faq_desc: "Find quick answers to common questions",
+                faq1_q: "What are your working hours?",
+                faq1_a: "Our offices are open Monday to Friday from 8:00 AM to 5:00 PM East Africa Time. For urgent export-related matters, we provide 24/7 emergency support through our hotline.",
+                faq2_q: "How do I request a product sample?",
+                faq2_a: "You can request product samples through our contact form, by emailing sales@fammatl.co.tz, or by contacting our sales team directly. We typically process sample requests within 2-3 business days.",
+                faq3_q: "What is your minimum order quantity?",
+                faq3_a: "Minimum order quantities vary by product. For most agricultural products, our MOQ is 1 container (20ft or 40ft). However, we offer flexible arrangements for new customers and bulk discounts for larger orders.",
+                faq4_q: "How do I verify your certifications?",
+                faq4_a: "All our certifications are blockchain-verified. You can use the verification tool on our Certifications page or contact certification@fammatl.co.tz for direct verification.",
+                faq5_q: "Do you offer logistics support?",
+                faq5_a: "Yes, we provide complete end-to-end logistics support including shipping, customs clearance, and documentation. Our logistics team handles everything from farm to port to final destination.",
+                
+                // Footer
+                footer_desc: "Leading exporters of premium agricultural products from Tanzania, committed to quality and sustainability.",
+                quick_links: "Quick Links",
+                contact_us: "Contact Us",
+                iso_cert: "ISO 22000",
+                organic_cert: "Organic Certification",
+                halal_cert: "Halal Certification",
+                fairtrade_cert: "Fair Trade"
+            },
+            sw: {
+                // Header
+                home: "Nyumbani",
+                about: "Kuhusu Sisi",
+                products: "Bidhaa",
+                services: "Huduma za Usafirishaji",
+                certifications: "Vyeti",
+                contact: "Wasiliana",
+                contact_title: "Wasiliana Nasi",
+                
+                // Page Header
+                get_in_touch: "Wasiliana Nasi",
+                contact_desc: "Tupo hapa kukusaidia na mahitaji yako ya usafirishaji wa kilimo. Wasiliana nasi kupitia njia yoyote hapa chini.",
+                
+                // Contact Form
+                send_message: "Tutumie Ujumbe",
+                form_desc: "Jaza fomu hapa chini na tutakujibu ndani ya masaa 24.",
+                first_name: "Jina la Kwanza *",
+                last_name: "Jina la Mwisho *",
+                email_address: "Anwani ya Barua Pepe *",
+                phone_number: "Namba ya Simu",
+                subject: "Mada *",
+                message: "Ujumbe *",
+                inquiry_type: "Aina ya Uhoji",
+                select_inquiry: "Chagua aina ya uhoji",
+                product_inquiry: "Uhoji wa Bidhaa",
+                export_inquiry: "Huduma za Usafirishaji",
+                certification_inquiry: "Uthibitishaji",
+                partnership_inquiry: "Ushirikiano",
+                other_inquiry: "Nyingine",
+                
+                // Contact Info
+                visit_us: "Tutembelee",
+                head_office: "Ofisi Kuu:",
+                call_us: "Tuite",
+                business_hars: "Masaa ya Biashara:",
+                email_us: "Tutumie Barua Pepe",
+                
+                // Map
+                find_us: "Tafuta Eneo Letu",
+                map_desc: "Ramani inayoonyesha makao makuu na ofisi zetu za kikanda",
+                open_maps: "Fungua kwenye Google Maps",
+                
+                // Contact Channels
+                contact_channels: "Njia za Mawasiliano",
+                channels_desc: "Wasiliana nasi kupitia njia unayopendelea ya mawasiliano",
+                whatsapp: "WhatsApp Biashara",
+                whatsapp_desc: "Zungumza nasi moja kwa moja kwa majibu ya haraka",
+                live_chat: "Msaada wa Mazungumzo ya Moja kwa Moja",
+                live_chat_desc: "Pata msaada wa haraka kutoka kwa timu yetu ya msaada",
+                video_call: "Mkutano wa Video",
+                video_call_desc: "Panga mkutano wa mtandaoni na timu yetu",
+                start_chat: "Anza Mazungumzo",
+                schedule_now: "Panga Sasa",
+                
+                // Team Section
+                meet_team: "Kutana na Timu Yetu",
+                team_desc: "Wasiliana na wanachama wetu wa timu moja kwa moja",
+                export_manager: "Meneja wa Usafirishaji",
+                quality_manager: "Meneja wa Udhibiti wa Ubora",
+                sales_director: "Mkurugenzi wa Mauzo",
+                certification_specialist: "Mtaalam wa Uthibitishaji",
+                
+                // FAQ Section
+                faq_title: "Maswali Yanayoulizwa Mara Kwa Mara",
+                faq_desc: "Pata majibu ya haraka kwa maswali ya kawaida",
+                faq1_q: "Masaa yenu ya kufanya kazi ni yapi?",
+                faq1_a: "Ofisi zetu zinafunguliwa Jumatatu hadi Ijumaa kutoka saa 8:00 asubuhi hadi saa 5:00 jioni Muda wa Afrika Mashariki. Kwa mambo ya dharuba yanayohusiana na usafirishaji, tunatoa msaada wa dharuba 24/7 kupitia nambari yetu ya simu ya dharuba.",
+                faq2_q: "Ninaomba sampuli ya bidhaa vipi?",
+                faq2_a: "Unaweza kuomba sampuli za bidhaa kupitia fomu yetu ya mawasiliano, kwa kutuma barua pepe kwa sales@fammatl.co.tz, au kwa kuwasiliana moja kwa moja na timu yetu ya mauzo. Kwa kawaida tunashughulikia maombi ya sampuli ndani ya siku 2-3 za kazi.",
+                faq3_q: "Ni kiasi gani cha chini cha agizo?",
+                faq3_a: "Viwango vya chini vya agizo hutofautiana kulingana na bidhaa. Kwa bidhaa nyingi za kilimo, MOQ yetu ni kontena 1 (20ft au 40ft). Hata hivyo, tunatoa mipangilio laini kwa wateja wapya na punguzo la wingi kwa maagizo makubwa.",
+                faq4_q: "Ninawezaje kuthibitisha vyeti vyenu?",
+                faq4_a: "Vyeti vyetu vyote vinathibitishwa na blockchain. Unaweza kutumia zana ya uthibitishaji kwenye ukurasa wetu wa Vyeti au kuwasiliana na certification@fammatl.co.tz kwa uthibitishaji wa moja kwa moja.",
+                faq5_q: "Je, mnatoa msaada wa logistiki?",
+                faq5_a: "Ndio, tunatoa msaada kamili wa logistiki kutoka mwanzo hadi mwisho ikiwa ni pamoja na usafirishaji, udhibiti wa forodha, na nyaraka. Timu yetu ya logistiki inashughulikia kila kitu kutoka shambani hadi bandarini hadi marudio ya mwisho.",
+                
+                // Footer
+                footer_desc: "Wasanifu wakuu wa bidhaa za kilimo bora kutoka Tanzania, wakijitolea kwa ubora na uendelevu.",
+                quick_links: "Viungo vya Haraka",
+                contact_us: "Wasiliana Nasi",
+                iso_cert: "ISO 22000",
+                organic_cert: "Uthibitishaji wa Asilia",
+                halal_cert: "Uthibitishaji wa Halali",
+                fairtrade_cert: "Biashara Haki"
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'en';
+
+        // Change language function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    element.textContent = languageData[lang][key];
+                }
+            });
+            
+            // Update dropdown options
+            document.querySelectorAll('select option[data-lang]').forEach(option => {
+                const key = option.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    option.textContent = languageData[lang][key];
+                }
+            });
+            
+            // Update input placeholders
+            document.querySelectorAll('input[data-lang], textarea[data-lang]').forEach(input => {
+                const key = input.getAttribute('data-lang');
+                if (languageData[lang][key]) {
+                    input.placeholder = languageData[lang][key];
+                }
+            });
+        }
+
+        // Contact Form Validation and Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Reset previous states
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span data-lang="sending">Sending...</span>';
+            formMessage.className = 'form-message';
+            formMessage.style.display = 'none';
+            
+            // Get form values
+            const formData = {
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                subject: document.getElementById('subject').value.trim(),
+                message: document.getElementById('message').value.trim(),
+                inquiryType: document.getElementById('inquiryType').value
+            };
+            
+            // Validate form
+            let isValid = true;
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => {
+                msg.style.display = 'none';
+                msg.previousElementSibling.classList.remove('error');
+            });
+            
+            if (!formData.firstName) {
+                showError('firstName', 'First name is required');
+                isValid = false;
+            }
+            
+            if (!formData.lastName) {
+                showError('lastName', 'Last name is required');
+                isValid = false;
+            }
+            
+            if (!formData.email || !isValidEmail(formData.email)) {
+                showError('email', 'Valid email is required');
+                isValid = false;
+            }
+            
+            if (!formData.subject) {
+                showError('subject', 'Subject is required');
+                isValid = false;
+            }
+            
+            if (!formData.message) {
+                showError('message', 'Message is required');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span data-lang="send_message">Send Message</span>';
+                return;
+            }
+            
+            // Simulate form submission
+            setTimeout(() => {
+                formMessage.className = 'form-message success';
+                formMessage.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Thank you for your message!</strong>
+                    <p>We have received your inquiry and will get back to you within 24 hours. A confirmation email has been sent to ${formData.email}.</p>
+                `;
+                formMessage.style.display = 'block';
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span data-lang="send_message">Send Message</span>';
+                
+                // Scroll to message
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 2000);
+        });
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorMsg = field.nextElementSibling;
+            field.classList.add('error');
+            errorMsg.textContent = currentLanguage === 'sw' ? 
+                (fieldId === 'firstName' ? 'Jina la kwanza linahitajika' :
+                 fieldId === 'lastName' ? 'Jina la mwisho linahitajika' :
+                 fieldId === 'email' ? 'Barua pepe halali inahitajika' :
+                 fieldId === 'subject' ? 'Mada inahitajika' :
+                 'Ujumbe unahitajika') : message;
+            errorMsg.style.display = 'block';
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(index) {
+            const answer = document.getElementById(`faqAnswer${index}`);
+            const question = answer.previousElementSibling;
+            
+            if (answer.classList.contains('open')) {
+                answer.classList.remove('open');
+                question.classList.remove('active');
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer').forEach(faq => {
+                    faq.classList.remove('open');
+                });
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                });
+                
+                // Open clicked FAQ
+                answer.classList.add('open');
+                question.classList.add('active');
+            }
+        }
+
+        // Map Functions
+        function openGoogleMaps() {
+            window.open('https://goo.gl/maps/example', '_blank');
+        }
+
+        function zoomInMap() {
+            alert('Zooming in on map');
+        }
+
+        function zoomOutMap() {
+            alert('Zooming out of map');
+        }
+
+        function locateMe() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        alert(`Your location: ${position.coords.latitude}, ${position.coords.longitude}`);
+                    },
+                    () => {
+                        alert('Unable to retrieve your location');
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by your browser');
+            }
+        }
+
+        // Contact Channel Functions
+        function openLiveChat() {
+            alert('Live chat would open here. In a real implementation, this would connect to a live chat service.');
+        }
+
+        function scheduleMeeting() {
+            alert('Meeting scheduler would open here. In a real implementation, this would integrate with a calendar booking system.');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage('en');
+            
+            // Add language-specific content
+            if (currentLanguage === 'sw') {
+                document.querySelector('[data-lang="sending"]').textContent = 'Inatumwa...';
+            }
+        });
+    </script>
+</body>
+</html>
