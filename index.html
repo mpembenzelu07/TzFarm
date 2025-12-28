@@ -33,6 +33,7 @@
             color: var(--text-dark);
             background-color: var(--bg-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -40,6 +41,118 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            margin-left: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 2px;
         }
 
         /* Language Switcher */
@@ -50,18 +163,20 @@
             z-index: 1001;
             background: white;
             border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            padding: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 12px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
         .lang-btn {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             border: none;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             font-weight: bold;
             cursor: pointer;
@@ -69,102 +184,287 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lang-btn:hover::before {
+            opacity: 1;
         }
 
         .lang-btn:hover {
-            transform: scale(1.1);
-            background: var(--primary-dark);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
+        }
+
+        .lang-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         /* Live Market Ticker */
         .market-ticker {
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
             color: white;
-            padding: 15px 0;
+            padding: 18px 0;
             overflow: hidden;
             position: relative;
             margin-top: 80px;
+            box-shadow: 0 5px 20px rgba(27, 94, 32, 0.3);
         }
 
         .ticker-content {
             display: flex;
-            gap: 40px;
-            animation: ticker 30s linear infinite;
+            gap: 50px;
+            animation: ticker 40s linear infinite;
             white-space: nowrap;
+            padding: 5px 0;
         }
 
         @keyframes ticker {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(100vw); }
             100% { transform: translateX(-100%); }
         }
 
         .ticker-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
         }
 
-        .price-up { color: #4caf50; }
-        .price-down { color: #f44336; }
+        .ticker-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .price-up { 
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .price-down { 
+            color: #ff5252;
+            font-weight: bold;
+        }
 
         /* Voice AI Assistant */
         .voice-assistant {
             position: fixed;
-            bottom: 100px;
-            right: 30px;
+            bottom: 40px;
+            right: 40px;
             z-index: 1000;
         }
 
         .voice-btn {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            overflow: hidden;
+        }
+
+        .voice-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .voice-btn:hover::before {
+            width: 100px;
+            height: 100px;
         }
 
         .voice-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.6);
         }
 
         .voice-btn.listening {
-            animation: pulse 1.5s infinite;
+            animation: pulse 2s infinite;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(102, 126, 234, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 65, 108, 0.7); 
+            }
+            70% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 0 25px rgba(255, 65, 108, 0); 
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 65, 108, 0); 
+            }
         }
 
         .voice-response {
             position: absolute;
-            bottom: 80px;
+            bottom: 100px;
             right: 0;
             background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 300px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            max-width: 350px;
             display: none;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.3s ease forwards;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .voice-response::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            transform: rotate(45deg);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.9), rgba(46, 125, 50, 0.9)), 
+                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--secondary), #ff5722);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+            animation: fadeInUp 1s ease 0.4s backwards;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 152, 0, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* 3D Product Viewer */
         .product-3d-viewer {
-            height: 400px;
-            background: #f5f5f5;
-            border-radius: 15px;
-            margin: 40px 0;
+            height: 500px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            border-radius: 25px;
+            margin: 60px 0;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         #product3dCanvas {
@@ -174,109 +474,590 @@
 
         .viewer-controls {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 20px;
             background: rgba(0,0,0,0.7);
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 15px 30px;
+            border-radius: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .viewer-btn {
-            background: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .viewer-btn:hover {
-            color: var(--secondary);
-            transform: scale(1.2);
+            background: var(--secondary);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
         }
 
-        /* Continue with your existing CSS... */
-        /* (Your original CSS remains here) */
+        .product-info-display {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 350px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: slideInLeft 0.5s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
         /* Shipment Tracker */
         .shipment-tracker {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
+            padding: 50px;
+            border-radius: 25px;
             margin: 60px 0;
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shipment-tracker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
         }
 
         .tracker-map {
-            height: 300px;
+            height: 350px;
             background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            margin: 20px 0;
+            border-radius: 15px;
+            margin: 30px 0;
             position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
         }
 
         .shipment-marker {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             background: var(--secondary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: bounce 2s infinite;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .shipment-marker:hover {
+            transform: scale(1.2);
+            box-shadow: 0 15px 40px rgba(255, 152, 0, 0.7);
+        }
+
+        .shipment-marker::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            animation: ripple 3s infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .shipment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .detail-box {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .detail-box:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
         }
 
         /* Blockchain Certificate */
         .blockchain-verifier {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
+            padding: 50px;
+            border-radius: 25px;
             margin: 60px 0;
+            box-shadow: 0 20px 50px rgba(10, 25, 47, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blockchain-verifier::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 176, 155, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(150, 201, 61, 0.1) 0%, transparent 50%);
         }
 
         .blockchain-animation {
-            height: 200px;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            margin: 40px 0;
         }
 
         .block {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, #00b09b, #96c93d);
-            margin: 0 10px;
-            border-radius: 5px;
-            animation: blockChain 3s infinite;
+            margin: 0 15px;
+            border-radius: 10px;
+            animation: blockChain 4s infinite ease-in-out;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 176, 155, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .block::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(10px);
         }
 
         @keyframes blockChain {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(-20px); opacity: 1; }
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+                box-shadow: 0 10px 30px rgba(0, 176, 155, 0.3);
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg); 
+                box-shadow: 0 20px 50px rgba(0, 176, 155, 0.5);
+            }
         }
 
-        .block:nth-child(2) { animation-delay: 0.2s; }
-        .block:nth-child(3) { animation-delay: 0.4s; }
-        .block:nth-child(4) { animation-delay: 0.6s; }
-        .block:nth-child(5) { animation-delay: 0.8s; }
+        .block:nth-child(1) { animation-delay: 0s; }
+        .block:nth-child(2) { animation-delay: 0.4s; }
+        .block:nth-child(3) { animation-delay: 0.8s; }
+        .block:nth-child(4) { animation-delay: 1.2s; }
+        .block:nth-child(5) { animation-delay: 1.6s; }
+
+        /* Featured Products */
+        .featured-products {
+            background: var(--bg-light-secondary);
+            padding: 80px 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .product-content {
+            padding: 30px;
+        }
+
+        .product-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), #ff5722);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 50px auto 0;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 6rem;
+            color: var(--primary-light);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .client-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: var(--primary-light);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-light);
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-light);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .product-3d-viewer {
+                height: 400px;
+            }
+            
+            .language-switcher {
+                top: 20px;
+                right: 20px;
+            }
+            
+            .voice-assistant {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .viewer-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 90%;
+            }
+            
+            .shipment-tracker,
+            .blockchain-verifier {
+                padding: 30px 20px;
+            }
+            
+            .product-info-display {
+                position: relative;
+                top: auto;
+                left: auto;
+                max-width: 100%;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+            
+            .viewer-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .ticker-item {
+                padding: 8px 15px;
+                gap: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .voice-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Language Switcher -->
     <div class="language-switcher">
-        <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="changeLanguage('sw')">SW</button>
+        <button class="lang-btn" onclick="changeLanguage('en')">
+            <span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('sw')">
+            <span>SW</span>
+        </button>
     </div>
 
     <!-- Voice AI Assistant -->
@@ -285,7 +1066,7 @@
             <i class="fas fa-microphone"></i>
         </button>
         <div class="voice-response" id="voiceResponse">
-            <p id="voiceText">Ask me about products, pricing, or shipping!</p>
+            <div id="voiceText" data-lang="voice_default">Ask me about products, pricing, or shipping!</div>
         </div>
     </div>
 
@@ -312,7 +1093,7 @@
 
     <!-- Live Market Ticker -->
     <div class="market-ticker">
-        <div class="ticker-content">
+        <div class="ticker-content" id="tickerContent">
             <!-- Ticker items will be populated by JavaScript -->
         </div>
     </div>
@@ -321,7 +1102,7 @@
     <section class="hero">
         <div class="container">
             <h1 data-lang="hero_title">Premium Agricultural Products for Global Markets</h1>
-            <p data-lang="hero_text">FAMM ATL Company Ltd is a leading exporter of high-quality agricultural products from Tanzania to international markets.</p>
+            <p data-lang="hero_text">FAMM ATL Company Ltd is a leading exporter of high-quality agricultural products from Tanzania to international markets. Experience excellence in every harvest.</p>
             <a href="contact.html" class="cta-button" data-lang="request_quote">Request a Quote</a>
         </div>
     </section>
@@ -336,25 +1117,134 @@
             
             <div class="product-3d-viewer">
                 <canvas id="product3dCanvas"></canvas>
+                
+                <div class="product-info-display" id="productInfo">
+                    <h3 id="currentProductName" data-lang="coffee_premium">Premium Arabica Coffee</h3>
+                    <p id="currentProductDesc" data-lang="coffee_desc">Single-origin, shade-grown, hand-picked Arabica beans from Kilimanjaro region.</p>
+                    <div style="margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span data-lang="grade">Grade:</span>
+                            <span style="font-weight: bold;">AA</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span data-lang="moisture">Moisture:</span>
+                            <span style="font-weight: bold;">10-12%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span data-lang="origin">Origin:</span>
+                            <span style="font-weight: bold;">Kilimanjaro</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="viewer-controls">
-                    <button class="viewer-btn" onclick="change3DProduct('coffee')">
+                    <button class="viewer-btn" onclick="change3DProduct('coffee')" title="Coffee">
                         <i class="fas fa-mug-hot"></i>
                     </button>
-                    <button class="viewer-btn" onclick="change3DProduct('grains')">
+                    <button class="viewer-btn" onclick="change3DProduct('grains')" title="Grains">
                         <i class="fas fa-wheat-awn"></i>
                     </button>
-                    <button class="viewer-btn" onclick="change3DProduct('spices')">
+                    <button class="viewer-btn" onclick="change3DProduct('spices')" title="Spices">
                         <i class="fas fa-mortar-pestle"></i>
                     </button>
-                    <button class="viewer-btn" onclick="zoomIn()">
+                    <button class="viewer-btn" onclick="change3DProduct('legumes')" title="Legumes">
+                        <i class="fas fa-seedling"></i>
+                    </button>
+                    <button class="viewer-btn" onclick="change3DProduct('nuts')" title="Nuts">
+                        <i class="fas fa-acorn"></i>
+                    </button>
+                    <button class="viewer-btn" onclick="zoomIn()" title="Zoom In">
                         <i class="fas fa-search-plus"></i>
                     </button>
-                    <button class="viewer-btn" onclick="zoomOut()">
+                    <button class="viewer-btn" onclick="zoomOut()" title="Zoom Out">
                         <i class="fas fa-search-minus"></i>
                     </button>
-                    <button class="viewer-btn" onclick="resetView()">
+                    <button class="viewer-btn" onclick="resetView()" title="Reset View">
                         <i class="fas fa-redo"></i>
                     </button>
+                    <button class="viewer-btn" onclick="startARTour()" title="AR View">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section featured-products">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="featured_products">Featured Products</h2>
+                <p data-lang="featured_desc">Discover our premium selection of agricultural exports</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #8B4513, #654321);">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag" data-lang="best_seller">Best Seller</span>
+                        <h3 data-lang="coffee">Premium Coffee</h3>
+                        <p data-lang="coffee_full_desc">Arabica and Robusta varieties, single-origin, specialty grade coffee beans.</p>
+                        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">$4.85/kg</span>
+                            <button class="viewer-btn" style="width: 40px; height: 40px;" onclick="viewProduct('coffee')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #FFD700, #FFC107);">
+                        <i class="fas fa-wheat-awn"></i>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag" data-lang="organic">Organic</span>
+                        <h3 data-lang="grains">Organic Grains</h3>
+                        <p data-lang="grains_desc">Maize, rice, wheat, and sorghum - non-GMO, chemical-free production.</p>
+                        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">$450/MT</span>
+                            <button class="viewer-btn" style="width: 40px; height: 40px;" onclick="viewProduct('grains')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #8B0000, #B22222);">
+                        <i class="fas fa-mortar-pestle"></i>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag" data-lang="premium">Premium</span>
+                        <h3 data-lang="spices">Exotic Spices</h3>
+                        <p data-lang="spices_desc">Cloves, pepper, cardamom, and cinnamon from Zanzibar and Pemba islands.</p>
+                        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">$6.20/kg</span>
+                            <button class="viewer-btn" style="width: 40px; height: 40px;" onclick="viewProduct('spices')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(135deg, #228B22, #32CD32);">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag" data-lang="high_protein">High Protein</span>
+                        <h3 data-lang="legumes">Quality Legumes</h3>
+                        <p data-lang="legumes_desc">Kidney beans, chickpeas, lentils, and pigeon peas - high protein content.</p>
+                        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">$950/MT</span>
+                            <button class="viewer-btn" style="width: 40px; height: 40px;" onclick="viewProduct('legumes')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -369,35 +1259,35 @@
                     <p data-lang="shipment_desc">Track your agricultural exports in real-time across the globe</p>
                 </div>
                 
-                <div class="tracker-map">
+                <div class="tracker-map" id="trackerMap">
                     <!-- Map with animated shipment markers -->
-                    <div class="shipment-marker" style="top: 30%; left: 25%;">
+                    <div class="shipment-marker" id="shipment1" style="top: 30%; left: 25%;" onclick="showShipmentInfo(1)">
                         <i class="fas fa-ship"></i>
                     </div>
-                    <div class="shipment-marker" style="top: 60%; left: 50%;">
+                    <div class="shipment-marker" id="shipment2" style="top: 60%; left: 50%;" onclick="showShipmentInfo(2)">
                         <i class="fas fa-plane"></i>
                     </div>
-                    <div class="shipment-marker" style="top: 40%; left: 75%;">
+                    <div class="shipment-marker" id="shipment3" style="top: 40%; left: 75%;" onclick="showShipmentInfo(3)">
                         <i class="fas fa-truck"></i>
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div>
+                <div class="shipment-details">
+                    <div class="detail-box">
                         <h3 data-lang="shipment_id">Shipment ID</h3>
-                        <p>#FA-7894-2024</p>
+                        <p id="shipmentId">#FA-7894-2024</p>
                     </div>
-                    <div>
+                    <div class="detail-box">
                         <h3 data-lang="status">Status</h3>
-                        <p><span class="price-up">In Transit</span></p>
+                        <p><span style="color: #4caf50; font-weight: bold;" id="shipmentStatus">In Transit</span></p>
                     </div>
-                    <div>
+                    <div class="detail-box">
                         <h3 data-lang="location">Location</h3>
-                        <p>Indian Ocean</p>
+                        <p id="shipmentLocation">Indian Ocean</p>
                     </div>
-                    <div>
-                        <h3 data-lang="eta">ETA</h3>
-                        <p>Dec 28, 2024</p>
+                    <div class="detail-box">
+                        <h3 data-lang="eta">Estimated Arrival</h3>
+                        <p id="shipmentETA">Dec 28, 2024</p>
                     </div>
                 </div>
             </div>
@@ -414,75 +1304,325 @@
                 </div>
                 
                 <div class="blockchain-animation">
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
-                    <div class="block"></div>
+                    <div class="block">#1</div>
+                    <div class="block">#2</div>
+                    <div class="block">#3</div>
+                    <div class="block">#4</div>
+                    <div class="block">#5</div>
                 </div>
                 
-                <div style="text-align: center; margin-top: 30px;">
-                    <input type="text" id="certificateHash" placeholder="Enter certificate hash..." style="padding: 15px; width: 300px; border: none; border-radius: 5px; margin-right: 10px;">
-                    <button onclick="verifyCertificate()" style="background: var(--secondary); color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer;">
-                        <i class="fas fa-search"></i> <span data-lang="verify">Verify</span>
+                <div style="text-align: center; margin-top: 40px;">
+                    <input type="text" id="certificateHash" 
+                           placeholder="Enter certificate hash..." 
+                           style="padding: 18px 25px; width: 100%; max-width: 400px; border: none; border-radius: 50px; margin-right: 15px; font-size: 1rem; background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
+                    <button onclick="verifyCertificate()" style="background: linear-gradient(135deg, var(--secondary), #ff5722); color: white; border: none; padding: 18px 35px; border-radius: 50px; cursor: pointer; font-size: 1rem; font-weight: 600; margin-top: 20px; transition: all 0.3s ease;">
+                        <i class="fas fa-search"></i> <span data-lang="verify">Verify Certificate</span>
                     </button>
                 </div>
                 
-                <div id="verificationResult" style="text-align: center; margin-top: 20px;"></div>
+                <div id="verificationResult" style="text-align: center; margin-top: 30px; font-size: 1.1rem;">
+                    <!-- Verification results appear here -->
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Continue with your existing homepage content... -->
-    <!-- (Your existing sections remain here) -->
+    <!-- Company Stats -->
+    <section class="section stats-section">
+        <div class="container">
+            <div class="section-title" style="color: white;">
+                <h2 data-lang="company_stats">Our Impact in Numbers</h2>
+                <p data-lang="stats_desc">Years of excellence in agricultural exports</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="25">0</div>
+                    <h3 data-lang="years_exp">Years Experience</h3>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <h3 data-lang="countries">Countries Served</h3>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="1000">0</div>
+                    <h3 data-lang="happy_clients">Happy Clients</h3>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50000">0</div>
+                    <h3 data-lang="tons_exported">Tons Exported</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- JavaScript for Goosebump Features -->
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang="testimonials">Client Testimonials</h2>
+                <p data-lang="testimonials_desc">What our international partners say about us</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="client-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <p style="font-size: 1.2rem; margin-bottom: 20px; font-style: italic;" data-lang="testimonial1">"FAMM ATL consistently delivers premium quality coffee beans. Their attention to detail and reliable shipping make them our preferred supplier."</p>
+                    <h3>Hans Müller</h3>
+                    <p style="color: var(--text-light);" data-lang="company1">CEO, European Coffee Importers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <div class="logo-text">FAMM<span>ATL</span></div>
+                    </div>
+                    <p data-lang="footer_desc">Leading exporters of premium agricultural products from Tanzania, committed to quality, sustainability, and innovation in global food supply chains.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="quick_links">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> <span data-lang="home">Home</span></a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> <span data-lang="about">About Us</span></a></li>
+                        <li><a href="products.html"><i class="fas fa-chevron-right"></i> <span data-lang="products">Products</span></a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> <span data-lang="services">Export Services</span></a></li>
+                        <li><a href="certifications.html"><i class="fas fa-chevron-right"></i> <span data-lang="certifications">Certifications</span></a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> <span data-lang="contact">Contact</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="our_products">Our Products</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-seedling"></i> <span data-lang="coffee">Coffee</span></a></li>
+                        <li><a href="#"><i class="fas fa-wheat-awn"></i> <span data-lang="grains">Grains</span></a></li>
+                        <li><a href="#"><i class="fas fa-mortar-pestle"></i> <span data-lang="spices">Spices</span></a></li>
+                        <li><a href="#"><i class="fas fa-leaf"></i> <span data-lang="legumes">Legumes</span></a></li>
+                        <li><a href="#"><i class="fas fa-acorn"></i> <span data-lang="nuts">Nuts</span></a></li>
+                        <li><a href="#"><i class="fas fa-fruit-apple"></i> <span data-lang="dried_fruits">Dried Fruits</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 data-lang="contact_info">Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> <span data-lang="address">Dar es Salaam, Tanzania</span></a></li>
+                        <li><a href="tel:+255123456789"><i class="fas fa-phone"></i> <span>+255 123 456 789</span></a></li>
+                        <li><a href="mailto:info@fammatl.co.tz"><i class="fas fa-envelope"></i> <span>info@fammatl.co.tz</span></a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> <span>www.fammatl.co.tz</span></a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> <span>+255 123 456 789</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FAMM ATL Company Ltd. All rights reserved. <span data-lang="copyright">Premium Agricultural Exporters from Tanzania.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Enhanced Features -->
     <script>
-        // Multi-language support
+        // Complete Language Support
         const translations = {
             en: {
+                // Navigation
                 home: "Home",
                 about: "About Us",
                 products: "Products",
                 services: "Export Services",
                 certifications: "Certifications",
                 contact: "Contact",
+                
+                // Hero Section
                 hero_title: "Premium Agricultural Products for Global Markets",
-                hero_text: "FAMM ATL Company Ltd is a leading exporter of high-quality agricultural products from Tanzania to international markets.",
+                hero_text: "FAMM ATL Company Ltd is a leading exporter of high-quality agricultural products from Tanzania to international markets. Experience excellence in every harvest.",
                 request_quote: "Request a Quote",
-                3d_viewer: "Interactive 3D Product Viewer",
-                3d_desc: "Rotate, zoom, and explore our premium products in stunning 3D detail",
+                
+                // 3D Viewer
+                "3d_viewer": "Interactive 3D Product Viewer",
+                "3d_desc": "Rotate, zoom, and explore our premium products in stunning 3D detail",
+                coffee_premium: "Premium Arabica Coffee",
+                coffee_desc: "Single-origin, shade-grown, hand-picked Arabica beans from Kilimanjaro region.",
+                grade: "Grade:",
+                moisture: "Moisture:",
+                origin: "Origin:",
+                
+                // Featured Products
+                featured_products: "Featured Products",
+                featured_desc: "Discover our premium selection of agricultural exports",
+                best_seller: "Best Seller",
+                coffee: "Premium Coffee",
+                coffee_full_desc: "Arabica and Robusta varieties, single-origin, specialty grade coffee beans.",
+                organic: "Organic",
+                grains: "Organic Grains",
+                grains_desc: "Maize, rice, wheat, and sorghum - non-GMO, chemical-free production.",
+                premium: "Premium",
+                spices: "Exotic Spices",
+                spices_desc: "Cloves, pepper, cardamom, and cinnamon from Zanzibar and Pemba islands.",
+                high_protein: "High Protein",
+                legumes: "Quality Legumes",
+                legumes_desc: "Kidney beans, chickpeas, lentils, and pigeon peas - high protein content.",
+                
+                // Shipment Tracker
                 shipment_tracker: "Live Shipment Tracker",
                 shipment_desc: "Track your agricultural exports in real-time across the globe",
                 shipment_id: "Shipment ID",
                 status: "Status",
                 location: "Location",
-                eta: "ETA",
+                eta: "Estimated Arrival",
+                
+                // Blockchain Verifier
                 blockchain_title: "Blockchain-Verified Certificates",
                 blockchain_desc: "Verify the authenticity of our certifications on the blockchain",
-                verify: "Verify"
+                verify: "Verify Certificate",
+                
+                // Stats Section
+                company_stats: "Our Impact in Numbers",
+                stats_desc: "Years of excellence in agricultural exports",
+                years_exp: "Years Experience",
+                countries: "Countries Served",
+                happy_clients: "Happy Clients",
+                tons_exported: "Tons Exported",
+                
+                // Testimonials
+                testimonials: "Client Testimonials",
+                testimonials_desc: "What our international partners say about us",
+                testimonial1: "\"FAMM ATL consistently delivers premium quality coffee beans. Their attention to detail and reliable shipping make them our preferred supplier.\"",
+                company1: "CEO, European Coffee Importers",
+                
+                // Footer
+                footer_desc: "Leading exporters of premium agricultural products from Tanzania, committed to quality, sustainability, and innovation in global food supply chains.",
+                quick_links: "Quick Links",
+                our_products: "Our Products",
+                contact_info: "Contact Info",
+                address: "Dar es Salaam, Tanzania",
+                nuts: "Nuts",
+                dried_fruits: "Dried Fruits",
+                copyright: "Premium Agricultural Exporters from Tanzania.",
+                
+                // Voice Assistant
+                voice_default: "Ask me about products, pricing, or shipping!",
+                voice_listening: "Listening... Speak now.",
+                voice_processing: "Processing your request...",
+                
+                // Verification Messages
+                verify_success: "✅ Certificate verified on blockchain! Valid until December 2025",
+                verify_error: "❌ Certificate not found or expired",
+                verify_empty: "Please enter a certificate hash",
+                
+                // Shipment Info
+                shipment1_info: "Coffee to Rotterdam | 25 days remaining",
+                shipment2_info: "Spices to Dubai | 3 days remaining",
+                shipment3_info: "Grains to Mombasa | 7 days remaining"
             },
             sw: {
+                // Navigation
                 home: "Nyumbani",
                 about: "Kuhusu Sisi",
                 products: "Bidhaa",
                 services: "Huduma za Usafirishaji",
                 certifications: "Vyeti",
                 contact: "Wasiliana",
+                
+                // Hero Section
                 hero_title: "Bidhaa Bora za Kilimo kwa Soko la Kimataifa",
-                hero_text: "FAMM ATL Company Ltd ni msafirishaji mkuu wa bidhaa bora za kilimo kutoka Tanzania hadi sokoni la kimataifa.",
+                hero_text: "FAMM ATL Company Ltd ni msafirishaji mkuu wa bidhaa bora za kilimo kutoka Tanzania hadi sokoni la kimataifa. Jione ubora katika kila mavuno.",
                 request_quote: "Omba Bei",
-                3d_viewer: "Kionyeshi cha 3D cha Bidhaa",
-                3d_desc: "Zungusha, zingatia, na uchunguze bidhaa zetu bora kwa undani wa kustaajabisha wa 3D",
+                
+                // 3D Viewer
+                "3d_viewer": "Kionyeshi cha 3D cha Bidhaa",
+                "3d_desc": "Zungusha, zingatia, na uchunguze bidhaa zetu bora kwa undani wa kustaajabisha wa 3D",
+                coffee_premium: "Kahawa Bora ya Arabica",
+                coffee_desc: "Mbegu za Arabica zenye asili moja, zilizokua kwenye kivuli, zilizochaguliwa kwa mkono kutoka eneo la Kilimanjaro.",
+                grade: "Daraja:",
+                moisture: "Unyamavu:",
+                origin: "Asili:",
+                
+                // Featured Products
+                featured_products: "Bidhaa Zilizoangaziwa",
+                featured_desc: "Gundua uteuzi wetu bora wa usafirishaji wa kilimo",
+                best_seller: "Inauzwa Zaidi",
+                coffee: "Kahawa Bora",
+                coffee_full_desc: "Aina za Arabica na Robusta, mbegu za kahawa zenye asili moja, daraja maalum.",
+                organic: "Asilia",
+                grains: "Nafaka Asilia",
+                grains_desc: "Mahindi, mchele, ngano, na mtama - zisizo na GMO, uzalishaji bila kemikali.",
+                premium: "Bora",
+                spices: "Viungo Vya Kigeni",
+                spices_desc: "Karafuu, pilipili, iliki, na mdalasini kutoka visiwa vya Zanzibar na Pemba.",
+                high_protein: "Protini Nyingi",
+                legumes: "Legumes Bora",
+                legumes_desc: "Maharagwe ya figo, dengu, ndengu, na mbaazi - yaliyo na protini nyingi.",
+                
+                // Shipment Tracker
                 shipment_tracker: "Kifuatilio cha Usafirishaji cha Wakati Halisi",
                 shipment_desc: "Fuatilia usafirishaji wako wa kilimo kwa wakati halisi ulimwenguni",
                 shipment_id: "Kitambulisho cha Shehena",
                 status: "Hali",
                 location: "Mahali",
                 eta: "Muda wa Kufika",
+                
+                // Blockchain Verifier
                 blockchain_title: "Vyeti Vilivyothibitishwa na Blockchain",
                 blockchain_desc: "Thibitisha ukweli wa vyeti vyetu kwenye blockchain",
-                verify: "Thibitisha"
+                verify: "Thibitisha Cheti",
+                
+                // Stats Section
+                company_stats: "Athari Yetu Katika Nambari",
+                stats_desc: "Miaka ya ubora katika usafirishaji wa kilimo",
+                years_exp: "Miaka ya Uzoefu",
+                countries: "Nchi Zilizohudumiwa",
+                happy_clients: "Wateja Wenye Furaha",
+                tons_exported: "Toni Zilizosafirishwa",
+                
+                // Testimonials
+                testimonials: "Usaidizi wa Wateja",
+                testimonials_desc: "Nini washirika wetu wa kimataifa wanasema kuhusu sisi",
+                testimonial1: "\"FAMM ATL kila wakati hutoa mbegu bora za kahawa. Uangalifu wao wa kina na usafirishaji wa kuaminika huwafanya kuwa mtoa huduma wetu wa kufaa.\"",
+                company1: "Mkurugenzi Mtendaji, Waanzilishi wa Kahawa wa Ulaya",
+                
+                // Footer
+                footer_desc: "Wasanifu wakuu wa bidhaa za kilimo bora kutoka Tanzania, wakijitolea kwa ubora, uendelevu, na ubunifu katika minyororo ya usambazaji wa chakula duniani.",
+                quick_links: "Viungo vya Haraka",
+                our_products: "Bidhaa Zetu",
+                contact_info: "Maelezo ya Mawasiliano",
+                address: "Dar es Salaam, Tanzania",
+                nuts: "Njugu",
+                dried_fruits: "Matunda Yaliyokaushwa",
+                copyright: "Wasanifu Bora wa Kilimo Kutoka Tanzania.",
+                
+                // Voice Assistant
+                voice_default: "Niulize kuhusu bidhaa, bei, au usafirishaji!",
+                voice_listening: "Ninasikiliza... Sema sasa.",
+                voice_processing: "Inachakata ombi lako...",
+                
+                // Verification Messages
+                verify_success: "✅ Cheti kimeidhinishwa kwenye blockchain! Inatumika hadi Desemba 2025",
+                verify_error: "❌ Cheti hakijapatikana au kimeisha muda",
+                verify_empty: "Tafadhali ingiza hash ya cheti",
+                
+                // Shipment Info
+                shipment1_info: "Kahawa hadi Rotterdam | Siku 25 zimebaki",
+                shipment2_info: "Viungo hadi Dubai | Siku 3 zimebaki",
+                shipment3_info: "Nafaka hadi Mombasa | Siku 7 zimebaki"
             }
         };
 
@@ -490,63 +1630,115 @@
 
         function changeLanguage(lang) {
             currentLang = lang;
+            
+            // Update all translatable elements
             document.querySelectorAll('[data-lang]').forEach(element => {
                 const key = element.getAttribute('data-lang');
                 if (translations[lang][key]) {
                     element.textContent = translations[lang][key];
                 }
             });
+            
+            // Update input placeholders
+            document.querySelectorAll('input[placeholder*="hash"]').forEach(input => {
+                input.placeholder = lang === 'en' 
+                    ? "Enter certificate hash..." 
+                    : "Ingiza hash ya cheti...";
+            });
+            
+            // Update voice assistant text
+            if (document.getElementById('voiceText')) {
+                document.getElementById('voiceText').textContent = translations[lang].voice_default;
+            }
+            
+            // Update stats counters
+            updateStatsAnimation();
         }
 
         // Live Market Ticker
         const marketData = [
-            { product: "Coffee", price: 4.85, change: 0.12 },
-            { product: "Sesame", price: 1450, change: -25 },
-            { product: "Cashew", price: 2150, change: 45 },
-            { product: "Cloves", price: 9.20, change: 0.35 },
-            { product: "Beans", price: 550, change: 12 }
+            { product: "Coffee", price: 4.85, change: 0.12, symbol: "☕" },
+            { product: "Sesame", price: 1450, change: -25, symbol: "🌱" },
+            { product: "Cashew", price: 2150, change: 45, symbol: "🥜" },
+            { product: "Cloves", price: 9.20, change: 0.35, symbol: "🌸" },
+            { product: "Beans", price: 550, change: 12, symbol: "🫘" },
+            { product: "Tea", price: 3.45, change: -0.08, symbol: "🍃" },
+            { product: "Maize", price: 380, change: 8, symbol: "🌽" },
+            { product: "Rice", price: 520, change: -15, symbol: "🍚" }
         ];
 
         function updateTicker() {
-            const ticker = document.querySelector('.ticker-content');
+            const ticker = document.getElementById('tickerContent');
             ticker.innerHTML = '';
             
-            marketData.forEach(item => {
+            // Create two sets of data for seamless loop
+            [...marketData, ...marketData].forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'ticker-item';
                 div.innerHTML = `
-                    <span>${item.product}</span>
-                    <span>$${item.price.toFixed(2)}</span>
+                    <span style="font-size: 1.2rem;">${item.symbol}</span>
+                    <span style="font-weight: 600;">${item.product}</span>
+                    <span style="font-weight: bold;">$${item.price.toFixed(2)}</span>
                     <span class="${item.change >= 0 ? 'price-up' : 'price-down'}">
-                        ${item.change >= 0 ? '+' : ''}${item.change}%
+                        ${item.change >= 0 ? '↗' : '↘'} ${Math.abs(item.change)}%
                     </span>
                 `;
                 ticker.appendChild(div);
             });
         }
 
-        // Simulate price changes every 10 seconds
-        setInterval(() => {
+        // Simulate live market changes
+        function simulateMarketChanges() {
             marketData.forEach(item => {
-                item.price += (Math.random() - 0.5) * item.price * 0.02;
+                // Random price fluctuation between -2% and +2%
+                const fluctuation = (Math.random() - 0.5) * 0.04;
+                item.price *= (1 + fluctuation);
+                item.price = Math.max(item.price, 1); // Ensure positive price
+                
+                // Update change percentage
                 item.change = (Math.random() - 0.5) * 2;
             });
             updateTicker();
-        }, 10000);
+        }
 
         // Voice AI Assistant
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition;
+        let isListening = false;
         
-        if (SpeechRecognition) {
-            recognition = new SpeechRecognition();
-            recognition.continuous = false;
-            recognition.lang = 'en-US';
-            
-            recognition.onresult = function(event) {
-                const speechResult = event.results[0][0].transcript;
-                processVoiceCommand(speechResult);
-            };
+        function initializeVoiceAssistant() {
+            if (SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = currentLang === 'en' ? 'en-US' : 'sw-TZ';
+                
+                recognition.onstart = function() {
+                    console.log('Voice recognition started');
+                };
+                
+                recognition.onresult = function(event) {
+                    const speechResult = event.results[0][0].transcript;
+                    console.log('Speech recognized:', speechResult);
+                    processVoiceCommand(speechResult);
+                };
+                
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    stopVoiceAssistant();
+                };
+                
+                recognition.onend = function() {
+                    if (isListening) {
+                        // Restart recognition if still listening
+                        setTimeout(() => {
+                            if (isListening) recognition.start();
+                        }, 100);
+                    }
+                };
+            } else {
+                console.warn('Speech recognition not supported');
+            }
         }
 
         function toggleVoiceAssistant() {
@@ -554,107 +1746,325 @@
             const response = document.getElementById('voiceResponse');
             
             if (!recognition) {
-                alert('Speech recognition not supported in your browser');
+                alert(currentLang === 'en' 
+                    ? 'Speech recognition is not supported in your browser. Please try Chrome or Edge.'
+                    : 'Utambuzi wa sauti haujaungwa mkono kwenye kivinjari chako. Tafadhali jaribu Chrome au Edge.');
                 return;
             }
             
-            if (btn.classList.contains('listening')) {
-                recognition.stop();
-                btn.classList.remove('listening');
-                response.style.display = 'none';
+            if (isListening) {
+                stopVoiceAssistant();
             } else {
-                recognition.start();
-                btn.classList.add('listening');
-                response.style.display = 'block';
-                document.getElementById('voiceText').textContent = 
-                    currentLang === 'en' ? 'Listening...' : 'Ninasikiliza...';
+                startVoiceAssistant();
             }
         }
 
+        function startVoiceAssistant() {
+            isListening = true;
+            const btn = document.getElementById('voiceBtn');
+            const response = document.getElementById('voiceResponse');
+            const voiceText = document.getElementById('voiceText');
+            
+            btn.classList.add('listening');
+            response.style.display = 'block';
+            voiceText.textContent = translations[currentLang].voice_listening;
+            
+            recognition.lang = currentLang === 'en' ? 'en-US' : 'sw-TZ';
+            recognition.start();
+        }
+
+        function stopVoiceAssistant() {
+            isListening = false;
+            const btn = document.getElementById('voiceBtn');
+            const response = document.getElementById('voiceResponse');
+            
+            btn.classList.remove('listening');
+            
+            if (recognition) {
+                recognition.stop();
+            }
+            
+            // Hide response after delay
+            setTimeout(() => {
+                response.style.display = 'none';
+            }, 3000);
+        }
+
         function processVoiceCommand(command) {
-            const response = document.getElementById('voiceText');
+            const voiceText = document.getElementById('voiceText');
             const lowerCommand = command.toLowerCase();
             
             let aiResponse = '';
             
-            if (lowerCommand.includes('price') || lowerCommand.includes('cost')) {
-                aiResponse = currentLang === 'en' 
-                    ? `Current coffee prices are $4.85/kg for Arabica. Shall I send you a detailed quote?`
-                    : `Bei za sasa za kahawa ni $4.85/kg kwa Arabica. Nikutume nakala ya kina?`;
-            } else if (lowerCommand.includes('ship') || lowerCommand.includes('delivery')) {
-                aiResponse = currentLang === 'en'
-                    ? `Shipping to Europe takes 25-30 days by sea. We can arrange air freight in 5-7 days.`
-                    : `Usafirishaji hadi Ulaya huchukua siku 25-30 kwa bahari. Tunaweza kupanga usafirishaji wa anga katika siku 5-7.`;
-            } else if (lowerCommand.includes('product') || lowerCommand.includes('item')) {
-                aiResponse = currentLang === 'en'
-                    ? `We have coffee, spices, grains, legumes, and dried fruits. Which product interests you?`
-                    : `Tuna kahawa, viungo, nafaka, legumes, na matunda yaliyokaushwa. Bidhaa gani inakupendeza?`;
-            } else {
-                aiResponse = currentLang === 'en'
-                    ? `I can help with pricing, shipping, and product information. What would you like to know?`
-                    : `Naweza kusaidia kwa bei, usafirishaji, na maelezo ya bidhaa. Ungependa kujua nini?`;
-            }
+            // Show processing message
+            voiceText.innerHTML = `<em>${translations[currentLang].voice_processing}</em>`;
             
-            response.innerHTML = `<strong>You:</strong> ${command}<br><br><strong>FAMM ATL AI:</strong> ${aiResponse}`;
-            
-            // Speak the response
-            const speech = new SpeechSynthesisUtterance(aiResponse);
-            speech.lang = currentLang === 'en' ? 'en-US' : 'sw-TZ';
-            window.speechSynthesis.speak(speech);
+            // Simulate processing delay
+            setTimeout(() => {
+                if (lowerCommand.includes('price') || lowerCommand.includes('cost') || lowerCommand.includes('bei')) {
+                    aiResponse = currentLang === 'en' 
+                        ? `Current prices: Arabica coffee at $4.85/kg, organic maize at $450/MT. Shall I send you a detailed price list?`
+                        : `Bei za sasa: Kahawa ya Arabica kwa $4.85/kg, mahindi asilia kwa $450/MT. Nikutume orodha ya kina ya bei?`;
+                } else if (lowerCommand.includes('ship') || lowerCommand.includes('delivery') || lowerCommand.includes('safirishaji')) {
+                    aiResponse = currentLang === 'en'
+                        ? `Shipping to Europe: 25-30 days by sea, 5-7 days by air. To Asia: 20-25 days by sea. Need a shipping quote?`
+                        : `Usafirishaji hadi Ulaya: Siku 25-30 kwa bahari, siku 5-7 kwa ndege. Hadi Asia: Siku 20-25 kwa bahari. Unahitaji nakala ya usafirishaji?`;
+                } else if (lowerCommand.includes('product') || lowerCommand.includes('item') || lowerCommand.includes('bidhaa')) {
+                    aiResponse = currentLang === 'en'
+                        ? `We export coffee, spices, grains, legumes, nuts, and dried fruits. Which product are you interested in?`
+                        : `Tunasafirisha kahawa, viungo, nafaka, legumes, njugu, na matunda yaliyokaushwa. Bidhaa gani inakuvutia?`;
+                } else if (lowerCommand.includes('certificate') || lowerCommand.includes('quality') || lowerCommand.includes('cheti')) {
+                    aiResponse = currentLang === 'en'
+                        ? `We have ISO 22000, Organic, Halal, and Fair Trade certifications. All verified on blockchain.`
+                        : `Tuna vyeti vya ISO 22000, Asilia, Halali, na Biashara Haki. Vyote vimeidhinishwa kwenye blockchain.`;
+                } else if (lowerCommand.includes('contact') || lowerCommand.includes('call') || lowerCommand.includes('wasiliana')) {
+                    aiResponse = currentLang === 'en'
+                        ? `Call us at +255 123 456 789 or email info@fammatl.co.tz. We're available 24/7 for urgent inquiries.`
+                        : `Tuite kwa +255 123 456 789 au tuma barua pepe kwa info@fammatl.co.tz. Tupo 24/7 kwa maswali ya haraka.`;
+                } else if (lowerCommand.includes('hello') || lowerCommand.includes('hi') || lowerCommand.includes('habari')) {
+                    aiResponse = currentLang === 'en'
+                        ? `Hello! I'm FAMM ATL AI Assistant. How can I help you today?`
+                        : `Habari! Mimi ni Msaidizi wa AI wa FAMM ATL. Ninaweza kukusaidia vipi leo?`;
+                } else {
+                    aiResponse = currentLang === 'en'
+                        ? `I can help with pricing, shipping, products, certifications, and contact information. What would you like to know?`
+                        : `Naweza kusaidia kwa bei, usafirishaji, bidhaa, vyeti, na maelezo ya mawasiliano. Ungependa kujua nini?`;
+                }
+                
+                voiceText.innerHTML = `<strong style="color: #667eea;">${currentLang === 'en' ? 'You' : 'Wewe'}:</strong> ${command}<br><br>
+                                    <strong style="color: #764ba2;">${currentLang === 'en' ? 'FAMM ATL AI' : 'FAMM ATL AI'}:</strong> ${aiResponse}`;
+                
+                // Speak the response
+                speakResponse(aiResponse);
+                
+            }, 1500);
         }
 
-        // 3D Product Viewer
-        let scene, camera, renderer, product;
+        function speakResponse(text) {
+            if ('speechSynthesis' in window) {
+                const speech = new SpeechSynthesisUtterance(text);
+                speech.lang = currentLang === 'en' ? 'en-US' : 'sw-TZ';
+                speech.rate = 0.9;
+                speech.pitch = 1;
+                speech.volume = 1;
+                window.speechSynthesis.speak(speech);
+            }
+        }
+
+        // 3D Product Viewer with Three.js
+        let scene, camera, renderer, product, controls;
+        let current3DProduct = 'coffee';
         
+        const productMaterials = {
+            coffee: { color: 0x8B4513, scale: 1.2 },
+            grains: { color: 0xFFD700, scale: 1.5 },
+            spices: { color: 0x8B0000, scale: 0.8 },
+            legumes: { color: 0x228B22, scale: 1.3 },
+            nuts: { color: 0xA0522D, scale: 1.0 }
+        };
+
+        const productInfo = {
+            coffee: {
+                name: "Premium Arabica Coffee",
+                desc: "Single-origin, shade-grown, hand-picked Arabica beans from Kilimanjaro region.",
+                grade: "AA Grade",
+                moisture: "10-12%",
+                origin: "Kilimanjaro"
+            },
+            grains: {
+                name: "Organic Maize",
+                desc: "Non-GMO, chemical-free maize grown in Southern Highlands of Tanzania.",
+                grade: "Grade A",
+                moisture: "13-14%",
+                origin: "Southern Highlands"
+            },
+            spices: {
+                name: "Zanzibar Cloves",
+                desc: "Premium quality cloves, sun-dried, with rich aroma from Zanzibar islands.",
+                grade: "Special Grade",
+                moisture: "8-10%",
+                origin: "Zanzibar"
+            },
+            legumes: {
+                name: "Kidney Beans",
+                desc: "High protein content, uniform size, cleaned and sorted for export quality.",
+                grade: "Grade A",
+                moisture: "12-14%",
+                origin: "Lake Zone"
+            },
+            nuts: {
+                name: "Cashew Nuts",
+                desc: "Whole kernels, premium grade W320, naturally processed and sorted.",
+                grade: "W320",
+                moisture: "5-7%",
+                origin: "Coastal Region"
+            }
+        };
+
         function init3DViewer() {
+            // Create scene
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
+            scene.background = null;
             
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('product3dCanvas'), alpha: true });
-            renderer.setSize(document.querySelector('.product-3d-viewer').offsetWidth, 400);
-            
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
-            const material = new THREE.MeshBasicMaterial({ color: 0x8B4513 });
-            product = new THREE.Mesh(geometry, material);
-            scene.add(product);
-            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, 
+                document.querySelector('.product-3d-viewer').offsetWidth / 500, 
+                0.1, 1000);
             camera.position.z = 5;
             
-            // Add lights
-            const light = new THREE.DirectionalLight(0xffffff, 1);
-            light.position.set(5, 5, 5);
-            scene.add(light);
+            // Create renderer
+            const canvas = document.getElementById('product3dCanvas');
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: canvas,
+                alpha: true,
+                antialias: true 
+            });
+            renderer.setSize(document.querySelector('.product-3d-viewer').offsetWidth, 500);
+            renderer.setPixelRatio(window.devicePixelRatio);
             
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+            
+            // Create initial product (coffee)
+            createProduct('coffee');
+            
+            // Add orbit controls for mouse interaction
+            initOrbitControls();
+            
+            // Start animation
             animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function createProduct(type) {
+            // Remove existing product
+            if (product) {
+                scene.remove(product);
+            }
+            
+            current3DProduct = type;
+            const material = productMaterials[type];
+            
+            // Create a more interesting geometry (torus knot for coffee beans)
+            let geometry;
+            switch(type) {
+                case 'coffee':
+                    geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+                    break;
+                case 'grains':
+                    geometry = new THREE.CylinderGeometry(0.5, 0.5, 2, 8);
+                    break;
+                case 'spices':
+                    geometry = new THREE.OctahedronGeometry(1.2);
+                    break;
+                case 'legumes':
+                    geometry = new THREE.CapsuleGeometry(0.5, 1.5, 4, 8);
+                    break;
+                case 'nuts':
+                    geometry = new THREE.DodecahedronGeometry(1.2);
+                    break;
+                default:
+                    geometry = new THREE.BoxGeometry(2, 2, 2);
+            }
+            
+            const meshMaterial = new THREE.MeshPhongMaterial({ 
+                color: material.color,
+                shininess: 100,
+                specular: 0x222222
+            });
+            
+            product = new THREE.Mesh(geometry, meshMaterial);
+            product.scale.set(material.scale, material.scale, material.scale);
+            scene.add(product);
+            
+            // Update product info display
+            updateProductInfo(type);
+        }
+
+        function initOrbitControls() {
+            // Simple manual orbit controls for demo
+            let mouseX = 0, mouseY = 0;
+            let windowHalfX = window.innerWidth / 2;
+            let windowHalfY = window.innerHeight / 2;
+            
+            document.addEventListener('mousemove', (event) => {
+                if (event.target.closest('.product-3d-viewer')) {
+                    mouseX = (event.clientX - windowHalfX) / 100;
+                    mouseY = (event.clientY - windowHalfY) / 100;
+                }
+            });
+            
+            // Animate rotation based on mouse position
+            function animateRotation() {
+                if (product) {
+                    product.rotation.y += 0.01 + (mouseX * 0.001);
+                    product.rotation.x += 0.005 + (mouseY * 0.001);
+                }
+            }
+            
+            // Add to animation loop
+            const originalAnimate = animate;
+            animate = function() {
+                requestAnimationFrame(animate);
+                animateRotation();
+                renderer.render(scene, camera);
+            };
         }
 
         function animate() {
             requestAnimationFrame(animate);
-            product.rotation.x += 0.01;
-            product.rotation.y += 0.01;
+            if (product) {
+                product.rotation.y += 0.01;
+            }
             renderer.render(scene, camera);
         }
 
+        function onWindowResize() {
+            camera.aspect = document.querySelector('.product-3d-viewer').offsetWidth / 500;
+            camera.updateProjectionMatrix();
+            renderer.setSize(document.querySelector('.product-3d-viewer').offsetWidth, 500);
+        }
+
         function change3DProduct(type) {
-            let color, scale;
+            createProduct(type);
             
-            switch(type) {
-                case 'coffee':
-                    color = 0x8B4513; // Brown
-                    scale = 1.2;
-                    break;
-                case 'grains':
-                    color = 0xFFD700; // Gold
-                    scale = 1.5;
-                    break;
-                case 'spices':
-                    color = 0x8B0000; // Dark Red
-                    scale = 0.8;
-                    break;
+            // Visual feedback for button
+            document.querySelectorAll('.viewer-btn').forEach(btn => {
+                btn.style.background = 'rgba(255,255,255,0.1)';
+            });
+            event.target.style.background = 'var(--secondary)';
+        }
+
+        function updateProductInfo(type) {
+            const info = productInfo[type];
+            document.getElementById('currentProductName').textContent = info.name;
+            document.getElementById('currentProductDesc').textContent = info.desc;
+            
+            // Update the info details
+            const infoDiv = document.querySelector('.product-info-display div');
+            if (infoDiv) {
+                infoDiv.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>${currentLang === 'en' ? 'Grade:' : 'Daraja:'}</span>
+                        <span style="font-weight: bold;">${info.grade}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>${currentLang === 'en' ? 'Moisture:' : 'Unyamavu:'}</span>
+                        <span style="font-weight: bold;">${info.moisture}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>${currentLang === 'en' ? 'Origin:' : 'Asili:'}</span>
+                        <span style="font-weight: bold;">${info.origin}</span>
+                    </div>
+                `;
             }
-            
-            product.material.color.setHex(color);
-            product.scale.set(scale, scale, scale);
         }
 
         function zoomIn() {
@@ -667,60 +2077,275 @@
 
         function resetView() {
             camera.position.z = 5;
-            product.rotation.x = 0;
-            product.rotation.y = 0;
+            if (product) {
+                product.rotation.x = 0;
+                product.rotation.y = 0;
+            }
+        }
+
+        function viewProduct(type) {
+            change3DProduct(type);
+            document.querySelector('.product-3d-viewer').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function startARTour() {
+            alert(currentLang === 'en'
+                ? "AR Farm Tour: In a real implementation, this would use WebXR to place virtual products in your environment!"
+                : "Ziara ya AR ya Shamba: Katika utekelezaji halisi, hii ingetumia WebXR kuweka bidhaa za virtual katika mazingira yako!");
+        }
+
+        // Shipment Tracker
+        const shipments = [
+            {
+                id: 1,
+                type: 'ship',
+                status: 'In Transit',
+                location: 'Indian Ocean',
+                destination: 'Rotterdam',
+                eta: 'Dec 28, 2024',
+                product: 'Coffee',
+                details: '25 days remaining'
+            },
+            {
+                id: 2,
+                type: 'plane',
+                status: 'In Transit',
+                location: 'Over Saudi Arabia',
+                destination: 'Dubai',
+                eta: 'Dec 10, 2024',
+                product: 'Spices',
+                details: '3 days remaining'
+            },
+            {
+                id: 3,
+                type: 'truck',
+                status: 'In Transit',
+                location: 'Kenya-Tanzania Border',
+                destination: 'Mombasa',
+                eta: 'Dec 15, 2024',
+                product: 'Grains',
+                details: '7 days remaining'
+            }
+        ];
+
+        function showShipmentInfo(shipmentId) {
+            const shipment = shipments.find(s => s.id === shipmentId);
+            if (shipment) {
+                document.getElementById('shipmentId').textContent = `#FA-${String(shipmentId).padStart(4, '0')}-2024`;
+                document.getElementById('shipmentStatus').textContent = shipment.status;
+                document.getElementById('shipmentLocation').textContent = shipment.location;
+                document.getElementById('shipmentETA').textContent = shipment.eta;
+                
+                // Highlight selected marker
+                document.querySelectorAll('.shipment-marker').forEach(marker => {
+                    marker.style.boxShadow = '0 10px 30px rgba(255, 152, 0, 0.5)';
+                });
+                document.getElementById(`shipment${shipmentId}`).style.boxShadow = '0 0 0 5px var(--secondary), 0 15px 40px rgba(255, 152, 0, 0.7)';
+                
+                // Show notification
+                showNotification(`${shipment.product} to ${shipment.destination} | ${shipment.details}`);
+            }
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                right: 40px;
+                background: var(--primary);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Animate shipment markers
+        function animateShipmentMarkers() {
+            shipments.forEach(shipment => {
+                const marker = document.getElementById(`shipment${shipment.id}`);
+                if (marker) {
+                    // Random slight movement
+                    const left = parseFloat(marker.style.left) + (Math.random() - 0.5);
+                    const top = parseFloat(marker.style.top) + (Math.random() - 0.5);
+                    
+                    // Keep within bounds
+                    marker.style.left = `${Math.max(5, Math.min(95, left))}%`;
+                    marker.style.top = `${Math.max(5, Math.min(95, top))}%`;
+                }
+            });
         }
 
         // Blockchain Certificate Verifier
         function verifyCertificate() {
-            const hash = document.getElementById('certificateHash').value;
+            const hash = document.getElementById('certificateHash').value.trim();
             const result = document.getElementById('verificationResult');
             
-            if (!hash.trim()) {
-                result.innerHTML = currentLang === 'en'
-                    ? '<span style="color: #ff9800;">Please enter a certificate hash</span>'
-                    : '<span style="color: #ff9800;">Tafadhali ingiza hash ya cheti</span>';
+            if (!hash) {
+                result.innerHTML = `<span style="color: #ff9800;">${translations[currentLang].verify_empty}</span>`;
                 return;
             }
             
-            // Simulate blockchain verification
+            // Show loading
+            result.innerHTML = `<span style="color: #fff;">
+                <i class="fas fa-spinner fa-spin"></i> ${currentLang === 'en' ? 'Verifying on blockchain...' : 'Inathibitisha kwenye blockchain...'}
+            </span>`;
+            
+            // Simulate blockchain verification with delay
             setTimeout(() => {
-                const verified = Math.random() > 0.3; // 70% chance of verification
+                // Mock verification - in real implementation, this would call a blockchain API
+                const validHashes = [
+                    '0x1a2b3c4d5e6f7890', '0xfedcba9876543210', 
+                    '0x1234567890abcdef', '0x0fedcba987654321'
+                ];
                 
-                if (verified) {
-                    result.innerHTML = currentLang === 'en'
-                        ? '<span style="color: #4CAF50;"><i class="fas fa-check-circle"></i> Certificate verified on blockchain! Valid until Dec 2025</span>'
-                        : '<span style="color: #4CAF50;"><i class="fas fa-check-circle"></i> Cheti kimeidhinishwa kwenye blockchain! Inatumika hadi Des 2025</span>';
+                const isValid = validHashes.includes(hash.toLowerCase()) || Math.random() > 0.5;
+                
+                if (isValid) {
+                    result.innerHTML = `<span style="color: #4CAF50;">
+                        <i class="fas fa-check-circle"></i> ${translations[currentLang].verify_success}
+                    </span>`;
+                    
+                    // Add celebration effect
+                    celebrateVerification();
                 } else {
-                    result.innerHTML = currentLang === 'en'
-                        ? '<span style="color: #f44336;"><i class="fas fa-times-circle"></i> Certificate not found or expired</span>'
-                        : '<span style="color: #f44336;"><i class="fas fa-times-circle"></i> Cheti hakijapatikana au kimeisha muda</span>';
+                    result.innerHTML = `<span style="color: #f44336;">
+                        <i class="fas fa-times-circle"></i> ${translations[currentLang].verify_error}
+                    </span>`;
                 }
-            }, 1500);
+            }, 2000);
         }
 
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            updateTicker();
-            init3DViewer();
+        function celebrateVerification() {
+            // Create celebration particles
+            for (let i = 0; i < 20; i++) {
+                createParticle();
+            }
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: linear-gradient(135deg, #00b09b, #96c93d);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                top: 50%;
+                left: 50%;
+            `;
             
-            // Auto-update shipment markers
-            setInterval(() => {
-                document.querySelectorAll('.shipment-marker').forEach(marker => {
-                    const left = Math.random() * 80 + 10;
-                    const top = Math.random() * 80 + 10;
-                    marker.style.left = `${left}%`;
-                    marker.style.top = `${top}%`;
-                });
-            }, 5000);
+            document.body.appendChild(particle);
+            
+            // Animate particle
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 3;
+            const duration = 1000 + Math.random() * 1000;
+            
+            const animation = particle.animate([
+                { 
+                    transform: 'translate(0, 0) scale(1)',
+                    opacity: 1 
+                },
+                { 
+                    transform: `translate(${Math.cos(angle) * speed * 100}px, ${Math.sin(angle) * speed * 100}px) scale(0)`,
+                    opacity: 0 
+                }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Stats Counter Animation
+        function updateStatsAnimation() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const current = parseInt(stat.textContent) || 0;
+                
+                if (current < target) {
+                    const increment = Math.ceil(target / 100);
+                    let currentValue = current;
+                    
+                    const timer = setInterval(() => {
+                        currentValue += increment;
+                        if (currentValue >= target) {
+                            currentValue = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = currentValue.toLocaleString();
+                    }, 20);
+                }
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage('en');
+            
+            // Initialize features
+            updateTicker();
+            initializeVoiceAssistant();
+            init3DViewer();
+            updateStatsAnimation();
+            
+            // Set up intervals
+            setInterval(simulateMarketChanges, 10000); // Update prices every 10 seconds
+            setInterval(animateShipmentMarkers, 3000); // Animate markers every 3 seconds
+            
+            // Show first shipment info by default
+            showShipmentInfo(1);
+            
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
         });
 
-        // Augmented Reality Feature (placeholder)
-        function startARTour() {
-            alert(currentLang === 'en'
-                ? "AR Farm Tour: Point your camera at a flat surface to place our virtual farm!"
-                : "Ziara ya AR ya Shamba: Elekeza kamera yako kwenye uso ulio sawa kuweka shamba letu la virtual!");
-        }
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
